@@ -77,6 +77,10 @@ class User_model extends MY_Model {
             'label' => 'Teaser',
             'rules' => 'xss_clean'),
         array(
+            'field' => 'terms',
+            'label' => 'Terms',
+            'rules' => 'xss_clean'),
+        array(
             'field' => 'profile_image',
             'label' => 'Profile Image',
             'rules' => 'xss_clean'),

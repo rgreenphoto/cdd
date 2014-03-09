@@ -24,6 +24,10 @@ class Site_info_model extends MY_Model {
             'label' => 'Site Description',
             'rules' => 'xss_clean'),
         array(
+            'field' => 'site_terms',
+            'label' => 'Site Term and Conditions',
+            'rules' => 'xss_clean'),
+        array(
             'field' => 'site_url',
             'label' => 'Site URL',
             'rules' => 'xss_clean'),

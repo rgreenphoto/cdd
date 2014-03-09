@@ -13,8 +13,8 @@ All graphic assets and custom CSS is for use by the Colorado Disc Dogs. Please s
 
 This project is built using the following frameworks, libraries and other modules
 <ul>
-    <li>CodeIgniter 2.1.3</li>
-    <li>Bootstrap 3.0.0</li>
-    <li>JQuery 1.8.3</li>
+    <li>CodeIgniter 2.1.3 http://ellislab.com/codeigniter/</li>
+    <li>Bootstrap 3.0.0 http://getboostrap.com</li>
+    <li>JQuery 1.8.3 http://jquery.com</li>
     <li>FooTable - http://fooplugins.com/plugins/footable-jquery</li>
 </ul>

@@ -62,6 +62,24 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-lg-12">
+                                        <div id="terms_alert" class="alert alert-warning">
+                                            <?php echo $this->site_info->site_terms; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="checkbox pull-right">
+                                            <label>
+                                                <input type="checkbox" name="terms" value="1" <?php echo $this->the_user->terms == 1?'checked':''; ?> />
+                                                I accept these Terms & Conditions
+                                            </label>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
                                         <?php echo form_submit('submit', 'Save', 'class="btn btn-cdd pull-right"'); ?>
                                     </div>
                                 </div>
