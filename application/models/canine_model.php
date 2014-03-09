@@ -147,6 +147,33 @@ class Canine_model extends MY_Model {
         }
     }
     
+    public function add_dogs($user_id, $dogs, $other_name) {
+        $new_dogs = array();
+        if(!empty($dogs)) {
+            $i=0;
+            foreach($dogs as $k=>$v) {
+                $new_dogs[$i]['user_id'] = $user_id;
+                $new_dogs[$i]['name'] = $v;
+                $i++;
+            }
+        }
+        if(!empty($other_name)) {
+            $other['user_id'] = $user_id;
+            $other['name'] = $other_name;
+            array_push($new_dogs, $other);
+        }
+        if(!empty($new_dogs)) {
+            try {
+                $this->canine_model->insert_many($new_dogs);
+                return true;
+            } catch (Exception $ex) {
+                echo '<pre>';
+                print_r($ex);
+                die();
+            }
+        }
+    }
+    
     public function import($sheet) {
         $this->load->model('user_model');
         if(!empty($sheet)) {

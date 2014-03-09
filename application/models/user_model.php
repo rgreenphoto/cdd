@@ -141,6 +141,13 @@ class User_model extends MY_Model {
         return $query->result();
     }
     
+    public function add_to_group($user_id, $group_id) {
+        $options = array('user_id' => $user_id, 'group_id' => $group_id);
+        if($this->db->insert('users_groups', $options)) {
+            return true;
+        }
+        return false;
+    }
 
     public function import($sheet) {
         if(!empty($sheet)) {

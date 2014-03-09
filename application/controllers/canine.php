@@ -23,7 +23,8 @@ class Canine extends Member_Controller {
         $this->data['title'] = 'Add Canine';
         $this->data['hidden'] = array('user_id' => $this->the_user->id, 'rescue' => '0');
         $this->data['attributes'] = array('class' => 'form-horizontal');
-        
+        $return_url = ($this->agent->referrer() == base_url().'user/edit')?'user/edit/#tab_dogs':'user/member';
+        $this->data['return_url'] = $return_url;
         $this->data['user'] = $this->user_model->with('canine')->get($this->the_user->id);
                           
         if(!empty($_POST)) {
@@ -31,12 +32,7 @@ class Canine extends Member_Controller {
             
             if($this->canine_model->insert($options)) {
                 $this->session->set_flashdata('message', 'Record Added');
-                if($this->data['the_user']->group_id == '3') {
-                    redirect('user/member/');
-                } else {
-                    redirect('canine/index');
-                }
-                
+                redirect($return_url);
             }            
         } 
         
@@ -47,7 +43,7 @@ class Canine extends Member_Controller {
     public function edit($canine_id) {
         $this->data['title'] = 'Edit Canine'; 
         //set up return to either member info tab or member profile 
-        $return_url = ($this->agent->referrer() == base_url().'user/edit')?'/user/edit/#tab_dogs':'/user/member';        
+        $return_url = ($this->agent->referrer() == base_url().'user/edit')?'user/edit/#tab_dogs':'user/member';        
 
         $this->data['return_url'] = $return_url;
         $this->data['canine'] = $this->canine_model->get_by(array('user_id' => $this->the_user->id, 'id' => $canine_id));

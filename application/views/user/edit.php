@@ -93,15 +93,43 @@
                                 <div class="col-lg-6">
                                     <?php echo form_open('user/add_family', array('class' => 'form-inline'), array()); ?>
                                     <form action="<?php echo base_url(); ?>user/add_family">
-                                    <fieldset>
-                                        <div class="control-group">
-                                            <label for="first_name">First Name:</label>
-                                            <input type="text" class="form-control" name="first_name" />
-                                            <label for="last_name">Last Name:</label>
-                                            <input type="text" class="form-control" name="last_name" />
-                                            <input type="submit" name="submit" value="Submit" class="btn btn-cdd pull-right" />
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <label for="first_name">First Name:</label>
+                                                <input type="text" class="form-control" name="first_name" />
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label for="last_name">Last Name:</label>
+                                                <input type="text" class="form-control" name="last_name" />
+                                            </div>    
                                         </div>
-                                    </fieldset>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <p>Select which dogs to add to this family member. Or add a new dog.</p>
+                                                
+                                                <?php if(!empty($the_dogs)) foreach($the_dogs as $dog): ?>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" name="dogs[]" value="<?php echo $dog->name; ?>">
+                                                        <?php echo $dog->name; ?>
+                                                    </label>
+                                                </div>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <label for="other_name">Other Dog:</label>
+                                                <input type="text" name="other_name" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <input type="submit" name="submit" value="Submit" class="btn btn-cdd pull-right" /> 
+                                            </div>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

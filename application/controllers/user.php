@@ -329,34 +329,30 @@ class User extends Member_Controller {
       }
   }
   
-  public function family() {
-      if(!empty($this->data['the_family'])) {
-          $i=0;
-          foreach($this->data['the_family'] as $row) {
-              $this->data['family'][$i]['name'] = $row->full_name;
-              $i++;
-          }
-      }
-      $this->data['main'] = 'user/family';
-      $this->load->view('secondary_layout', $this->data);
-  }
   
   public function add_family() {
-      if(!empty($this->data['the_user']->family_id)) {
-          if(!empty($_POST)) {
-              $data = $this->set_post_options($_POST);
-              $new_id = $this->user_model->get_next_member_id();
-              $data['member_id'] = $new_id[0]->member_id;
-              $data['family_id'] = $this->data['the_user']->family_id;
-              if($this->user_model->insert($data, TRUE)) {
-                  redirect('user/family');
-              } else {
-                  echo 'No Go';
-              }
+      $this->load->model('canine_model');
+      $data = $this->set_post_options($_POST);
+      if(!empty($data)) {
+          try {
+              $user_data = array(
+                  'first_name' => $data['first_name'],
+                  'last_name' => $data['last_name'],
+                  'family_id' => $this->data['the_user']->family_id
+              );
+              $this->user_model->insert($user_data, TRUE);
+              $user_id = $this->db->insert_id();
+              $this->user_model->add_to_group($user_id, $this->data['the_user']->group_id);
+              $this->canine_model->add_dogs($user_id, $data['dogs'], $data['other_name']);
+              $this->session->set_flashdata('message', 'Family member added');
+              redirect('user/edit/#tab_family');
+          } catch (Exception $ex) {
+              $this->session->set_flashdata('error_message', 'Could not add family member at this time');
+              redirect('user/edit/');
           }
       }
-      $this->data['main'] = 'user/add_family';
-      $this->load->view('secondary_layout', $this->data);   
-  } 
+   
+  }
+  
 }
 ?>
