@@ -1,0 +1,121 @@
+/* 
+    Document   : master
+    Created on : Oct 5, 2013, 5:13:59 PM
+    Author     : Russ green
+    Description:
+        Purpose of the stylesheet follows.
+*/
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+
+}
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.btn-cdd {
+    color: #fff;
+    background-color: #020277;
+}
+.btn-cdd:hover,
+.btn-cdd:focus,
+.btn-cdd:active {
+    color: #fff200;
+}
+
+
+/*make top navbar adjustments*/
+.navbar-cdd {
+    border-bottom: #000 solid thin;
+    background-color: #AF0101;
+}
+.navbar-cdd .navbar-brand {
+    color: #fff;
+}
+.navbar-cdd .navbar-brand:hover,
+.navbar-cdd .navbar-brand:focus {
+  color: #fff200;
+  background-color: transparent;
+}
+
+.navbar-cdd .navbar-toggle:hover, 
+.navbar-cdd .navbar-toggle:focus {
+    background-color: transparent;
+}
+
+.navbar-cdd .navbar-nav li a {
+    color: #fff;
+}
+
+.navbar-cdd .navbar-nav li a:hover {
+    color: #fff200;
+    background-color: transparent;
+}
+
+.navbar-cdd .navbar-nav .dropdown ul li a {
+    color: #020277;
+}
+
+/* override nav bar colors */
+.navbar-cdd .navbar-nav .dropdown ul li a:hover,
+.navbar-cdd .navbar-nav .dropdown ul li a:focus {
+    color: #fff;
+    background-color: #0200AC;
+}
+/*override navbar colors*/
+.navbar-cdd .navbar-nav > .open > a,
+.navbar-cdd .navbar-nav > .open > a:hover,
+.navbar-cdd .navbar-nav > .open > a:focus {
+  color: #020277;
+  background-color: #fff;
+}
+
+/*override nav pills*/
+.nav-pills > li.active > a, 
+.nav-pills > li.active > a:hover, 
+.nav-pills > li.active > a:focus
+{
+  color: #ffffff;
+  background-color: #020277;
+}
+.ui-autocomplete-loading {
+    background: white url('../../images/dog-loader.gif') right center no-repeat;
+}
+

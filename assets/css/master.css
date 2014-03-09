@@ -1,0 +1,309 @@
+/* 
+    Document   : master
+    Created on : Nov 4, 2012, 8:59:07 AM
+    Author     : Russ Green rgreen@rgreenphotography.com
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+html, body {    
+    font-family: Tahoma,Verdana,Arial,sans-serif;
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    padding-top: 70px;
+    padding-bottom: 15px;
+}
+
+h1, h2, h3, h4, h5, h6, legend {
+    color: #020277;
+}
+
+a {
+    color: #020277;
+}
+
+/*make top navbar adjustments*/
+.navbar-cdd {
+    border-bottom: #000 solid thin;
+    background-color: #020277;
+}
+
+.navbar-cdd .navbar-toggle:hover, 
+.navbar-cdd .navbar-toggle:focus {
+    background-color: transparent;
+}
+
+.navbar-cdd .navbar-brand {
+    color: #fff;
+}
+.navbar-cdd .navbar-brand:hover,
+.navbar-cdd .navbar-brand:focus {
+  color: #fff200;
+  background-color: transparent;
+}
+
+.navbar-cdd .navbar-nav li a {
+    color: #fff;
+}
+
+.navbar-cdd .navbar-nav li a:hover {
+    color: #fff200;
+    background-color: transparent;
+}
+
+.navbar-cdd .navbar-nav .dropdown ul li a {
+    color: #020277;
+}
+
+/* override nav bar colors */
+.navbar-cdd .navbar-nav .dropdown ul li a:hover,
+.navbar-cdd .navbar-nav .dropdown ul li a:focus {
+    color: #fff;
+    background-color: #0200AC;
+}
+/*override navbar colors*/
+.navbar-cdd .navbar-nav > .open > a,
+.navbar-cdd .navbar-nav > .open > a:hover,
+.navbar-cdd .navbar-nav > .open > a:focus {
+  color: #020277;
+  background-color: #fff;
+}
+
+/*override nav pills*/
+.nav-pills > li.active > a, 
+.nav-pills > li.active > a:hover, 
+.nav-pills > li.active > a:focus
+{
+  color: #ffffff;
+  background-color: #020277;
+}
+
+
+.navbar-fixed-top form {
+    margin-top: 5px;
+}
+.cdd-nav-footer {
+    min-height: 35px;
+}
+
+.cdd-nav-footer .navbar-brand {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.cdd-nav-footer a,
+.cdd-nav-footer .navbar-brand {
+    color: #fff200;
+    font-size: 12px;
+}
+
+.cdd-nav-footer .navbar-nav li a {
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 12px;
+    color: #fff200;
+}
+.btn-cdd {
+    color: #fff;
+    background-color: #020277;
+}
+.btn-cdd:hover,
+.btn-cdd:focus,
+.btn-cdd:active {
+    color: #fff200;
+}
+
+.btn-cdd .caret {
+    color: #fff;
+}
+
+
+.btn-cdd-yellow {
+    background-color: #d40000;
+}
+
+.navbar-footer {
+    background-color: rgba(0,0,0,.7);
+}
+
+.navbar-footer .navbar-nav {
+    max-height: 1px;
+}
+
+.navbar-footer .navbar-nav li a {
+    color: #fff200;
+}
+/* override nav bar colors */
+.navbar-footer .navbar-nav li a:hover,
+.navbar-footer .navbar-nav li a:focus {
+    color: #fff;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  margin-bottom: 5px;
+
+  /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
+  margin-top: -25px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+}
+/* Declare heights because of positioning of img element */
+.carousel .item {
+  height: 400px;
+  background-color: #fff;
+}
+.carousel-inner > .item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 400px;
+}
+/* carousel */
+.carousel-caption h1 {
+    font-size: 24px;
+}
+.carousel-caption h1,
+.carousel-caption .lead {
+    margin: 0;
+    line-height: 1.25;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0,0,0,.4);
+}
+.carousel-caption p {
+    margin: 0;
+    font-size: 12px;
+}
+.carousel-caption .btn {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.carousel-caption-inner {
+  display: block;  
+  background: rgba(2,0,172,.7) url(../images/pattern.png) repeat top left;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  min-height: 55px;
+  min-width: 275px;
+  padding: 12px 12px;  
+}
+.carousel-caption-inner h1 {
+    font-size: 24px;
+}
+.carousel-caption-inner h1,
+.carousel-caption-inner .lead {
+  margin: 0;
+  line-height: 1.25;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0,0,0,.4);
+}
+
+.carousel-caption-inner-right {
+    display: block;
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+}
+
+
+
+/* carousel colors */
+.orange_trans {
+    background: rgba(2,2,119,.6) url(../images/pattern.png) repeat top left;
+}
+
+.blue_trans {
+    background: rgba(0,0,255,.3) url(../images/pattern.png) repeat top left;
+}
+
+.red_trans {
+    background: rgba(255,0,0, .7) url(../images/pattern.png) repeat top left;
+}
+.dark_trans {
+    background: rgba(129,132,135,.7) url(../images/pattern.png) repeat top left;
+}
+
+
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Pad the edges of the mobile views a bit */
+.marketing {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.marketing h2 {
+  font-weight: normal;
+}
+.marketing .col-lg-3 p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.label-cdd {
+    background-color: #020277;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.table > thead > tr > td.cdd,
+.table > tbody > tr > td.cdd,
+.table > tfoot > tr > td.cdd,
+.table > thead > tr > th.cdd,
+.table > tbody > tr > th.cdd,
+.table > tfoot > tr > th.cdd,
+.table > thead > tr.cdd > td,
+.table > tbody > tr.cdd > td,
+.table > tfoot > tr.cdd > td,
+.table > thead > tr.cdd > th,
+.table > tbody > tr.cdd > th,
+.table > tfoot > tr.cdd > th {
+  color: #fff;
+  background-color: #020277;
+  border-color: #ddd;
+}
+
+.radio {
+    margin: 5px;
+    height: 40px;
+}
+
+.poll_response {
+    padding: 10px;
+    background-color: #eaeaea;
+}
+
+.poll_selected {
+    background-color: #B0F3CA;
+}
+.panel-cdd {
+    border-color: #DDD;
+}
+
+.panel-cdd > .panel-heading {
+    background-color: #EAEAEA;
+    border-color: #DDD;
+    color: #FFF;
+}
