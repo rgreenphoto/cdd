@@ -36,7 +36,7 @@ class Disc_type_model extends MY_Model {
     public function create_color_dropdown($row) {
         if(!empty($row->color)) {
             $color_array = explode(',', $row->color);
-            $new_array = array('' => 'Select Color');
+            $new_array = array('' => 'Color');
             foreach($color_array as $k=>$v) {
                 $new_array[$v] = $v;
             }
@@ -47,11 +47,11 @@ class Disc_type_model extends MY_Model {
     
     public function create_amount_dropdown($row) {
         if(!empty($row)) {
-            $amount_array = array('' => 'Select Amount');
-            $num = 25;
-            while($num <= 250) {
+            $amount_array = array('' => 'Quanity');
+            $num = $row->min;
+            while($num <= $row->max) {
                 $amount_array[$num] = $num;
-                $num += 25;
+                $num += $row->min;
             }
             $row->amount_dropdown = $amount_array;
         }

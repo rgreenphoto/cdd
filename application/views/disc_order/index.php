@@ -6,10 +6,9 @@
         <table class="table table-condensed table-bordered table-hover table-striped footable toggle-circle toggle-medium">
             <thead>
                 <tr class="warning">
-                    <th>Disc Type</th>
-                    <th>Disc Color</th>
-                    <th># of Discs</th>
-                    <th>Price</th>
+                    <th>Brand</th>
+                    <th>Color</th>
+                    <th>Quantity</th>
                     <th>Total</th>
                 </tr>
             </thead>
@@ -18,14 +17,19 @@
                 <tr>
                     <td>
                         <input type="hidden" id="<?php echo $disc->id; ?>_name" value="<?php echo $disc->name; ?>" />
-                        <?php echo $disc->name; ?>
+                        <?php echo $disc->name; ?><br />
+                        <a href="<?php echo $disc->description; ?>" target="_blank"><?php echo $disc->brand; ?></a>
+                        <input type="hidden" name="<?php echo $disc->id; ?>" value="<?php echo $disc->price; ?>" id="<?php echo $disc->id; ?>" />
+                        <span class="text-success">$<?php echo $disc->price; ?></span>
                     </td>
                     <td>
+                        <?php if(!empty($disc->color_dropdown)): ?>
                         <select name="<?php echo $disc->id; ?>_color" class="form-control" id="<?php echo $disc->id; ?>_color_selected">
                             <?php foreach($disc->color_dropdown as $k=>$v): ?>
                             <option value="<?php echo str_replace(' ', '_', $v); ?>"><?php echo $v; ?></option>
                             <?php endforeach; ?>
                         </select>
+                        <?php endif; ?>
                     </td>
                     <td>
                         <select name="<?php echo $disc->id; ?>_total_discs" class="form-control amount_selected" id="<?php echo $disc->id; ?>_amount_selected" data="<?php echo $disc->id; ?>">
@@ -35,14 +39,13 @@
                         </select>
                     </td>
                     <td>
-                        <input type="hidden" name="<?php echo $disc->id; ?>" value="<?php echo $disc->price; ?>" id="<?php echo $disc->id; ?>" />
-                        <?php echo $disc->price; ?>
-                    </td>
-                    <td>
-                        <div class="col-lg-8">
-                            <input type="text" name="<?php echo $disc->id; ?>_total" id="<?php echo $disc->id; ?>_total" class="form-control input-sm disabled" />
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <input type="text" name="<?php echo $disc->id; ?>_total" id="<?php echo $disc->id; ?>_total" class="form-control input-xs" disabled />
+                            </div>
+                            <a href="#" data="<?php echo $disc->id; ?>" class="btn btn-xs btn-cdd add_disc">Add <i class="icon-plus"></i></a>
                         </div>
-                        <a href="#" data="<?php echo $disc->id; ?>" class="btn btn-xs btn-cdd add_disc">Add <i class="icon-plus"></i></a>
+                        
                     </td>
                 </tr>
                 <?php endforeach; ?>
@@ -53,9 +56,9 @@
         <table class="table table-condensed table-bordered table-hover table-striped footable toggle-circle toggle-medium">
             <thead>
                 <tr class="danger">
-                    <th data-toggle="true">Type</th>
+                    <th data-toggle="true">Brand</th>
                     <th data-hide="all">Color</th>
-                    <th># of Discs</th>
+                    <th>Quality</th>
                     <th>Total</th>
                     <th>&nbsp;</th>
                 </tr>
@@ -112,9 +115,17 @@ $(document).ready(function() {
         type = $(this).attr('data');
         name = $('#' + type + '_name').val();
         amount = $('#' + type + '_amount_selected').val();
+        if(amount === 'Select_Amount') {
+            $('#freeow').freeow("Error", 'Please Select an ', {
+                classes: ["gray"],
+                autoHide: true
+            });
+        }
         total = $('#' + type + '_total').val();
         color = $('#' + type + '_color_selected').val();
-        
+        if(!color) {
+            color = 'N/A';
+        }
         $.ajax({
             type: "POST", 
             async: false, 
@@ -175,7 +186,6 @@ $(document).ready(function() {
             },
             success: function(data) {
                 result = $.parseJSON(data);
-                console.log(result);
                 $('#id_' + result.id).remove().trigger('footable_redraw');
                 $('#total_discs').text(result.total_discs);
                 $('#total_amount').text('$' + result.total_amount);
