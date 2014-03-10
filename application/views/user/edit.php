@@ -74,7 +74,6 @@
                                                 <input type="checkbox" name="terms" value="1" <?php echo $this->the_user->terms == 1?'checked':''; ?> />
                                                 I accept these Terms & Conditions
                                             </label>
-                                            
                                         </div>
                                     </div>
                                 </div>

@@ -70,7 +70,22 @@
                     <td><a href="#" class="btn btn-xs btn-danger remove_disc" data="<?php echo $order->id; ?>" >Remove <i class="icon-remove"></i></a></td>
                 </tr>
                 <?php endforeach; ?>
-                
+            </tbody>
+        </table>
+        <p>When you select either Pay By Check or PayPal, this will place your order. A details screen will display with the ability to print confirmation, where to send the check or a Pay with PayPal button.</p>
+        <table class="table">
+            
+            <thead>
+                <tr>
+                    <th>Total Discs: <span id="total_discs" class="label label-info"><?php echo !empty($stats->total_discs)?$stats->total_discs:''; ?></span></th>
+                    <th>Total Amount: <span id="total_amount" class="label label-success"><?php echo !empty($stats->total)?'$'.$stats->total:''; ?></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>&nbsp</td>
+                    <td><a href="<?php echo base_url(); ?>disc_order/confirm" class="btn btn-xs btn-cdd">Pay By Check</a> <a href="disc_order/confirm/1" class="btn btn-xs btn-cdd">PayPal</a></td>
+                </tr>
             </tbody>
         </table>
         <?php endif; ?>
@@ -119,7 +134,9 @@ $(document).ready(function() {
                 new_row = new_row + '<td>' + total + '</td>';
                 new_row = new_row + '<td><a href="#" class="btn btn-xs btn-danger remove_disc" data="' + result.id +  '" >Remove <i class="icon-remove"></i></a></td>';
                 new_row = new_row + '</tr>';
-                $('#cart').append(new_row).trigger('footable_redraw');;
+                $('#cart').append(new_row).trigger('footable_redraw');
+                $('#total_discs').text(result.total_discs);
+                $('#total_amount').text('$' + result.total_amount);
                 $('#' + type + '_color_selected').prop('selectedIndex',0);
                 $('#' + type + '_amount_selected').prop('selectedIndex',0);
                 $('#' + type + '_total').val('');
@@ -148,26 +165,29 @@ $(document).ready(function() {
     });
     
     function remove_discs(item) {
-            row = $(item).attr('data');
-            $.ajax({
-                type: "POST",
-                async: false,
-                url: '<?php echo base_url(); ?>disc_order/delete',
-                data: {
-                    id: row
-                },
-                success: function(data) {
-                    result = $.parseJSON(data);
-                    $('#id_' + result.id).remove();
-                    if(result.success_message) {
-                        $('#freeow').freeow("Success", result.success_message, {
-                            classes: ["gray"],
-                            autoHide: true
-                        });
-                    }
-                },
-                error: function(){alert('error');}
-            });
+        row = $(item).attr('data');
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: '<?php echo base_url(); ?>disc_order/delete',
+            data: {
+                id: row
+            },
+            success: function(data) {
+                result = $.parseJSON(data);
+                console.log(result);
+                $('#id_' + result.id).remove().trigger('footable_redraw');
+                $('#total_discs').text(result.total_discs);
+                $('#total_amount').text('$' + result.total_amount);
+                if(result.success_message) {
+                    $('#freeow').freeow("Success", result.success_message, {
+                        classes: ["gray"],
+                        autoHide: true
+                    });
+                }
+            },
+            error: function(){alert('error');}
+        });
     }
 });
 

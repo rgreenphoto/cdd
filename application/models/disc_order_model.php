@@ -39,6 +39,24 @@ class Disc_order_model extends MY_Model {
     
     public $before_update = array('modified');
     
+    public function stats($user_id, $season) {
+        $return = new stdClass();
+        $this->db->select_sum('total_discs');
+        $this->db->select_sum('total');
+        $this->db->where('user_id', $user_id);
+        $this->db->where('season', $season);
+        $query = $this->db->get('disc_order');
+        $result = $query->result();
+        if(!empty($result[0]->total_discs)) {
+            $return->total_discs = $result[0]->total_discs;
+        }
+        if(!empty($result[0]->total)) {
+            $return->total = $result[0]->total;
+        }
+        return $return;
+        
+    }
+    
 }
 
 

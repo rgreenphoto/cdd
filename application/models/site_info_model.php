@@ -34,6 +34,14 @@ class Site_info_model extends MY_Model {
         array(
             'field' => 'site_email',
             'label' => 'Site Email',
+            'rules' => 'xss_clean'),
+        array(
+            'field' => 'bulk_order_text',
+            'label' => 'Bulk Order Text',
+            'rules' => 'xss_clean'),
+        array(
+            'field' => 'bulk_order_email',
+            'label' => 'Bulk Order Email',
             'rules' => 'xss_clean')
     );
     

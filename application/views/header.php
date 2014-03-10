@@ -15,6 +15,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
       <?php if(!empty($the_user)): ?>
+          <li><a href="<?php echo base_url(); ?>user/<?php echo $the_user->group_id == '3'?'member':'edit'; ?>"><?php echo $the_user->full_name; ?></a></li>
         <?php if($the_user->group_id == '3'): ?>
           <li>
               <a href="<?php echo base_url(); ?>notification">
