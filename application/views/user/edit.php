@@ -4,7 +4,9 @@
             <div class="panel-heading">
                 <ul class="nav nav-pills">
                     <li class="active"><a href="#info" data-toggle="tab">General Info</a></li>
+                    <?php if(!empty($the_family)): ?>
                     <li><a href="#family" data-toggle="tab">Family</a></li>
+                    <?php endif; ?>
                     <li><a href="#dogs" data-toggle="tab">Dogs</a></li>
                 </ul> 
             </div>

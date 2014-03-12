@@ -29,12 +29,16 @@
         <?php $this->load->view('header'); ?>
                 <div class="col-xs-12 col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
                     <?php $this->load->view($main);?>
+                    <?php if($display_social === true): ?>
+                    <br />
+                    <div class="row">
+                        <?php $this->load->view('social'); ?>
+                    </div>
+                    <?php endif; ?>
                 </div>                
                 <div class="hidden-xs col-md-2 col-lg-2 col-md-pull-10 col-lg-pull-10">
                     <?php $this->load->view('menu'); ?>
                 </div>
-       
-       <?php if($display_social === true) { $this->load->view('social'); } ?> 
        <?php $this->load->view('footer'); ?>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
