@@ -12,16 +12,16 @@ All graphic assets and custom CSS is for use by the **Colorado Disc Dogs**. Plea
 
 
 This project is built using the following frameworks, libraries and other modules
-
-    * CodeIgniter 2.1.3 http://ellislab.com/codeigniter/
-    * Bootstrap 3.0.0 http://getboostrap.com
-    * JQuery 1.8.3 http://jquery.com
-    * FooTable - http://fooplugins.com/plugins/footable-jquery
-    * TinyMCE - http://www.tinymce.com/
-    * Plupload - http://www.plupload.com/
-    * GMap 3 for JQuery - http://gmap3.net
-    * FontAwesome 3.2.1 - http://fortawesome.github.io/Font-Awesome/3.2.1/
-
+<ul>
+    <li>CodeIgniter 2.1.3 http://ellislab.com/codeigniter/</li>
+    <li>Bootstrap 3.0.0 http://getboostrap.com</li>
+    <li>JQuery 1.8.3 http://jquery.com</li>
+    <li>FooTable - http://fooplugins.com/plugins/footable-jquery</li>
+    <li>TinyMCE - http://www.tinymce.com/</li>
+    <li>Plupload - http://www.plupload.com/</li>
+    <li>GMap 3 for JQuery - http://gmap3.net</li>
+    <li>FontAwesome 3.2.1 - http://fortawesome.github.io/Font-Awesome/3.2.1/</li>
+</ul>
 ##TODO
 1. Finish Score Interface to support iPad and mobile entry
 2. Update competition configuration manager to include new features added to competition type
