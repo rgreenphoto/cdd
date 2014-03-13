@@ -21,3 +21,8 @@ This project is built using the following frameworks, libraries and other module
     * Plupload - http://www.plupload.com/
     * GMap 3 for JQuery - http://gmap3.net
     * FontAwesome 3.2.1 - http://fortawesome.github.io/Font-Awesome/3.2.1/
+
+##TODO
+1. Finish Score Interface to support iPad and mobile entry
+2. Update competition configuration manager to include new features added to competition type
+3. 
