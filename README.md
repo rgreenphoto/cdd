@@ -23,6 +23,5 @@ This project is built using the following frameworks, libraries and other module
     <li>FontAwesome 3.2.1 - http://fortawesome.github.io/Font-Awesome/3.2.1/</li>
 </ul>
 ##TODO
-1. Finish Score Interface to support iPad and mobile entry
-2. Update competition configuration manager to include new features added to competition type
-3. 
+- [] Finish Score Interface to support iPad and mobile entry
+- [] Update competition configuration manager to include new features added to competition type 
