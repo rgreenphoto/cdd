@@ -17,4 +17,8 @@ This project is built using the following frameworks, libraries and other module
     <li>Bootstrap 3.0.0 http://getboostrap.com</li>
     <li>JQuery 1.8.3 http://jquery.com</li>
     <li>FooTable - http://fooplugins.com/plugins/footable-jquery</li>
+    <li>TinyMCE - http://www.tinymce.com/</li>
+    <li>Plupload - http://www.plupload.com/</li>
+    <li>GMap 3 for JQuery - http://gmap3.net</li>
+    <li>FontAwesome 3.2.1 - http://fortawesome.github.io/Font-Awesome/3.2.1/</li>
 </ul>
