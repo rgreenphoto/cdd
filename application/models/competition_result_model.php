@@ -409,14 +409,19 @@ class Competition_result_model extends MY_Model {
             $tc_cat_1 = '';
             $tc_cat_2 = '';
             for($i=1; $i<=10; $i++) {
-                $tc_cat_1 .= $options['tc_1_'.$i].',';
-                unset($options['tc_1_'.$i]);
-                $tc_cat_2 .= $options['tc_2_'.$i].',';
-                unset($options['tc_2_'.$i]);                
+                if(isset($options['tc_1_'.$i])) {
+                    $tc_cat_1 .= $options['tc_1_'.$i].',';
+                    unset($options['tc_1_'.$i]);
+                }
+                if(isset($options['tc_2_'.$i])) {
+                    $tc_cat_2 .= $options['tc_2_'.$i].',';
+                    unset($options['tc_2_'.$i]);    
+                }            
             }
             $options['tc_cat_1'] = rtrim($tc_cat_1, ',');
             $options['tc_cat_2'] = rtrim($tc_cat_2, ','); 
         }
+        unset($options['round']);
         unset($options['submit']);
         return $options;
     }

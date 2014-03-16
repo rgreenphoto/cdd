@@ -8,7 +8,7 @@ class Competition_result extends Admin_Controller {
         $this->load->library(array('excel'));
         $this->load->helper(array('download'));
         $this->css = array(base_url().'/assets/css/FooTable-2/css/footable.core.min.css');
-        $this->js = array(base_url().'assets/js/FooTable-2/dist/footable.min.js',base_url().'assets/js/FooTable-2/dist/footable.filter.min.js', base_url().'assets/js/FooTable-2/dist/footable.sort.min.js', base_url().'assets/js/FooTable-2/dist/footable.paginate.min.js');
+        $this->js = array(base_url().'assets/js/jmath.js',base_url().'assets/js/jquery.smooth-scroll.min.js',base_url().'assets/js/FooTable-2/dist/footable.min.js',base_url().'assets/js/FooTable-2/dist/footable.filter.min.js', base_url().'assets/js/FooTable-2/dist/footable.sort.min.js', base_url().'assets/js/FooTable-2/dist/footable.paginate.min.js');
         
     }
     
@@ -46,7 +46,8 @@ class Competition_result extends Admin_Controller {
         }       
     }     
     
-    public function edit($id, $division_id) { 
+    public function edit($id, $division_id) {
+        $mobile_display = $this->agent->is_mobile();
         $this->data['breadcrumb'] = $this->division_model->get($division_id);
         
         $existing = $this->competition_result_model->with('competition')->with('user')->with('canine')->with('division')->get($id);
@@ -104,11 +105,15 @@ class Competition_result extends Admin_Controller {
             }
         }
         
-        $this->data['main'] = 'admin/competition_result/elements/tc';
-        if($existing->division->freestyle == 1) {
-            $this->data['main'] = 'admin/competition_result/elements/fs';
+        if($mobile_display == 1 || $mobile_display == 0) {
+            $this->data['main'] = 'admin/competition_result/elements/tc';
+            if($this->data['breadcrumb']->freestyle == 1) {
+                $this->data['main'] = 'admin/competition_result/elements/fs';
+            }
+        } else {
+            $this->data['main'] = 'admin/competition_result/edit';
         }
-        $this->load->view('admin/layout', $this->data);
+        $this->load->view('admin/scorekeep', $this->data);
         
         
     }
