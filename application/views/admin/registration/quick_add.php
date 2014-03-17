@@ -10,7 +10,7 @@
 <div class="row">
     <div class="col-lg-10 col-lg-push-1">
         <div class="alert alert-danger">
-            <p class="lead">Already Registered with:</p>
+            <p class="lead">Registered with:</p>
             <ul class="list-unstyled">
                 <?php foreach($registrations as $registration): ?>
                 <li><?php echo '<strong>'.$registration->canine->name.'</strong> <em>'.$registration->division->name.'</em>'; ?></li>

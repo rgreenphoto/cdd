@@ -1,5 +1,5 @@
 <ul class="breadcrumb">
-    <li><a href="<?php echo base_url(); ?>admin/registration/detail/<?php echo $registration->competition_id; ?>">Competition Detail</a></li>
+    <li><a href="<?php echo base_url(); ?>admin/gameday/<?php echo $registration->competition_id; ?>">Game Day Dashboard</a></li>
     <li class="active"><?php echo $title; ?></li>
 </ul>
 <div class="row">

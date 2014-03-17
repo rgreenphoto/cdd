@@ -111,12 +111,12 @@ class Registration extends Admin_Controller {
                     force_download('Skyhoundz_Reg_Forms.docx', $data);
                 } else {
                     $this->session->set_flashdata('message', 'Could not generate document.');
-                    redirect('/admin/registration/detail/'.$competition_id);
+                    redirect('/admin/gameday/'.$competition_id);
                 }
             
         } else {
             $this->session->set_flashdata('message', 'No forms to print');
-            redirect('/admin/registration/detail/'.$competition_id);
+            redirect('/admin/gameday/'.$competition_id);
         }        
     }
     
@@ -186,12 +186,12 @@ class Registration extends Admin_Controller {
                     force_download($file_name.'.docx', $data);
                 } else {
                     $this->session->set_flashdata('message', 'Could not generate document.');
-                    redirect('/admin/registration/detail/'.$competition_id);
+                    redirect('/admin/gameday/'.$competition_id);
                 }
             
         } else {
             $this->session->set_flashdata('message', 'No forms to print');
-            redirect('/admin/registration/detail/'.$competition_id);
+            redirect('/admin/gameday/'.$competition_id);
         } 
     }
     
@@ -203,7 +203,7 @@ class Registration extends Admin_Controller {
         $this->data['registration'] = $registration;
         //grab divisions for this competition type
         if(!empty($registration->competition->competition_type_id)) {
-            $this->data['divisions'] = $this->division_model->get_list($registration->competition->competition_type_id);
+            $this->data['divisions'] = $this->division_model->get_full_list($registration->competition->competition_type_id);
         }
 
         if(!empty($_POST)) {
@@ -219,7 +219,7 @@ class Registration extends Admin_Controller {
             if($this->registration_model->update($id, $options)) {
 
                 $this->session->set_flashdata('success_message', 'Record Saved');
-                redirect('admin/registration/detail/'.$options['competition_id']);
+                redirect('admin/gameday/'.$options['competition_id']);
             }
         } else {
             //view method

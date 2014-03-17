@@ -1,4 +1,4 @@
-<h4><img src="<?php echo base_url(); ?><?php echo $competition->competition_type->image; ?>" /> <?php echo $competition->name; ?> <?php echo $competition->date; ?></h4>
+<h3><img src="<?php echo base_url(); ?><?php echo $competition->competition_type->image; ?>" /> <?php echo $competition->name; ?> <?php echo $competition->date; ?></h3>
 <div class="row">
     <div class="col-lg-6">
         <div class="panel panel-default">
@@ -35,7 +35,10 @@
                 <h4>Add Walk-up Registrations</h4>
                 <p>Enter the first and last name of the competitor. If we have them in our system, click on the name when it appears.</p>
                 <div class="ui-widget">
-                    <input id="filter" type="text" class="form-control" placeholder="First Name Last Name" data-source="<?php echo base_url(); ?>admin/user/quick_search" data-link="<?php echo base_url(); ?>admin/registration/quick_add_form/<?php echo $competition->id; ?>/" data-ajax="#user-edit">
+                    <div class="input-group">
+                        <input id="filter" type="text" class="form-control" placeholder="First Name Last Name" data-source="<?php echo base_url(); ?>admin/user/quick_search" data-link="<?php echo base_url(); ?>admin/registration/quick_add_form/<?php echo $competition->id; ?>/" data-ajax="#user-edit">
+                        <span class="input-group-addon"><i class="icon-search"></i></span>
+                    </div>
                 </div>
                 <br />
                 <div id="ajax-loader" class="pull-right" style="display:none;">
