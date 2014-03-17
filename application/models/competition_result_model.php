@@ -58,11 +58,11 @@ class Competition_result_model extends MY_Model {
             'rules' => 'xss_clean'),
         array(
             'field' => 'cr_1',
-            'label' => 'Catch Ration',
+            'label' => 'Catch Ratio',
             'rules' => 'xss_clean'),
         array(
             'field' => 'tc_cat_1',
-            'label' => 'TC ARray',
+            'label' => 'TC Catch 1',
             'rules' => 'xss_clean'),
         array(
             'field' => 'tc_total',
@@ -90,7 +90,7 @@ class Competition_result_model extends MY_Model {
             'rules' => 'xss_clean'),
         array(
             'field' => 'cr_2',
-            'label' => 'Catch Ration 2',
+            'label' => 'Catch Ratio 2',
             'rules' => 'xss_clean'),
         array(
             'field' => 'tc_cat_2',

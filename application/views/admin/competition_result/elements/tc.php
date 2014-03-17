@@ -163,7 +163,9 @@ $(document).ready(function() {
             previous_value = $('#tc_' + round +'_' + dp).val();
             previous_total = $('#tc_total_'+ round).val();
             $('#tc_' + round + '_' + dp).val('');
-            $('#tc_total_' + round).math('-', previous_total, previous_value);
+            if($.isNumeric(previous_value) && $.isNumeric(previous_total)) {
+                $('#tc_total_' + round).math('-', previous_total, previous_value);
+            }
             $('#focus_target_'+round+'_' + dp).removeClass().addClass('danger score-label');
 
         });
@@ -183,7 +185,7 @@ $(document).ready(function() {
             if(!current) {
                 current = 0;
             }
-            if($.isNumeric(val)) {
+            if($.isNumeric(val) && $.isNumeric(current)) {
                 $('#tc_total_' + round).math('+', current, val);
                 $('#tc_total_' + round).effect('highlight', 'slow');   
             }
@@ -196,7 +198,9 @@ $(document).ready(function() {
         previous_value = $('#tc_' + round +'_' + dp).val();
         previous_total = $('#tc_total_'+ round).val();
         $('#tc_' + round + '_' + dp).val('');
-        $('#tc_total_' + round).math('-', previous_total, previous_value);
+        if($.isNumeric(previous_value) && $.isNumeric(previous_total)) {
+            $('#tc_total_' + round).math('-', previous_total, previous_value);
+        }
         $('#focus_target_'+round+'_' + dp).removeClass().addClass('danger score-label');
 
     });

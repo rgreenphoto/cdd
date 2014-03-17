@@ -24,43 +24,86 @@
 </div>
 <div class="row">
     <div class="col-lg-12">
-        <h5>Freestyle</h5>
-        <table class="table table-bordered table-condensed table-striped">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th><?php echo $labels['fs_labels'][0]; ?></th>
-                    <th><?php echo $labels['fs_labels'][1]; ?></th>
-                    <th><?php echo $labels['fs_labels'][2]; ?></th>
-                    <th><?php echo $labels['fs_labels'][3]; ?></th>
-                    <th>Catch Ratio</th>
-                    <th>Deduct</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
+        <?php echo form_open('admin/competition_result/edit/'.$id.'/'.$division_id, '', $hidden); ?>
+        <ul class="nav nav-pills">
+            <li class="active"><a href="#round_1" data-toggle="tab" data="1">Round 1</a></li>
+            <li><a href="#round_2" data-toggle="tab" data="2">Round 2</a></li>
+        </ul>
+        <br />
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="round_1">
+                <table class="table table-bordered table-condensed table-striped">
+                    <thead>
+                        <tr class="info">
+                            <th class="text-center"><?php echo $labels['fs_labels'][0]; ?></th>
+                            <th class="text-center"><?php echo $labels['fs_labels'][1]; ?></th>
+                            <th class="text-center"><?php echo $labels['fs_labels'][2]; ?></th>
+                            <th class="text-center"><?php echo $labels['fs_labels'][3]; ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="active">
+                        <td><input type="number" name="fs_1_1" class="fs_1 form-control" id="fs_1_1" value="<?php echo $item->fs_1_1; ?>" /></td>
+                        <td><input type="number" name="fs_2_1" class="fs_1 form-control" id="fs_2_1" value="<?php echo $item->fs_2_1; ?>" /></td>
+                        <td><input type="number" name="fs_3_1" class="fs_1 form-control" id="fs_3_1" value="<?php echo $item->fs_3_1; ?>" /></td>
+                        <td><input type="number" name="fs_4_1" class="fs_1 form-control" id="fs_4_1" value="<?php echo $item->fs_4_1; ?>" /></td>
+                    </tr>
+                    <tr class="warning">
+                        <th colspan="3" class="text-right">Catch Ratio</th>
+                        <td><input type="number" name="cr_1" class="cr_1 form-control" id="cr_1" value="<?php echo $item->cr_1; ?>" /></td>
+                    </tr>
+                    <tr class="danger">
+                        <th colspan="3" class="text-right">Deduct</th>
+                        <td><input type="number" name="deduct_1" class="fs_1 form-control" id="deduct_1" /></td>
+                    </tr>
+                    <tr class="success">
+                        <th colspan="3" class="text-right">Total</th>
+                        <td><input type="number" name="fs_total_1" class="form-control" id="fs_total_1" value="<?php echo $item->fs_total_1; ?>" /></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="round_2">
+                <table class="table table-bordered table-condensed table-striped">
+                    <thead>
+                        <tr class="info">
+                            <th class="text-center"><?php echo $labels['fs_labels'][0]; ?></th>
+                            <th class="text-center"><?php echo $labels['fs_labels'][1]; ?></th>
+                            <th class="text-center"><?php echo $labels['fs_labels'][2]; ?></th>
+                            <th class="text-center"><?php echo $labels['fs_labels'][3]; ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="active">
+                        <td><input type="number" name="fs_1_2" class="fs_2 form-control" id="fs_1_2" value="<?php echo $item->fs_1_2; ?>" /></td>
+                        <td><input type="number" name="fs_2_2" class="fs_2 form-control" id="fs_2_2" value="<?php echo $item->fs_2_2; ?>" /></td>
+                        <td><input type="number" name="fs_3_2" class="fs_2 form-control" id="fs_3_2" value="<?php echo $item->fs_3_2; ?>" /></td>
+                        <td><input type="number" name="fs_4_2" class="fs_2 form-control" id="fs_4_2" value="<?php echo $item->fs_4_2; ?>" /></td>
+                    </tr>
+                    <tr class="warning">
+                        <th colspan="3" class="text-right">Catch Ratio</th>
+                        <td><input type="number" name="cr_2" class="cr_2 form-control" id="cr_2" value="<?php echo $item->cr_2; ?>" /></td>
+                    </tr>
+                    <tr class="danger">
+                        <th colspan="3" class="text-right">Deduct</th>
+                        <td><input type="number" name="deduct_2" class="fs_2 form-control" id="deduct_2" /></td>
+                    </tr>
+                    <tr class="success">
+                        <th colspan="3" class="text-right">Total</th>
+                        <td><input type="number" name="fs_total_2" class="form-control" id="fs_total_2" value="<?php echo $item->fs_total_2; ?>" /></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <table class="table">
             <tbody>
-                <tr class="success">
-                    <td>1</td>
-                    <td><input type="number" name="fs_1_1" class="fs_1 form-control" id="fs_1_1" value="<?php echo $item->fs_1_1; ?>" /></td>
-                    <td><input type="number" name="fs_2_1" class="fs_1 form-control" id="fs_2_1" value="<?php echo $item->fs_2_1; ?>" /></td>
-                    <td><input type="number" name="fs_3_1" class="fs_1 form-control" id="fs_3_1" value="<?php echo $item->fs_3_1; ?>" /></td>
-                    <td><input type="number" name="fs_4_1" class="fs_1 form-control" id="fs_4_1" value="<?php echo $item->fs_4_1; ?>" /></td>
-                    <td><input type="number" name="cr_1" class="cr_1 form-control" id="cr_1" value="<?php echo $item->cr_1; ?>" /></td>
-                    <td><input type="number" name="deduct_1" class="fs_1 form-control" id="deduct_1" /></td>
-                    <td><input type="number" name="fs_total_1" class="form-control" id="fs_total_1" value="<?php echo $item->fs_total_1; ?>" /></td>
-                </tr>                
-                <tr class="info">
-                    <td>2</td>
-                    <td><input type="number" name="fs_1_2" class="fs_2 form-control" id="fs_1_2" value="<?php echo $item->fs_1_2; ?>" /></td>
-                    <td><input type="number" name="fs_2_2" class="fs_2 form-control" id="fs_2_2" value="<?php echo $item->fs_2_2; ?>" /></td>
-                    <td><input type="number" name="fs_3_2" class="fs_2 form-control" id="fs_3_2" value="<?php echo $item->fs_3_2; ?>" /></td>
-                    <td><input type="number" name="fs_4_2" class="fs_2 form-control" id="fs_4_2" value="<?php echo $item->fs_4_2; ?>" /></td>
-                    <td><input type="number" name="cr_2" class="cr_2 form-control" id="cr_2" value="<?php echo $item->cr_2; ?>" /></td>
-                    <td><input type="number" name="deduct_2" class="fs_2 form-control" id="deduct_2" /></td>
-                    <td><input type="number" name="fs_total_2" class="form-control" id="fs_total_2" value="<?php echo $item->fs_total_2; ?>" /></td>
-                </tr>                
+                <tr>
+                    <td class="text-right" colspan="8"><?php echo form_submit('submit', 'Save Score', 'class="btn btn-primary"'); ?></td>
+                </tr>
             </tbody>
         </table>
+        <?php echo form_close(); ?>
     </div>
 </div>
 <script>

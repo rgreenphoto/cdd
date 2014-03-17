@@ -86,7 +86,10 @@ class Result extends Public_Controller {
     public function get_results($competition_id, $division_id) {
         $this->data['division'] = $this->division_model->get($division_id);
         $this->data['results'] = $this->competition_result_model->get_teams($competition_id, $division_id);
-        $view = $this->load->view('result/elements/table', $this->data);
+//        echo '<pre>';
+//        print_r($this->data['results']);
+//        die();
+        $view = $this->load->view('result/elements/table', $this->data, true);
         echo $view;
     }
     

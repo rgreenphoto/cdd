@@ -37,12 +37,12 @@ function get_results(division_id) {
     $.ajax({
         url: '<?php echo base_url(); ?>result/get_results/<?php echo $competition[0]->id; ?>/' + division_id,
         beforeSend: function() {
-            $('#target').fadeOut();
+            //$('#target').fadeOut();
             $('#spinner').toggle();
             $('#fetch').toggle();
         },
         success: function(data) {
-            $('#target').html(data).toggle();
+            $('#target').html(data);
             $('.footable').effect("highlight", 1000);
             $('#spinner').toggle();
             $('#fetch').toggle();
