@@ -13,8 +13,7 @@
             <?php if(!empty($competitors)): ?>
                 <div id="competitors">
                     <h4>Enter Scores</h4>
-                    <p>Select which division you would like to edit. If a running order hasn't been previously set, a random order will be genereated.
-                        From this screen select each competitor and enter their scores.</p>
+                    <p>Select which division you would like to edit. From this screen select each competitor and enter their scores.</p>
                     <div class="btn-group pull-right">
                         <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">Select Division <span class="caret"></span></button>
                         <ul class="dropdown-menu" role="menu">

@@ -56,6 +56,17 @@
         <div id="division-loader" style="display:none;">
             <button class="btn btn-cdd">Fetching Divisions...<img src="<?php echo base_url(); ?>assets/images/dog-loader.gif" /></button>
         </div>
+        <?php if(!empty($previous_comps)): ?>
+            <div class="pull-right">
+                <label for="previous_fees" id="desc_message" class="text-danger"></label>
+                <select id="previous_fees" name="previous_fees">
+                    <option value="">Select previous fees</option>
+                    <?php foreach($previous_comps as $pcomp): ?>
+                    <option data="<?php echo $pcomp->competition_type_id; ?>" value="<?php echo $pcomp->id; ?>"><?php echo $pcomp->name; ?></option>
+                    <?php endforeach; ?>
+                </select>                        
+            </div>
+        <?php endif; ?>
         <div id="division-list" style="display:none;"></div>
         <br />
         <div class="row">
@@ -129,7 +140,7 @@
                         </select>                        
                     </div>
                     <?php endif; ?>
-                    <textarea id="event_description" name="event_description"><?php echo !empty($competition->description) ? $competition->description: ''; ?></textarea>
+                    <textarea id="event_description" name="event_description"><?php echo !empty($competition->event_description) ? $competition->event_description: ''; ?></textarea>
             </div>
         </div>                                           
     <br />
@@ -255,6 +266,14 @@
      
         $('#competition_type_id').change(function() {
             var competition_id = $('#id').val();
+            var competition_type_id = $('#competition_type_id').val();
+            if(competition_type_id) {
+                getDivisions(competition_id, competition_type_id);
+            }
+        });
+        
+        $('#previous_fees').change(function() {
+            var competition_id = $(this).val();
             var competition_type_id = $('#competition_type_id').val();
             if(competition_type_id) {
                 getDivisions(competition_id, competition_type_id);

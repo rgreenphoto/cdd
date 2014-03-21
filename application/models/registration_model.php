@@ -105,7 +105,7 @@ class Registration_model extends MY_Model {
        $reg_data['competition_id'] = $options['competition_id'];
        $reg_data['complete'] = 1;
        $reg_data['isPaid'] = 1;
-       $reg_data['fees'] = $fee->fee;
+       $reg_data['fees'] = !empty($fee->fee)?$fee->fee:'';
        
        //if we need to add a new user 
        if(empty($options['user_id'])) {
