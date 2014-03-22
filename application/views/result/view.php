@@ -24,7 +24,7 @@
         </caption>
         
         <thead>
-            <tr>
+            <tr class="cdd">
                 <th data-toggle="true" data-type="numeric">Place</th>
                 <th data-class="highlight">Handler</th>
                 <th>Dog</th>

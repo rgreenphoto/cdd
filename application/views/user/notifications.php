@@ -3,7 +3,7 @@
     You can change this option on your <a href="<?php echo base_url(); ?>user/settings">Account Settings</a> page.</p>
 <table class="table table-hover table-striped footable toggle-arrow-small toggle-small" data-page-navigation=".page" data-page-size="10" data-filter="#filter">
     <thead>
-        <tr>
+        <tr class="active">
             <th data-hide="all">&nbsp;</th>
             <th data-toggle="true">Subject</th>
             <th>Date</th>

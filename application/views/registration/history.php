@@ -12,7 +12,7 @@
                 <br />
             </caption> 
             <thead>
-                <tr>
+                <tr class="active">
                     <th data-toggle="true" data-sort-initial="descending">Date</th>
                     <th>Competition</th>
                     <th data-hide="phone">Division</th>

@@ -280,8 +280,8 @@ a {
 .table > thead > tr.cdd > th,
 .table > tbody > tr.cdd > th,
 .table > tfoot > tr.cdd > th {
-  color: #fff;
-  background-color: #020277;
+  color: #000;
+  background-color: #BFBFBF;
   border-color: #ddd;
 }
 

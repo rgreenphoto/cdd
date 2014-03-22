@@ -41,6 +41,7 @@ class Canine extends Member_Controller {
     }
     
     public function edit($canine_id) {
+        $this->js = array(base_url().'assets/js/plupload/js/plupload.full.js');      
         $this->data['title'] = 'Edit Canine'; 
         //set up return to either member info tab or member profile 
         $return_url = ($this->agent->referrer() == base_url().'user/edit')?'user/edit/#tab_dogs':'user/member';        

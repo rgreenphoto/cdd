@@ -15,13 +15,7 @@
 <!-- info tab pane -->
                     <div class="tab-pane fade in active" id="info">
                         <div class="row">
-                            <div class="col-lg-3">
-                                <div class="row">
-                                    <h4>Member #: <span class="label label-default"><?php echo $this->the_user->member_id; ?></span></h4>
-                                    <h4>Expiration: <span class="label label-default"><?php echo ($this->the_user->membership_date != '0000-00-00' && !empty($this->the_user->membership_date)) ? date('m/d/Y', strtotime($this->the_user->membership_date . " + 365 day")): 'Not a current member.' ?></span></h4> 
-                                </div>
-                            </div>
-                            <div class="col-lg-9">
+                            <div class="col-lg-7">
                                 <?php echo form_open(base_url().'user/edit', $attributes, $hidden);?>
                                 <form action="<?php echo base_url(); ?>admin/user/edit" method="post">
                                 <input type="hidden" name="id" value="<?php echo $this->the_user->id; ?>" />
@@ -64,17 +58,10 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div id="terms_alert" class="alert alert-warning">
-                                            <?php echo $this->site_info->site_terms; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
                                         <div class="checkbox pull-right">
                                             <label>
                                                 <input type="checkbox" name="terms" value="1" <?php echo $this->the_user->terms == 1?'checked':''; ?> />
-                                                I accept these Terms & Conditions
+                                                I accept The Legal Stuff
                                             </label>
                                         </div>
                                     </div>
@@ -85,6 +72,11 @@
                                     </div>
                                 </div>
                                 </form>
+                            </div>
+                            <div class="col-lg-5">
+                                <div id="terms_alert" class="alert alert-warning">
+                                    <?php echo $this->site_info->site_terms; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -174,6 +166,7 @@
                                     <thead>
                                         <tr class="cdd">
                                             <th>Name</th>
+                                            <th>Display on Profile</th>
                                             <th>&nbsp;</th>
                                         </tr>
                                     </thead>
@@ -181,7 +174,8 @@
                                         <?php foreach($this->the_dogs as $dog): ?>
                                         <tr>
                                             <td><?php echo $dog->name; ?></td>
-                                            <td><a href="<?php echo base_url(); ?>canine/edit/<?php echo $dog->id; ?>">Edit</a></td>
+                                            <td><?php echo ($dog->display_profile == 1)?'Yes':'No'; ?></td>
+                                            <td><a href="<?php echo base_url(); ?>canine/edit/<?php echo $dog->id; ?>" class="btn btn-sm btn-cdd">Edit <i class="icon-edit"></i></a></td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>

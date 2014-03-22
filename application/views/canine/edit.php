@@ -1,4 +1,3 @@
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/plupload/js/plupload.full.js"></script>
 <?php
     if(!empty($canine->image)) {
         $image_display = 'style=""';
