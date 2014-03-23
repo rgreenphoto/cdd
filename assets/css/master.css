@@ -14,11 +14,7 @@ html, body {
 
 body {
     padding-top: 70px;
-    padding-bottom: 15px;
-}
-
-h1, h2, h3, h4, h5, h6, legend {
-    color: #020277;
+    padding-bottom: 70px;
 }
 
 a {
@@ -86,24 +82,18 @@ a {
     margin-top: 5px;
 }
 .cdd-nav-footer {
-    min-height: 35px;
+    
 }
 
 .cdd-nav-footer .navbar-brand {
-    padding-top: 2px;
-    padding-bottom: 2px;
 }
 
 .cdd-nav-footer a,
 .cdd-nav-footer .navbar-brand {
     color: #fff200;
-    font-size: 12px;
 }
 
 .cdd-nav-footer .navbar-nav li a {
-    padding-top: 0;
-    padding-bottom: 0;
-    font-size: 12px;
     color: #fff200;
 }
 .btn-cdd {
@@ -152,7 +142,7 @@ a {
   margin-bottom: 5px;
 
   /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
-  margin-top: -25px;
+  margin-top: -20px;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
@@ -160,7 +150,7 @@ a {
 }
 /* Declare heights because of positioning of img element */
 .carousel .item {
-  height: 400px;
+  height: 275px;
   background-color: #fff;
 }
 .carousel-inner > .item > img {
@@ -168,7 +158,7 @@ a {
   top: 0;
   left: 0;
   min-width: 100%;
-  height: 400px;
+  height: 275px;
 }
 /* carousel */
 .carousel-caption h1 {
@@ -303,7 +293,23 @@ a {
 }
 
 .panel-cdd > .panel-heading {
-    background-color: #EAEAEA;
+    background-color: #AF0000;
     border-color: #DDD;
     color: #FFF;
+}
+
+.panel-cdd-yellow{
+    border-color:#DDD;
+}
+.panel-cdd-yellow > .panel-heading{
+    color:#FFF200;
+    background-color:#020277;
+}
+
+.panel-cdd-orange{
+    border-color:#DDD;
+}
+.panel-cdd-orange > .panel-heading{
+    color:#000;
+    background-color:#ED9C28;
 }

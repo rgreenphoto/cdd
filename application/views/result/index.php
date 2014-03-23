@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <?php if(!empty($cms_content)) echo $cms_content->description; ?>
     </div>

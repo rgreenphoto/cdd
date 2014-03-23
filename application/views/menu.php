@@ -4,10 +4,6 @@
     </div>
 </div>
 <div class="list-group">
-    <a href="<?php echo base_url(); ?>show" class="list-group-item">
-        <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-        <p class="list-group-item-heading">Demo Team</p>
-    </a>
     <a href="<?php echo base_url(); ?>profile" class="list-group-item">
         <span class="glyphicon glyphicon-chevron-right pull-right"></span>
         <p class="list-group-item-heading">Member Profiles</p>
