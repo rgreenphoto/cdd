@@ -63,8 +63,9 @@ class Competition_type_model extends MY_Model {
         $return = array();
         if(!empty($ct->tc_labels)) {
             $tc_labels = explode(',', $ct->tc_labels);
+            //always add FF = Foot Fault
             //always add NC = No Catch
-            $return['tc_labels'] = array('0' => 'NC');
+            $return['tc_labels'] = array('0' => 'NC', '1' => 'FF');
             //if out of bounds set add it to options
             if($ct->tc_outofbounds == 1) {
                 array_push($return['tc_labels'], 'OB');

@@ -44,7 +44,7 @@
                 <table id="queue" class="table table-bordered table-striped">
                     <thead>
                         <tr class="info">
-                            <td colspan="2">Scores</td>
+                            <td colspan="2">Round 1 Scores</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -83,7 +83,7 @@
                 <table id="queue" class="table table-bordered table-striped">
                     <thead>
                         <tr class="info">
-                            <td colspan="2">Scores</td>
+                            <td colspan="2">Round 2 Scores</td>
                         </tr>
                     </thead>
                     <tbody>

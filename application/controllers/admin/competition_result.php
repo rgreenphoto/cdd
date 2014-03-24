@@ -105,13 +105,9 @@ class Competition_result extends Admin_Controller {
             }
         }
         
-        if($mobile_display == 1) {
-            $this->data['main'] = 'admin/competition_result/elements/tc';
-            if($this->data['breadcrumb']->freestyle == 1) {
-                $this->data['main'] = 'admin/competition_result/elements/fs';
-            }
-        } else {
-            $this->data['main'] = 'admin/competition_result/edit';
+        $this->data['main'] = 'admin/competition_result/elements/tc';
+        if($this->data['breadcrumb']->freestyle == 1) {
+            $this->data['main'] = 'admin/competition_result/elements/fs';
         }
         $this->load->view('admin/scorekeep', $this->data);
         
