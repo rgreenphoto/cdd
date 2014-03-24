@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-12">
-        <div class="panel panel-cdd">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <ul class="nav nav-pills">
                     <li class="active"><a href="#info" data-toggle="tab">General Info</a></li>

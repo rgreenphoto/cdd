@@ -56,7 +56,7 @@
                 <td><?php echo $row->tc_cat_2; ?></td>
                 <td><?php echo $row->tc_total_2; ?></td>                
                 <td><?php echo $row->total; ?></td>
-                <td><a href="<?php echo base_url(); ?>result/print_results/<?php echo $row->id; ?>" class="btn btn-cdd btn-xs">Print <i class="icon-print"></i></a></td>
+                <td><a href="<?php echo base_url(); ?>result/print_results/<?php echo $row->id; ?>" class="btn btn-cdd btn-xs">Print <i class="fa fa-print fa-fw"></i></a></td>
             </tr>
             <?php endforeach; ?>
         </tbody>

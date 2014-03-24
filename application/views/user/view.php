@@ -118,16 +118,9 @@
 </div>
    
 <script>
-        Shadowbox.init();
-//        $('.dataTable').dataTable({
-//            "bFilter": false,
-//            "bInfo": true,
-//            "bStateSave": true,
-//            "iDisplayLength": 5,
-//            "bLengthChange": false
-//        });
-  
-  $('.footable').footable();
+    $(document).ready(function() {
+        Shadowbox.init();  
+        $('.footable').footable();
     
         $('.collapse').on('hide.bs.collapse', function() {
             var chev = $(this).attr('data');
@@ -141,8 +134,9 @@
         
         pagination = $('.page ul').attr('class');
         if(!pagination) {
+            console.log(pagination);
             $('.page ul').addClass('pagination pagination-sm');
-        }
-
+        }        
+    });
 </script>
 

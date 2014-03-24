@@ -44,7 +44,7 @@
         </div>
         <div class="row">
             <div class="col-lg-11">
-                <?php echo form_submit('submit', 'Save', 'class="btn btn-cdd pull-right"'); ?>
+                <button type="submit" id="submit" name="submit" class="btn btn-cdd pull-right">Save <i class="fa fa-floppy-o fa-fw"></i></button>
             </div>
         </div>
         <?php echo form_close(); ?>

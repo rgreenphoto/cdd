@@ -321,6 +321,18 @@ class Standing_model extends MY_Model {
         }        
     }
     
+    public function top5($year) {
+        $options = array('type' => 'Cup', 'season' => $year);
+        $top5['season'] = $year;
+        $top5['people'] = $this->limit(5)->order_by('place')->get_many_by($options);
+        if(empty($top5['people'])) {
+            $options['season'] = ($year - 1);
+            $top5['season'] = $options['season'];
+            $top5['people'] = $this->limit(5)->order_by('place')->get_many_by($options);
+        }
+        return $top5;
+    }
+    
     private function _calculate_rookie($members, $season) {
         foreach($members as $user) {
             //create a subset of members for the season being executed
@@ -430,7 +442,6 @@ class Standing_model extends MY_Model {
         }
         return $total;
     }
-    
     
     private function _delete_record($type, $season) {
         //deletes records based on type and season.

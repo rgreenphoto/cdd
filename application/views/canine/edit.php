@@ -11,7 +11,7 @@
     <li><a href="<?php echo base_url(); ?><?php echo $return_url; ?>">List of dogs</a></li>
     <li><a href="<?php echo base_url(); ?>canine/add/">Add New Dog</a></li>
 </ul>
-<div class="container">
+<div class="container-fluid">
 <h2 class="subhead"><?php echo $title; ?></h2>    
     <?php echo form_open(current_url(), $attributes, $hidden); ?>
 <fieldset>
@@ -52,7 +52,7 @@
     <div class="row">
         <div class="col-lg-12">
             <label class="checkbox-inline" for="rescue">
-                <input type="checkbox" name="rescue" value="1" />
+                <input type="checkbox" id="rescue" name="rescue" value="1" <?php echo ($canine->rescue == 'Yes')?'checked':''; ?> />
                 Rescue
             </label>
         </div>
@@ -84,7 +84,7 @@
             </div>
             <br />
             <div class="row">
-                <div id="button-container"><a href="#" id="open-uploader" class="btn btn-small btn-cdd pull-right"><i class="icon-upload-alt"></i> Upload Profile Image</a></div>
+                <div id="button-container"><a href="#" id="open-uploader" class="btn btn-small btn-cdd pull-right"><i class="fa fa-upload fa-fw"></i> Upload Profile Image</a></div>
             </div>
         </div>
         <?php endif; ?>
@@ -130,25 +130,24 @@
     </div>
 </fieldset>
     <div class="form-actions">
-        <?php echo form_submit('submit', 'Save', 'class="btn btn-cdd pull-right"'); ?>
+        <button id="submit" type="submit" name="submit" class="btn btn-cdd pull-right"><i class="fa fa-floppy-o fa-fw"></i> Save</button>
     </div>    
     <?php echo form_close(); ?> 
 </div>
             
 <script type="text/javascript" >
+    $(document).ready(function() {
         $('#displayprofile').tooltip({
             trigger: 'hover',
             placement: 'bottom',
             html: true
         });
-    $(function() {
         
         $("#rescue")
             .click(function () {
                 options = '';
                 if (this.checked) {
                     $('#rescue_group_block').show('fade', options, 2000);
-                    $('#rescue').val(1);
                 }
                 else {
                     $('#rescue_group_block').hide('fade', options, 2000);
@@ -158,8 +157,9 @@
                 if(this.checked) {
                     $('#rescue_group_block').show();                    
                 }
-            })
-          });
+            });
+            
+    });
 </script>
 <script type="text/javascript">
       // Custom example logic

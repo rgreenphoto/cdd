@@ -23,11 +23,11 @@
         <?php if(!empty($this->js)) foreach($this->js as $js): ?>
         <script type="text/javascript" src="<?php echo $js; ?>"></script>
         <?php endforeach; ?>
-        <script type="text/javascript" src="<?php echo base_url();?>assets/js/global.js"></script>
     </head>
     <body>        
         <?php $this->load->view('header'); ?>
         <?php $this->load->view('message'); ?>
+        <?php if(!empty($mobile)): ?>
         <div class="visible-xs hidden-lg">
             <div id="myCarousel" class="carousel slide">
                 <div class="carousel-inner">
@@ -49,8 +49,10 @@
                 <?php endif; ?>                
             </div>
         </div>
+        <?php endif; ?>
+        <?php if(empty($mobile)): ?>
         <div class="hidden-xs visible-lg">
-            <div class="col-xs-12 col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
+            <div class="col-xs-12 col-md-10 col-lg-10 col-md-push-2 col-lg-push-2 col-md-push-2">
                 <div id="myCarousel" class="carousel slide">
                     <div class="carousel-inner">
                         <div class="active item">
@@ -71,10 +73,11 @@
                     <?php endif; ?>
                 </div>
             </div>
-            <div class="col-md-2 col-lg-2 col-md-pull-10 col-lg-pull-10">
+            <div class="col-md-2 col-lg-2 col-md-pull-10 col-lg-pull-10 col-md-pull-10">
                 <?php $this->load->view('menu'); ?>
             </div>            
         </div>
+        <?php endif; ?>
         <?php $this->load->view('footer'); ?>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

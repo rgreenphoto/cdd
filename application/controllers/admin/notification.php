@@ -50,8 +50,8 @@ class Notification extends Admin_Controller {
                     'user_id' => $user->id,
                     'date_sent' => date('Y-m-d H:i:s'));
                 $this->user_inbox_model->insert($n_options);
-                if($user->email_notifications == 1) {
-                    $this->send_email($notification_id, $user->id, $user->email);
+                if($user->email_notifications == 1 && base_url() != 'http://cdd/' && base_url() != 'http://qa.coloradodiscdogs.com/') {
+                    $this->_send_email($notification_id, $user->id, $user->email);
                 }
             }            
         }        

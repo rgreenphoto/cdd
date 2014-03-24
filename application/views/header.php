@@ -33,7 +33,7 @@
             <?php if(!empty($the_user)): ?>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="<?php echo base_url(); ?>user/<?php echo $the_user->group_id == '3'?'member':'edit'; ?>"><?php echo $the_user->full_name; ?></a></li>
-                <li><a href="<?php echo base_url(); ?>notification">Messages <i class="fa fa-inbox"></i> <span id="unread_messages" class="text-danger"><?php echo $this->data['unread_messages']; ?></span></a></li>
+                <li><a href="<?php echo base_url(); ?>notification">Messages <i class="fa fa-inbox"></i> <span id="unread_messages" class="text-danger"><?php echo ($this->data['unread_messages'] != 0)?$this->data['unread_messages']:''; ?></span></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Member Info <i class="fa fa-cog fa-spin"></i></a>
                     <ul class="dropdown-menu">

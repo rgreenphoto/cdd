@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html>
     <head> 
-        <title><?php if(!empty($site_info)) echo $site_info->site_title; ?> - Content</title>
+        <title><?php if(!empty($site_info)) echo $site_info->site_title; ?> - Performance Team</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Colorado Disc Dogs - High Energy performace team available to perform at your next event. Please contact us for more details.">
         <meta name="keywords" content="frisbee,dog,dogs,frisbee dog,frisbee dogs,disc,disc dog,disc dogs,colorado,colorado frisbee dogs,frisbee dogs show,frisbee dog show,frisbee dog entertainment,frisbee dogs entertainment,frisbee dogs halftime,frisbee halftime shows,frisbee dog demo,frisbee dog demos,frisbee dogs demo">        
@@ -17,12 +17,77 @@
         <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
         <script type="text/javascript">stLight.options({publisher: "951709a5-a3d7-429b-90da-6975df5d80e8", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/js/global.js"></script>
-        
     </head>
     <body>                
         <?php $this->load->view('header'); ?>
         <?php $this->load->view('message'); ?>
-                <div class="col-xs-12 col-md-10 col-lg-10 col-lg-push-2">
+        <?php if(!empty($mobile)): ?>
+            <div id="myCarousel" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="active item">
+                        <img src="<?php echo base_url(); ?>assets/images/demoshow/1.jpg" />
+                          <div class="container">
+                            <div class="carousel-caption-inner">
+                              <h1><?php echo $title; ?></h1>
+                            </div>
+                          </div>                
+                    </div>
+                   <div class="item">
+                        <img src="<?php echo base_url(); ?>assets/images/demoshow/2.jpg" />
+                          <div class="container">
+                            <div class="carousel-caption-inner">
+                              <h1><?php echo $title; ?></h1>
+                            </div>
+                          </div>                
+                    </div>
+                   <div class="item">
+                        <img src="<?php echo base_url(); ?>assets/images/demoshow/3.jpg" />
+                          <div class="container">
+                            <div class="carousel-caption-inner">
+                              <h1><?php echo $title; ?></h1>
+                            </div>
+                          </div>                
+                    </div>
+                   <div class="item">
+                        <img src="<?php echo base_url(); ?>assets/images/demoshow/4.jpg" />
+                          <div class="container">
+                            <div class="carousel-caption-inner">
+                              <h1><?php echo $title; ?></h1>
+                            </div>
+                          </div>                
+                    </div>                                    
+                   <div class="item">
+                        <img src="<?php echo base_url(); ?>assets/images/demoshow/5.jpg" />
+                          <div class="container">
+                            <div class="carousel-caption-inner">
+                              <h1><?php echo $title; ?></h1>
+                            </div>
+                          </div>                
+                    </div>                                    
+                   <div class="item">
+                        <img src="<?php echo base_url(); ?>assets/images/demoshow/6.jpg" />
+                          <div class="container">
+                            <div class="carousel-caption-inner">
+                              <h1><?php echo $title; ?></h1>
+                            </div>
+                          </div>                
+                    </div>                                                         
+                </div>
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        <div class="container-fluid">
+            <?php $this->load->view($main); ?>
+            <?php if($display_social === true): ?>
+            <br />
+            <div class="row">
+                <?php $this->load->view('social'); ?>
+            </div>
+            <?php endif; ?>
+        </div>
+        <?php endif; ?>
+        <?php if(empty($mobile)): ?>
+                <div class="col-xs-12 col-md-10 col-lg-10 col-lg-push-2 col-md-push-2">
                     <div id="myCarousel" class="carousel slide">
                         <div class="carousel-inner">
                             <div class="active item">
@@ -77,11 +142,22 @@
                         <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
                         <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
                     </div>
-                    <?php $this->load->view($main); ?>
+                    <div class="container-fluid">
+                        <?php $this->load->view($main); ?>
+                        <?php if($display_social === true): ?>
+                        <br />
+                        <div class="row">
+                            <?php $this->load->view('social'); ?>
+                        </div>
+                        <?php endif; ?>
+                    </div>
                 </div>
-            <div class="hidden-xs col-md-2 col-lg-2 col-lg-pull-10">
+            <div class="hidden-xs col-md-2 col-lg-2 col-lg-pull-10 col-md-pull-10">
                 <?php $this->load->view('menu'); ?>    
-            </div>                
+            </div> 
+
+        <?php endif; ?>
+               
             <?php $this->load->view('footer'); ?>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

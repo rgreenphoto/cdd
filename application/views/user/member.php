@@ -26,9 +26,9 @@
             </div>
             <div id="button-container" class="col-lg-6">
                 <div class="btn-group pull-right">
-                    <a id="edit_bio" class="btn btn-sm btn-cdd"><i class="icon-edit"></i> Edit Bio</a>
-                    <a id="view_dogs" class="btn btn-sm btn-cdd"><i class="icon-list"></i> View All Dogs</a>
-                    <a href="#" id="open-uploader" class="btn btn-sm btn-cdd"><i class="icon-upload-alt"></i> Upload Profile Image</a>
+                    <a id="edit_bio" class="btn btn-sm btn-cdd"><i class="fa fa-pencil fa-fw"></i> Edit Bio</a>
+                    <a id="view_dogs" class="btn btn-sm btn-cdd"><i class="fa fa-tasks fa-fw"></i> View All Dogs</a>
+                    <a href="#" id="open-uploader" class="btn btn-sm btn-cdd"><i class="fa fa-upload fa-fw"></i> Upload Profile Image</a>
                 </div>                  
             </div>
         </div>
@@ -58,7 +58,7 @@
                 <img src="<?php echo base_url(); ?>assets/images/ajax-loader.gif" id="bio-loader" style="display:none;" class="pull-right"/>
             </div>
             <div class="col-lg-3">
-                <button id="save_bio" type="submit" class="btn btn-sm btn-cdd pull-right" data-loading-text="Saving..."><i class="icon-save"></i> Save</button>
+                <button id="save_bio" type="submit" class="btn btn-sm btn-cdd pull-right" data-loading-text="Saving..."><i class="fa fa-floppy-o fa-fw"></i> Save</button>
             </div>    
         </div>        
     </div>
@@ -79,11 +79,11 @@
                 <tr>
                     <td><?php echo $row->name; ?></td>
                     <td><?php $display = 'No'; if($row->display_profile == '1') $display = 'Yes'; echo $display; ?></td>
-                    <td><a href="<?php echo base_url(); ?>canine/edit/<?php echo $row->id; ?>" class="btn btn-cdd btn-sm"><i class="icon-edit"></i> Edit</a></td>
+                    <td><a href="<?php echo base_url(); ?>canine/edit/<?php echo $row->id; ?>" class="btn btn-cdd btn-sm"><i class="fa fa-pencil fa-fw"></i> Edit</a></td>
                 </tr>
                 <?php endforeach; ?>
                 <tr>
-                    <td colspan="3"><a href="<?php echo base_url(); ?>canine/add" class="btn btn-cdd btn-xs pull-right"><i class="icon-plus"></i> Add Dog</a></td>
+                    <td colspan="3"><a href="<?php echo base_url(); ?>canine/add" class="btn btn-cdd btn-xs pull-right"><i class="fa fa-plus fa-fw"></i> Add Dog</a></td>
                 </tr>
             </tbody>
         </table>

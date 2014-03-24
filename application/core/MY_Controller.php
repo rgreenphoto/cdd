@@ -21,9 +21,8 @@ class Main_Controller extends CI_Controller {
         $this->load->model('site_info_model');
         $this->site_info = $this->site_info_model->get_site();
         $this->data['site_info'] = $this->site_info;
-        //get next event
-        $this->load->model('competition_model');
-        $this->data['upcoming_events'] = $this->competition_model->with('competition_type')->limit(3)->order_by('date')->get_many_by(array('date >=' => ''.date('Y-m-d').'', 'competition.competition_type_id !=' => 6));
+        $this->data['mobile'] = ($this->agent->is_mobile())?$this->agent->mobile():'';
+        
         if($this->ion_auth->logged_in() && empty($this->the_user)) {
             //Put User in Class-wide variable
             $this->the_user = $this->ion_auth->user()->row(); 

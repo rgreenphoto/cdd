@@ -26,7 +26,13 @@ class Page extends Public_Controller {
            
             
         } else {
+            //get next 3 events
+            $this->load->model('competition_model');
+            $this->data['upcoming_events'] = $this->competition_model->with('competition_type')->limit(3)->order_by('date')->get_many_by(array('date >=' => ''.date('Y-m-d').'', 'competition.competition_type_id !=' => 6));
             
+            //get top five standings
+            $this->load->model('standing_model');
+            $this->data['top5'] = $this->standing_model->top5(date('Y'));
             $this->load->view('layout', $this->data);
         }
     }
