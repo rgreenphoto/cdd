@@ -45,7 +45,7 @@
         </div>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="panel panel-default">
                         <div class="panel-heading text-center">
                             <img class="img-rounded img-responsive" src="<?php echo base_url(); ?>assets/images/CDD-Club-Banner.png">
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="panel panel-cdd-orange">
                         <div class="panel-heading">
                             <h4 class="text-center">CDD Performance Team</h4>
@@ -84,9 +84,8 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="panel panel-cdd">
                         <div class="panel-heading">
                             <h4 class="text-center"><?php echo $top5['season']; ?> Cup Standings</h4>
@@ -100,10 +99,10 @@
                                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                             <p class="lead"><span class="label label-success"><?php echo $row->place; ?></span></p>
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4">
+                                        <div class="col-lg-6 col-md-5 col-sm-6 col-xs-4">
                                             <?php echo $row->handler; ?><br /><?php echo $row->canine; ?>
                                         </div>
-                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                                        <div class="col-lg-2 col-md-3 col-sm-2 col-xs-4">
                                             <span class="label label-primary"><?php echo $row->total_points; ?></span>
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
@@ -123,11 +122,11 @@
         <hr />
         <div class="container-fluid marketing">
             <div class="row featurette">
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6">
                     <h3 class="featurette-heading">Colorado Disc Dogs. <span class="text-muted">Fly high and land softly.</span></h3>
                     <p class="lead">The Colorado Disc Dogs club started in 1994 and gives Frisbee dog enthusiasts a chance to gather as a group and ply our hobby. We get together at least once a month during the season, exchanging ideas, tips, stories, and information about the sport, as well as practicing with our dogs in a fun, comfortable atmosphere.</p>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6">
                     <h3 class="featurette-heading">Competitions <span class="text-muted">and the Colorado Cup.</span></h3>
                     <p class="lead">We also run competitions, playdays and training seminars each year so that Colorado dog owners can enjoy the fun and benefits that playing with a Frisbee dog can bring. Among our ranks are World Champions, Regional and World Finalists, National Champions, National Distance Champions, the Colorado State Champion, and many others. </p>
                 </div>

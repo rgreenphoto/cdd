@@ -2,9 +2,9 @@
 
 /*
  * Russ Green (russ@engrain.com)
- * Various Base Controllers for access leves 
- * 
- * 
+ * Various Base Controller Methods
+ *
+ *
  */
 class Main_Controller extends CI_Controller {
     //Class-wide variable to store user object in.

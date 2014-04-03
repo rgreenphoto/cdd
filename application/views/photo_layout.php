@@ -28,7 +28,7 @@
         <?php $this->load->view('header'); ?>
         <?php $this->load->view('message'); ?>
         <?php if(!empty($mobile)): ?>
-        <div class="visible-xs hidden-lg">
+        <div class="visible-md visible-sm visible-xs hidden-lg">
             <div id="myCarousel" class="carousel slide">
                 <div class="carousel-inner">
                     <div class="active item">
@@ -36,8 +36,8 @@
                             <div class="carousel-caption-inner">
                               <h1><?php echo $title; ?></h1>
                             </div>
-                    </div>          
-                </div>                    
+                    </div>
+                </div>
             </div>
             <div class="container-fluid">
                 <?php $this->load->view($main);?>
@@ -46,13 +46,13 @@
                 <div class="row">
                     <?php $this->load->view('social'); ?>
                 </div>
-                <?php endif; ?>                
+                <?php endif; ?>
             </div>
         </div>
         <?php endif; ?>
         <?php if(empty($mobile)): ?>
-        <div class="hidden-xs visible-lg">
-            <div class="col-xs-12 col-md-10 col-lg-10 col-md-push-2 col-lg-push-2 col-md-push-2">
+        <div class="visible-lg hidden-md hidden-sm hidden-xs">
+            <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2 col-md-push-2">
                 <div id="myCarousel" class="carousel slide">
                     <div class="carousel-inner">
                         <div class="active item">
@@ -60,8 +60,8 @@
                                 <div class="carousel-caption-inner">
                                   <h1><?php echo $title; ?></h1>
                                 </div>
-                        </div>          
-                    </div>                    
+                        </div>
+                    </div>
                 </div>
                 <div class="container-fluid">
                     <?php $this->load->view($main);?>
@@ -75,7 +75,7 @@
             </div>
             <div class="col-md-2 col-lg-2 col-md-pull-10 col-lg-pull-10 col-md-pull-10">
                 <?php $this->load->view('menu'); ?>
-            </div>            
+            </div>
         </div>
         <?php endif; ?>
         <?php $this->load->view('footer'); ?>

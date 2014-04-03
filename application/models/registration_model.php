@@ -193,7 +193,12 @@ class Registration_model extends MY_Model {
             return false;
         }
     }
-    
+
+    public function get_basic_stats($competition_id) {
+        return $this->registration_model->count_by(array('competition_id' => $competition_id));
+    }
+
+
     public function get_forms($competition, $divisions) {        
         //now build the division object
         $grand_total = 0;

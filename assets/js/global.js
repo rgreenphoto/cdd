@@ -5,14 +5,15 @@
 $(document).ready(function() {
     $('#myCarousel').carousel(); 
     //handles accordian chevron
-    $('.accordion').on('show', function() {
-       //val = $(this).attr('id').val();
-       $(this).find('#chev').removeClass('icon-chevron-down').addClass('icon-chevron-up');
+    $('.collapse').on('show.bs.collapse', function() {
+       val = $(this).attr('data');
+       $('#chev_' + val).removeClass('fa fa-plus').addClass('fa fa-minus');
        //$('span #chev').removeClass('icon-chevron-down').addClass('icon-chevron-up');
     });
     // Reverse it for hide:
-    $('.accordion').on('hide', function() {
-       $(this).find('#chev').removeClass('icon-chevron-up').addClass('icon-chevron-down');
+    $('.collapse').on('hide.bs.collapse', function() {
+       val = $(this).attr('data');
+       $('#chev_' + val).removeClass('fa fa-minus').addClass('fa fa-plus');
     });
     
 //    //check to see if footable to present

@@ -27,7 +27,7 @@
     <body>
         <?php $this->load->view('message'); ?>
         <?php $this->load->view('header'); ?>
-                <div class="col-xs-12 col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
+                <div class="col-xs-12 col-lg-10 col-lg-push-2">
                     <?php $this->load->view($main);?>
                     <?php if($display_social === true): ?>
                     <br />
@@ -36,7 +36,7 @@
                     </div>
                     <?php endif; ?>
                 </div>                
-                <div class="hidden-xs col-md-2 col-lg-2 col-md-pull-10 col-lg-pull-10">
+                <div class="hidden-md hidden-sm hidden-xs col-lg-2 col-lg-pull-10">
                     <?php $this->load->view('menu'); ?>
                 </div>
        <?php $this->load->view('footer'); ?>

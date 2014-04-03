@@ -12,25 +12,25 @@
 <?php if(!empty($the_user) && $event->online_reg == '1'): ?>
 <div class="row">
     <div class="col-lg-12">
-        <p class="text-info">Select which dog you're playing with and then select their division. Each entry will be added to the page, you can add multiple entries.</p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-7">
         <div id="error-info"><p class="text-danger"></p></div>
         <form name="register-form" id="register-form" method="post" class="">
             <input type="hidden" name="user_id" id="user_id" value="<?php echo $the_user->id; ?>" />
             <input type="hidden" name="competition_id" id="competition_id" value="<?php echo $event->id; ?>" />
             <div class="form-group">
                 <select name="canine_id" id="canine_id" class="form-control input-sm">
-                    <option value="">Select a Dog</option>
+                    <option value="">Select Dog</option>
                     <?php if(!empty($the_dogs)) foreach($the_dogs as $dog): ?>
                     <option value="<?php echo $dog->id; ?>"><?php echo $dog->name; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
             <div class="form-group">
-                <?php echo form_dropdown('division_id', $division_types, '', 'id="division_id" class="form-control input-sm"'); ?>                                    
+                <select name="division_id" id="division_id" class="form-control input-sm">
+                    <option value="">Select Division</option>
+                    <?php if(!empty($divisions)) foreach($divisions as $division): ?>
+                    <option value="<?php echo $division->division_id; ?>"><?php echo $division->name.' ('.$division->fee.')'; ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             <?php if(!empty($the_family)): ?>
             <?php $fam[''] = 'Select a family member'; foreach($the_family as $row) { $fam[$row->id] = $row->full_name; } ?>
@@ -58,6 +58,11 @@
     </div>
 </div>
 <br />
+<div class="row">
+    <div class="col-lg-12">
+        <p class="text-info">Select which dog you're playing with and then select their division. Each entry will be added to the page, you can add multiple entries.</p>
+    </div>
+</div>
 <?php endif; ?>
 <script>
        current_user = '<?php if(!empty($the_user)) echo $the_user->id; ?>';

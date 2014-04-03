@@ -43,18 +43,10 @@ class Competition extends Public_Controller {
         }
         $this->data['event'] = $this->competition_model->with('competition_type')->get_by('slug', $slug);
         $this->data['title'] = $this->data['event']->name;
-        $this->data['divisions'] = $this->competition_fee_model->order_by('division_id')->get_many_by('competition_id', $this->data['event']->id);        
-        $division_types = $this->division_model->get_many_by('competition_type_id', $this->data['event']->competition_type_id);
-        
-        if(!empty($division_types)) {
-            $this->data['division_types'][''] = 'Please select division';
-            foreach($division_types as $row) {
-                $this->data['division_types'][$row->id] = $row->name;
-            }
-        }
-        
+        $this->data['divisions'] = $this->competition_fee_model->order_by('division_id')->get_many_by('competition_id', $this->data['event']->id);
+        $this->load->model('registration_model');
+
         if(!empty($this->the_user)) {
-            $this->load->model('registration_model');
             if(empty($this->the_user->family_id)) {
                 $options = array('registration.user_id' => $this->the_user->id, 'registration.competition_id' => $this->data['event']->id);
                 $this->data['registrations'] = $this->registration_model->with('canine')->with('user')->with('division')->get_many_by($options);
@@ -63,6 +55,7 @@ class Competition extends Public_Controller {
                 $this->data['registrations'] = $this->registration_model->with('canine')->with('user')->with('division')->get_many_by($options);                
             }
         }
+        $this->data['registration_total'] = $this->registration_model->get_basic_stats($this->data['event']->id);
         
         
         $this->data['main'] = 'competition/view';
@@ -102,9 +95,11 @@ class Competition extends Public_Controller {
                 redirect('error404', 'location', 404);
             }
         }        
-        $this->data['competition'] = $this->competition_model->with('competition_type')->get_by(array('slug' => $slug));        
+        $this->data['competition'] = $this->competition_model->with('competition_type')->get_by(array('slug' => $slug));
+        $this->load->model('division_model');
+        $this->data['divisions'] = $this->division_model->get_many_by(array('competition_type_id' => $this->data['competition']->competition_type->id));
         $this->load->model('registration_model');
-        $this->data['forms'] = $this->registration_model->get_forms($this->data['competition']);
+        $this->data['forms'] = $this->registration_model->get_forms($this->data['competition'], $this->data['divisions']);
         $this->data['title'] = $this->data['competition']->name;
         $this->data['main'] = 'competition/registered';
         $this->load->view('secondary_layout', $this->data);

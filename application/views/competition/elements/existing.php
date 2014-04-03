@@ -1,6 +1,6 @@
 <?php $style = 'display:none'; if(!empty($registrations)) $style = ''; ?>
 <table class="table table-striped table-bordered table-condensed" id="registered-teams" style="<?php echo $style; ?>">
-        <tr class="danger">
+        <tr class="info">
             <th>Human</th>
             <th>Dog</th>
             <th>Division</th>

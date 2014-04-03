@@ -90,12 +90,9 @@
     </div>
 </div>
 <script>
-        $('.footable').footable();
-
-        pagination = $('.page ul').attr('class');
-        if(!pagination) {
-            $('.page ul').addClass('pagination pagination-sm');
-        }
+    $(document).ready(function() {
+        console.log(this);
+        
         
         $('#edit_bio').click(function() {
            $('.alert').alert('close');           
@@ -128,7 +125,11 @@
                     });
                 }
             }); 
-        });      
+        });
+       
+       
+       
+    });      
 </script>
     <script type="text/javascript">
       var uploader = new plupload.Uploader({
