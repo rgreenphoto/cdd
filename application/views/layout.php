@@ -69,7 +69,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="panel panel-cdd-orange">
                         <div class="panel-heading">
-                            <h4 class="text-center">CDD Performance Team</h4>
+                            <h4 class="text-center">CDD Demo Team</h4>
                         </div>
                         <div class="panel-body">
                             <div class="col-lg-8 col-xs-8">
@@ -77,7 +77,7 @@
                             </div>
                             <p>We have appeared on NBC, ESPN, ESPN2, USA Network, Animal Planet, TBS, and other national and local networks. Our demo teams have performed at NFL, MLB, NBA, MLS, NCAA, and NLL halftimes. The Colorado Disc Dogs also donate a considerable amount of time each year supporting local and national charities and humane organizations.</p>
                             <div class="col-lg-7">
-                                <a href="<?php echo base_url(); ?>show" class="btn btn-sm btn-cdd">View Performance Team Info <i class="fa fa-video-camera"></i></a>
+                                <a href="<?php echo base_url(); ?>show" class="btn btn-sm btn-cdd">View Demo Team Info <i class="fa fa-video-camera"></i></a>
                             </div>
                             <div class="col-lg-5">
                                 <a href="https://www.facebook.com/DiscDogDemoTeam" target="_blank" class="btn btn-sm btn-primary">Facebook Page <i class="fa fa-facebook-square fa-lg"></i></a>

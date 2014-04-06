@@ -12,6 +12,11 @@
 <?php if(!empty($the_user) && $event->online_reg == '1'): ?>
 <div class="row">
     <div class="col-lg-12">
+        <p class="text-info">Select which dog you're playing with and then select their division. Each entry will be added to the page, you can add multiple entries.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
         <div id="error-info"><p class="text-danger"></p></div>
         <form name="register-form" id="register-form" method="post" class="">
             <input type="hidden" name="user_id" id="user_id" value="<?php echo $the_user->id; ?>" />
@@ -51,16 +56,8 @@
             <div class="form-group">
                 <img src="<?php echo base_url(); ?>assets/images/ajax-loader.gif" id="loader" style="display:none" />
                 <input type="submit" class="btn btn-sm btn-success" value="Submit Entry" />
-                <a href="<?php echo base_url(); ?>registration/done/1/0" class="btn btn-primary btn-xs">Pay at event</a>
-                <a href="<?php echo base_url(); ?>registration/complete" class="btn btn-xs btn-success" id="complete-reg">PayPal</a>
             </div>
         </form>        
-    </div>
-</div>
-<br />
-<div class="row">
-    <div class="col-lg-12">
-        <p class="text-info">Select which dog you're playing with and then select their division. Each entry will be added to the page, you can add multiple entries.</p>
     </div>
 </div>
 <?php endif; ?>

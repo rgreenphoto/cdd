@@ -18,24 +18,3 @@
         </div>
     </div>
 </div>
-<script>
-    function openHotelMap() {
-        $('#hotelMapCanvas').gmap3({
-            action: 'init',
-            map: {
-                options: {
-                    center: [<?php echo $event->hotel_lat_long; ?>],
-                    zoom: 14,
-                    scrollwheel: false
-                }
-            },
-            marker: {
-                latLng: [<?php echo $event->hotel_lat_long; ?>],
-                options: {
-                    icon: "http://maps.google.com/mapfiles/marker_green.png",
-                    animation: google.maps.Animation.DROP
-                }
-            }
-        });
-    }
-</script>

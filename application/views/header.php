@@ -18,6 +18,7 @@
             <!-- if not logged in show form -->
             <?php if(empty($the_user)): ?>
             <form action="<?php echo base_url(); ?>auth/login" method="post" class="navbar-form navbar-right" role="form">
+                <input type="hidden" name="previous_page" value="<?php echo (!empty($_SERVER['PATH_INFO']) ? base_url().''.ltrim($_SERVER['PATH_INFO'], '/'): base_url()); ?>" />
                 <div class="form-group">
                     <label class="sr-only" for="identity">Email</label>
                     <input type="email" class="form-control input-sm" placeholder="email" id="identity" name="identity">
