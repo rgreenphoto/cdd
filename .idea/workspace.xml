@@ -2,24 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="55fa9e8d-5aa2-4e40-8efd-f5834cb6494f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/core/MY_Controller.php" afterPath="$PROJECT_DIR$/application/core/MY_Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/competition.php" afterPath="$PROJECT_DIR$/application/controllers/competition.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/competition/elements/divisions.php" afterPath="$PROJECT_DIR$/application/views/competition/elements/divisions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/competition/elements/existing.php" afterPath="$PROJECT_DIR$/application/views/competition/elements/existing.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/footer.php" afterPath="$PROJECT_DIR$/application/views/footer.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/application/views/competition/elements/existing.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/application/views/competition/elements/location.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cdd/.idea/.name" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cdd/.idea/cdd.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cdd/.idea/deployment.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cdd/.idea/encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cdd/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cdd/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cdd/.idea/scopes/scope_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cdd/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cdd/.idea/workspace.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sql/cdd_full_03_23_13.sql" afterPath="$PROJECT_DIR$/sql/cdd_full_03_23_13.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/competition/elements/form.php" afterPath="$PROJECT_DIR$/application/views/competition/elements/form.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/global.js" afterPath="$PROJECT_DIR$/assets/js/global.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/gmap3.min.js" afterPath="$PROJECT_DIR$/assets/js/gmap3.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/header.php" afterPath="$PROJECT_DIR$/application/views/header.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/header.php" afterPath="$PROJECT_DIR$/application/views/admin/header.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/competition/elements/hotel.php" afterPath="$PROJECT_DIR$/application/views/competition/elements/hotel.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/layout.php" afterPath="$PROJECT_DIR$/application/views/layout.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/competition/elements/location.php" afterPath="$PROJECT_DIR$/application/views/competition/elements/location.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/master.css" afterPath="$PROJECT_DIR$/assets/css/master.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/user/member.php" afterPath="$PROJECT_DIR$/application/views/user/member.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/photo_layout.php" afterPath="$PROJECT_DIR$/application/views/photo_layout.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/competition/registered.php" afterPath="$PROJECT_DIR$/application/views/competition/registered.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/registration_model.php" afterPath="$PROJECT_DIR$/application/models/registration_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/secondary_layout.php" afterPath="$PROJECT_DIR$/application/views/secondary_layout.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/competition/elements/registration.php" afterPath="$PROJECT_DIR$/application/views/competition/elements/registration.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/competition/view.php" afterPath="$PROJECT_DIR$/application/views/competition/view.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="www.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,58 +48,19 @@
       <file leaf-file-name="view.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/competition/view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="144" column="63" selection-start="7102" selection-end="7102" vertical-scroll-proportion="0.7960251" vertical-offset="1399" max-vertical-offset="2355">
+            <state line="135" column="35" selection-start="6830" selection-end="6830" vertical-scroll-proportion="0.23535565" vertical-offset="1800" max-vertical-offset="2895">
               <folding>
-                <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#3;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="location.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/competition/elements/location.php">
+      <file leaf-file-name="tabs.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/competition/elements/tabs.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="13" selection-start="967" selection-end="967" vertical-scroll-proportion="-18.75" vertical-offset="0" max-vertical-offset="600">
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="divisions.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/competition/elements/divisions.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="10" selection-start="40" selection-end="40" vertical-scroll-proportion="-0.625" vertical-offset="0" max-vertical-offset="360">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="registration_model.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/models/registration_model.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="197" column="95" selection-start="7116" selection-end="7116" vertical-scroll-proportion="70.0" vertical-offset="4620" max-vertical-offset="5955">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="competition.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/competition.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="0" selection-start="1975" selection-end="1975" vertical-scroll-proportion="-18.75" vertical-offset="225" max-vertical-offset="1725">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="existing.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/competition/elements/existing.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="23" selection-start="216" selection-end="216" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="375">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="13.125" vertical-offset="315" max-vertical-offset="1335">
               <folding />
             </state>
           </provider>
@@ -105,19 +69,10 @@
       <file leaf-file-name="hotel.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/competition/elements/hotel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="13" selection-start="1449" selection-end="1449" vertical-scroll-proportion="-23.125" vertical-offset="0" max-vertical-offset="690">
+            <state line="1" column="4" selection-start="34" selection-end="839" vertical-scroll-proportion="-0.625" vertical-offset="0" max-vertical-offset="390">
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="form.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/competition/elements/form.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="0" selection-start="3921" selection-end="4154" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="2685">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -139,13 +94,17 @@
         <option value="$PROJECT_DIR$/application/views/photo_layout.php" />
         <option value="$PROJECT_DIR$/application/views/footer.php" />
         <option value="$PROJECT_DIR$/application/views/secondary_layout.php" />
-        <option value="$PROJECT_DIR$/application/views/header.php" />
         <option value="$PROJECT_DIR$/application/views/competition/elements/existing.php" />
-        <option value="$PROJECT_DIR$/application/views/competition/elements/form.php" />
         <option value="$PROJECT_DIR$/application/models/registration_model.php" />
         <option value="$PROJECT_DIR$/application/views/competition/elements/divisions.php" />
         <option value="$PROJECT_DIR$/application/controllers/competition.php" />
+        <option value="$PROJECT_DIR$/application/views/header.php" />
         <option value="$PROJECT_DIR$/application/views/competition/elements/location.php" />
+        <option value="$PROJECT_DIR$/application/views/competition/elements/form.php" />
+        <option value="$PROJECT_DIR$/application/views/competition/elements/registration.php" />
+        <option value="$PROJECT_DIR$/application/views/layout.php" />
+        <option value="$PROJECT_DIR$/application/controllers/profile.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/header.php" />
         <option value="$PROJECT_DIR$/application/views/competition/elements/hotel.php" />
         <option value="$PROJECT_DIR$/application/views/competition/view.php" />
       </list>
@@ -198,6 +157,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -278,60 +269,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="elements" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -447,22 +384,9 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/competition/view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="66" selection-start="5312" selection-end="5312" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1755">
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/competition/elements/divisions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="10" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="360">
-          <folding />
-        </state>
+        <state line="1" column="10" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="360" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/registration_model.php">
@@ -479,13 +403,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/competition/elements/existing.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="23" selection-start="216" selection-end="216" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="375">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/header.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="105" selection-start="1140" selection-end="1140" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="990">
@@ -495,24 +412,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/photo_layout.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="0" selection-start="5244" selection-end="5244" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1530">
-          <folding />
-        </state>
+        <state line="90" column="0" selection-start="5244" selection-end="5244" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1530" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/secondary_layout.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="38" selection-start="2625" selection-end="2625" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="945">
-          <folding />
-        </state>
+        <state line="29" column="38" selection-start="2625" selection-end="2625" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="945" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/competition/elements/hotel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="14" selection-start="742" selection-end="742" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="750">
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -526,19 +437,13 @@
     <entry file="file://$PROJECT_DIR$/application/views/competition/view.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="91" column="66" selection-start="5312" selection-end="5312" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1755">
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/competition/elements/divisions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="10" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="360">
-          <folding />
-        </state>
+        <state line="1" column="10" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="360" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/registration_model.php">
@@ -555,13 +460,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/competition/elements/existing.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="23" selection-start="216" selection-end="216" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/header.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="105" selection-start="1140" selection-end="1140" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="990">
@@ -571,24 +469,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/photo_layout.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="0" selection-start="5244" selection-end="5244" vertical-scroll-proportion="0.0" vertical-offset="1350" max-vertical-offset="1530">
-          <folding />
-        </state>
+        <state line="90" column="0" selection-start="5244" selection-end="5244" vertical-scroll-proportion="0.0" vertical-offset="1350" max-vertical-offset="1530" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/secondary_layout.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="38" selection-start="2625" selection-end="2625" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="945">
-          <folding />
-        </state>
+        <state line="29" column="38" selection-start="2625" selection-end="2625" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="945" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/competition/elements/hotel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="14" selection-start="742" selection-end="742" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="750">
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -658,37 +550,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/photo_layout.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="0" selection-start="5244" selection-end="5244" vertical-scroll-proportion="0.0" vertical-offset="1350" max-vertical-offset="1530">
-          <folding />
-        </state>
+        <state line="90" column="0" selection-start="5244" selection-end="5244" vertical-scroll-proportion="0.0" vertical-offset="1350" max-vertical-offset="1530" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/secondary_layout.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="38" selection-start="2625" selection-end="2625" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="945">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/header.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="105" selection-start="1140" selection-end="1140" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="990">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/competition/elements/existing.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="23" selection-start="216" selection-end="216" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="375">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/competition/elements/form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="0" selection-start="3921" selection-end="4154" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="2685">
-          <folding />
-        </state>
+        <state line="29" column="38" selection-start="2625" selection-end="2625" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="945" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/core/MY_Model.php">
@@ -700,37 +567,143 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/registration_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="197" column="95" selection-start="7116" selection-end="7116" vertical-scroll-proportion="70.0" vertical-offset="4620" max-vertical-offset="5955">
+        <state line="197" column="95" selection-start="7116" selection-end="7116" vertical-scroll-proportion="0.0" vertical-offset="2955" max-vertical-offset="5970">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/competition.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="0" selection-start="1975" selection-end="1975" vertical-scroll-proportion="-18.75" vertical-offset="225" max-vertical-offset="1725">
+        <state line="47" column="0" selection-start="1975" selection-end="1975" vertical-scroll-proportion="0.0" vertical-offset="705" max-vertical-offset="1755">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/auth/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="993" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/auth.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="96" selection-start="1712" selection-end="1736" vertical-scroll-proportion="0.39539748" vertical-offset="477" max-vertical-offset="10740">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/competition/elements/divisions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="10" selection-start="40" selection-end="40" vertical-scroll-proportion="-0.625" vertical-offset="0" max-vertical-offset="360">
+        <state line="1" column="10" selection-start="40" selection-end="40" vertical-scroll-proportion="0.015479876" vertical-offset="0" max-vertical-offset="969" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/competition/elements/form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="91" selection-start="3832" selection-end="3832" vertical-scroll-proportion="0.0" vertical-offset="855" max-vertical-offset="2640">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/competition/elements/location.php">
+    <entry file="file://$PROJECT_DIR$/application/views/competition/elements/registration.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="13" selection-start="967" selection-end="967" vertical-scroll-proportion="-18.75" vertical-offset="0" max-vertical-offset="600">
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state line="5" column="65" selection-start="242" selection-end="242" vertical-scroll-proportion="0.07739938" vertical-offset="0" max-vertical-offset="969">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.16099072" vertical-offset="156" max-vertical-offset="1125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/profile.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="108" selection-start="1863" selection-end="1863" vertical-scroll-proportion="0.54916316" vertical-offset="0" max-vertical-offset="1140">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/user.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.5533472" vertical-offset="1485" max-vertical-offset="5460">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/user/view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.62761503" vertical-offset="600" max-vertical-offset="2220">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/layout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="108" selection-start="6187" selection-end="6187" vertical-scroll-proportion="0.70606697" vertical-offset="510" max-vertical-offset="2385">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/admin/user.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="8" selection-start="1983" selection-end="2405" vertical-scroll-proportion="0.29811716" vertical-offset="450" max-vertical-offset="4215">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/master.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5265">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/admin/master.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1905">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="177" selection-start="1564" selection-end="1564" vertical-scroll-proportion="-12.5" vertical-offset="0" max-vertical-offset="1005">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="969">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/layout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="993">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/gmap3.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="980">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/competition/elements/tabs.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="13.125" vertical-offset="315" max-vertical-offset="1335">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/competition/elements/hotel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="13" selection-start="1449" selection-end="1449" vertical-scroll-proportion="-23.125" vertical-offset="0" max-vertical-offset="690">
+        <state line="1" column="4" selection-start="34" selection-end="839" vertical-scroll-proportion="-0.625" vertical-offset="0" max-vertical-offset="390">
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
@@ -739,11 +712,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/competition/view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="63" selection-start="7102" selection-end="7102" vertical-scroll-proportion="0.7960251" vertical-offset="1399" max-vertical-offset="2355">
+        <state line="135" column="35" selection-start="6830" selection-end="6830" vertical-scroll-proportion="0.23535565" vertical-offset="1800" max-vertical-offset="2895">
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#3;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
