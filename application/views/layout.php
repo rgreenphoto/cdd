@@ -48,7 +48,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="panel panel-default">
                         <div class="panel-heading text-center">
-                            <img class="img-rounded img-responsive" src="<?php echo base_url(); ?>assets/images/CDD-Club-Banner.png">
+                            <img class="img-rounded img-responsive center-block" src="<?php echo base_url(); ?>assets/images/CDD-Club-Banner.png">
                         </div>
                         <div class="panel-body">
                             <div class="list-group">
@@ -72,17 +72,23 @@
                             <h4 class="text-center">CDD Demo Team</h4>
                         </div>
                         <div class="panel-body">
-                            <div class="col-lg-8 col-xs-8">
-                                <img src="<?php echo base_url(); ?>assets/images/rocky_mntn_cover.gif" class="img-thumbnail img-responsive">
+                            <div class="row">
+                                <div class="col-lg-8 col-xs-8">
+                                    <img src="<?php echo base_url(); ?>assets/images/rocky_mntn_cover.gif" class="img-thumbnail img-responsive">
+                                </div>
+                                <p>We have appeared on NBC, ESPN, ESPN2, USA Network, Animal Planet, TBS, and other national and local networks. Our demo teams have performed at NFL, MLB, NBA, MLS, NCAA, and NLL halftimes. The Colorado Disc Dogs also donate a considerable amount of time each year supporting local and national charities and humane organizations.</p>
                             </div>
-                            <p>We have appeared on NBC, ESPN, ESPN2, USA Network, Animal Planet, TBS, and other national and local networks. Our demo teams have performed at NFL, MLB, NBA, MLS, NCAA, and NLL halftimes. The Colorado Disc Dogs also donate a considerable amount of time each year supporting local and national charities and humane organizations.</p>
-                            <div class="col-lg-7">
-                                <a href="<?php echo base_url(); ?>show" class="btn btn-sm btn-cdd">View Demo Team Info <i class="fa fa-video-camera"></i></a>
-                            </div>
-                            <div class="col-lg-5">
-                                <a href="https://www.facebook.com/DiscDogDemoTeam" target="_blank" class="btn btn-sm btn-primary">Facebook Page <i class="fa fa-facebook-square fa-lg"></i></a>
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <a href="<?php echo base_url(); ?>show" class="btn btn-sm btn-cdd pull-right">View Demo Team Info <i class="fa fa-video-camera"></i></a>
+                                </div>
+                                <div class="col-lg-4">
+                                    <a href="https://www.facebook.com/DiscDogDemoTeam" target="_blank" class="btn btn-sm btn-primary pull-right">Facebook Page <i class="fa fa-facebook-square fa-lg"></i></a>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12">

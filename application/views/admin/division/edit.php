@@ -8,13 +8,13 @@
     <div class="row">
         <div class="col-lg-6">
             <label for="name">Division Name <span class="text-danger"><?php echo form_error('name'); ?></span></label>
-            <input type="text" name="name" class="form-control" value="<?php echo $division->name; ?>" />
+            <input type="text" name="name" class="form-control" value="<?php echo !empty($division->name)?$division->name:''; ?>" />
         </div>
         <div class="col-lg-6">
             <label for="points_type">Points Category <span class="text-danger"><?php echo form_error('points_guide'); ?></span></label>
             <select name="points_type" class="form-control">
                 <?php if(!empty($points)) foreach($points as $k=>$v): ?>
-                <option value="<?php echo $k; ?>" <?php if($division->points_type == $k) echo 'selected'; ?>><?php echo $v; ?></option>
+                <option value="<?php echo $k; ?>" <?php if(!empty($division->points_type) &&  $division->points_type == $k) echo 'selected'; ?>><?php echo $v; ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -28,17 +28,17 @@
         <div class="col-lg-6">
             <label for="freestyle">Freestyle Division? <span class="text-danger"><?php echo form_error('freestyle'); ?></span></label>
             <label class="radio-inline">
-                <input type="radio" name="freestyle" value="1" <?php if($division->freestyle == 1) echo 'checked'; ?> />Yes
+                <input type="radio" name="freestyle" value="1" <?php if(!empty($division->freestyle) && $division->freestyle == 1) echo 'checked'; ?> />Yes
             </label>
             <label class="radio-inline">
-                <input type="radio" name="freestyle" value="0" <?php if($division->freestyle == 0) echo 'checked'; ?> />No
+                <input type="radio" name="freestyle" value="0" <?php if(!empty($division->freestyle) && $division->freestyle == 0) echo 'checked'; ?> />No
             </label>
         </div>
         <div class="col-lg-6">
             <label for="dual">Dual<span class="text-danger"><?php echo form_error('dual'); ?></span></label>
             <select name="dual" class="form-control">
                 <?php if(!empty($dual_categories)) foreach($dual_categories as $k=>$v): ?>
-                <option value="<?php echo $k; ?>" <?php if($division->dual == $k) echo 'selected'; ?>><?php echo $v; ?></option>
+                <option value="<?php echo $k; ?>" <?php if(!empty($division->dual) && $division->dual == $k) echo 'selected'; ?>><?php echo $v; ?></option>
                 <?php endforeach; ?>
             </select>
         </div>

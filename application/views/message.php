@@ -19,14 +19,7 @@
 </div>
     
 <script>
- //here is where the magic happens
  $(window).bind('load', function() {
-//     var reg_incomplete = '<?php if(!empty($reg_complete)) echo '1'; ?>';
-//     if(reg_incomplete) {
-//         //$('.registration-message').show();
-//         $('#registrations').removeClass('badge-success').addClass('badge-important');
-//         
-//     }
      var success_message = '<?php if(!empty($success_message)) echo $success_message; ?>';
      if(success_message) {
          $('#freeow').freeow("Success", success_message, {

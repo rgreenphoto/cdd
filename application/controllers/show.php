@@ -13,7 +13,7 @@ class Show extends Public_Controller {
     }
     
     public function index() {
-        $this->data['title'] = 'Performance Team';
+        $this->data['title'] = 'Demo Team';
         if(empty($year)) {
             $year = date('Y');
         }       

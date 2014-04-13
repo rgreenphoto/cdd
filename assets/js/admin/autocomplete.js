@@ -17,6 +17,10 @@ $(document).ready(function() {
                $('#ajax-loader').show();
                $(ajax).load(url, function() {
                    $('#ajax-loader').hide();
+                   display = $('#user-edit').attr('style');
+                   if(display === 'display: none;') {
+                       $('#user-edit').toggle();
+                   }
                });
            } else {
                window.location = url;

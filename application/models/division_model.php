@@ -8,7 +8,7 @@ class Division_model extends MY_Model {
     
     public $_table = 'division';
     
-    protected $soft_delete = FALSE;
+    protected $soft_delete = TRUE;
    
     public $protected_attributes = array('id');
     

@@ -7,7 +7,7 @@
 class Division extends Admin_Controller {
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('division_model', 'points_guide_model'));
+        $this->load->model(array('division_model', 'points_guide_model', 'competition_type_model'));
         $this->data['dual_categories'] = array('0' => 'Not Dual', '1' => 'Dual Division', '2' => 'Registration Category Only');
         $this->data['yes_no'] = array('1' => 'Yes', '0' => 'No');
     }
@@ -19,7 +19,8 @@ class Division extends Admin_Controller {
         
         $this->data['hidden'] = array(
             'competition_type_id' => $competition_type_id);
-        
+
+        $this->data['division']->competition_type = $this->competition_type_model->get($competition_type_id);
         $this->data['name'] = array(
             'id' => 'name',
             'name' => 'name'
@@ -104,6 +105,21 @@ class Division extends Admin_Controller {
             
             $this->load->view('admin/division/divisions', $this->data);
         }  
+    }
+
+    public function delete($id, $competition_type_id) {
+        if(!empty($id)) {
+            if($this->division_model->delete($id)) {
+                $this->session->set_flashdata('message', 'Record Deleted');
+                redirect('admin/competition_type/edit/'.$competition_type_id);
+            } else {
+                $this->session->set_flashdata('message', 'Could not delete record.');
+                redirect('admin/competition_type/edit/'.$competition_type_id);
+            }
+        } else {
+            $this->session->set_flashdata('message', 'ID for this item is missing.');
+            redirect('admin/competition_type/edit/'.$competition_type_id);
+        }
     }
     
   private function _do_upload($id) {

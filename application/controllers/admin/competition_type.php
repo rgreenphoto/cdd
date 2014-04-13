@@ -67,6 +67,8 @@ class Competition_type extends Admin_Controller {
     }    
         
     public function edit($id) {
+        $this->css = array(base_url().'/assets/css/FooTable-2/css/footable.core.min.css');
+        $this->js = array(base_url().'assets/js/FooTable-2/dist/footable.min.js',base_url().'assets/js/FooTable-2/dist/footable.filter.min.js', base_url().'assets/js/FooTable-2/dist/footable.sort.min.js', base_url().'assets/js/FooTable-2/dist/footable.paginate.min.js');
         $this->data['competition_type'] = $this->competition_type_model->with('division')->get($id);
         $this->data['hidden'] = array('id' => $id);
         $this->data['competition_id'] = $id;

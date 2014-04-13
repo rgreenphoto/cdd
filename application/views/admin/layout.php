@@ -25,7 +25,7 @@
     </head>
     <body>       
         <?php $this->load->view('admin/header'); ?>
-        <?php $this->load->view('message'); ?>
+        <?php $this->load->view('admin/message'); ?>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="container">

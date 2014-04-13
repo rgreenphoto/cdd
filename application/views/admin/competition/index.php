@@ -33,7 +33,7 @@
                 <a href="<?php echo base_url().'admin/competition/edit/'.$row->id; ?>" class="btn btn-cdd btn-xs">Edit <i class="icon-edit"></i></a>
                 <a href="<?php echo base_url().'admin/competition_result/index/'.$row->id; ?>" class="btn btn-info btn-xs">Results <i class="icon-list-ol"></i></a>
                 <a href="<?php echo base_url().'admin/gameday/'.$row->id; ?>" class="btn btn-warning btn-xs">Game Day <i class="icon-dashboard"></i></a>
-                <a href="<?php echo base_url().'admin/competition/delete/'.$row->id; ?>" class="confirm btn btn-danger btn-xs">Delete <i class="icon-ban-circle"></i></a>
+                <a data="<?php echo base_url().'admin/competition/delete/'.$row->id; ?>" class="confirm btn btn-danger btn-xs">Delete <i class="icon-ban-circle"></i></a>
             </td>
         </tr>
         <?php endforeach; ?>

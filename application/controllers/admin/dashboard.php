@@ -18,8 +18,9 @@ class Dashboard extends Admin_Controller {
         $this->js = array(base_url().'assets/js/FooTable-2/dist/footable.min.js',base_url().'assets/js/FooTable-2/dist/footable.filter.min.js', base_url().'assets/js/FooTable-2/dist/footable.sort.min.js', base_url().'assets/js/FooTable-2/dist/footable.paginate.min.js');
         //grab registration information
         $this->load->model('competition_model');
-        $this->data['competition'] = $this->competition_model->next_event();
-        $this->data['comp_reg'] = $this->competition_model->stats('2');
+        //$this->data['competition'] = $this->competition_model->next_event();
+
+        $this->data['comp_reg'] = $this->competition_model->stats('3');
         
         //grab user stats by group
         $this->load->model('group_model');

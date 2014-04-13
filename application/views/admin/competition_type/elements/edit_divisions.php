@@ -11,7 +11,7 @@
         <tr>
             <td><?php echo $row->name; ?></td>
             <td><a href="<?php echo base_url(); ?>uploads/templates/<?php echo $row->template; ?>" target="_blank"><?php echo $row->template; ?></a></td>
-            <td><a href="<?php echo base_url(); ?>admin/division/edit/<?php echo $row->id; ?>" class="btn btn-cdd btn-sm">Edit <i class="icon-edit"></i></a></td>
+            <td><a href="<?php echo base_url(); ?>admin/division/edit/<?php echo $row->id; ?>" class="btn btn-cdd btn-sm">Edit <i class="icon-edit"></i></a> <a data="<?php echo base_url(); ?>admin/division/delete/<?php echo $row->id; ?>/<?php echo $competition_type->id; ?>" class="btn btn-cdd btn-sm confirm">Delete <i class="icon-ban-circle"></i></a></td>
         </tr>
         <?php endforeach; ?>                 
     </tbody>

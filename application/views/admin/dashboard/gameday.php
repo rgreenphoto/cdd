@@ -146,6 +146,10 @@
            $('#ajax-loader').show();
            $('#user-edit').load(url, function() {
                $('#ajax-loader').hide();
+               display = $('#user-edit').attr('style');
+               if(display === 'display: none;') {
+                   $('#user-edit').toggle();
+               }
            });
        });
        

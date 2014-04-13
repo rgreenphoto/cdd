@@ -170,7 +170,7 @@ class Competition_model extends MY_Model {
     public function convert_date($row) {
         if(is_object($row)) {
             if(!empty($row->date)) {
-                $row->date = date('m/d/Y', strtotime($row->date));
+                $row->convert_date = date('m/d/Y', strtotime($row->date));
                 $row->long_date = date('l F jS Y', strtotime($row->date));         
             }
             $this->load->model('user_model');

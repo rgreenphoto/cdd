@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
     <li><a href="<?php echo base_url(); ?>admin/competition_type/">Competition Types</a></li>
-    <li class="active"><?php if(!empty($competition_type->name)) echo $competition_type->name; ?></li>
+    <li class="active"><?php if(!empty($competition_type)) echo $competition_type->name; ?></li>
 </ul>
 <?php echo form_open_multipart(current_url()); ?> 
     <fieldset>
@@ -13,13 +13,13 @@
         <div class="row">
             <div class="col-lg-2 col-xs-10">
                 <label for="name">Name: <?php echo form_error('name'); ?></label>
-                <input type="text" id="name" name="name" class="form-control" value="<?php echo !empty($competition_type->name) ? $competition_type->name: ''; ?>" />
+                <input type="text" id="name" name="name" class="form-control" value="<?php echo !empty($competition_type) ? $competition_type->name: ''; ?>" />
             </div>
             <div class="col-lg-2 col-xs-10">
                 <label for="type">Score Category <?php echo form_error('type'); ?></label>
                 <select id="type" name="type" class="form-control">
                     <?php if(!empty($types)) foreach($types as $k=>$v): ?>
-                    <option value="<?php echo $k; ?>"<?php echo (!empty($competition_type->type) && $competition_type->type == $v) ? 'selected': ''; ?>"><?php echo $v; ?></option>
+                    <option value="<?php echo $v; ?>"<?php echo (!empty($competition_type) && $competition_type->type == $v) ? 'selected="selected"': ''; ?>"><?php echo $v; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

@@ -131,7 +131,7 @@ $(document).ready(function() {
    });
    $('#close-edit-user').click(function(e) {
         e.preventDefault();
-        $('#user-edit').hide();
+        $('#user-edit').toggle();
     });
 });
 

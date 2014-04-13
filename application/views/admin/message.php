@@ -1,24 +1,25 @@
-<?php $message = $this->session->flashdata('message'); ?>
-<?php if(!empty($message)): ?>
-<div id="session-message">
-    <?php echo $this->session->flashdata('message'); ?>
-</div>
-    <script type="text/javascript">
-        $('#session-message').show().fadeOut(8000);
-    </script>
-<?php endif; ?>
+<div id="freeow" class="freeow freeow-top-right"></div>
+<?php
+    $success_message = $this->session->flashdata('success_message');
+    $error_message = $this->session->flashdata('error_message');
+    $message = $this->session->flashdata('message');
+?>
 
-<div id="dialog-confirm" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-        <h3 id="myModalLabel">Alert</h3>
-    </div>
-    <div class="modal-body">
-        <p>Are you sure you want to delete?</p>
-    </div>
-    <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <a id="continue_button" href="#" class="btn btn-primary">Continue</a>
+<div id="dialog-confirm" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title" id="myModalLabel">Alert</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
+                <a id="continue_button" href="#" class="btn btn-primary">Yes</a>
+            </div>
+        </div>
     </div>
 </div>
 <div id="pleaseWaitDialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
@@ -34,22 +35,36 @@
         <p>Please wait for completion.</p>
     </div>
 </div>
-    <script>
-        $(document).ready(function() {
-            $('#pleaseWaitDialog').on('shown', function() {
-                $('#pleaseWaitDialog').modal().css({
-                    'margin-top': function () {
-                        return window.pageYOffset-($(this).height() / 4 );
-                    }
-                });                
+
+
+<script>
+    $(window).bind('load', function() {
+        var success_message = '<?php if(!empty($success_message)) echo $success_message; ?>';
+        if(success_message) {
+            $('#freeow').freeow("Success", success_message, {
+                classes: ["gray"],
+                autoHide: true
             });
-            $('#dialog-confirm').on('shown', function() {
-                $('#dialog-confirm').modal().css({
-                    'margin-top': function () {
-                        return window.pageYOffset-($(this).height() / 2 );
-                    }
-                });                
-            });            
-        });
-    </script>
+        }
+        var error_message = '<?php if(!empty($error_message)) echo $error_message; ?>';
+        if(error_message) {
+            $('#freeow').freeow("Error", error_message, {
+                classes: ["gray", "error"],
+                autoHide: false
+            });
+        }
+        var message = '<?php if(!empty($message)) echo $message; ?>';
+        if(message) {
+            $('#freeow').freeow("Message", message, {
+                classes: ["gray"],
+                autoHide: true
+            });
+        }
+
+
+    });
+
+
+</script>
+
         
