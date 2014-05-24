@@ -59,6 +59,8 @@ class User extends Admin_Controller {
                 $username = $this->input->post('username');
                 $email    = $this->input->post('email');
                 $password = $this->input->post('password');
+                $_POST['full_name'] = $_POST['first_name'].' '.$_POST['last_name'];
+                $_POST['formal_name'] = $_POST['last_name'].', '.$_POST['first_name'];
 
                 $additional_data = $this->set_post_options($_POST);
 //                echo '<pre>';
@@ -103,6 +105,8 @@ class User extends Admin_Controller {
         
         if (!empty($_POST) && $this->user_model->validate($_POST)) {
             $this->form_validation->set_rules('group_id', 'Group', 'required');
+            $_POST['full_name'] = $_POST['first_name'].' '.$_POST['last_name'];
+            $_POST['formal_name'] = $_POST['last_name'].', '.$_POST['first_name'];
             $options = $this->set_post_options($_POST);
             
             if(empty($_POST['demo_team'])) {

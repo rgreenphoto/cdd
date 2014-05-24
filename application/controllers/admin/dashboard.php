@@ -25,7 +25,7 @@ class Dashboard extends Admin_Controller {
         //grab user stats by group
         $this->load->model('group_model');
         $this->data['user_list'] = $this->group_model->stats();
-        
+
         //grab poll data
         $this->load->model(array('poll_model', 'poll_response_model'));
         $poll = $this->poll_model->get_stats(3);

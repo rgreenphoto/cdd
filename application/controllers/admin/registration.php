@@ -65,7 +65,7 @@ class Registration extends Admin_Controller {
         $division = $this->registration_model->get_forms_by_user($competition_id);        
         if(!empty($division)) {
             $this->load->library('word');
-            $file_in = './uploads/templates/SkyhoundzChampionshipsRegistrationForm.docx';
+            $file_in = './uploads/templates/SkyhoundzChampionshipsQualifierCompetitorRegistrationForm.docx';
             $template = $this->word->loadTemplate($file_in);
             if(!empty($division->users)) {
                 $i = 0;
@@ -126,6 +126,7 @@ class Registration extends Admin_Controller {
         ini_set("memory_limit","96550M");
         $this->load->model(array('competition_result_model', 'competition_fee_model'));
         $division = $this->competition_result_model->get_forms_by_division($competition_id, $division_id);
+
         if(!empty($division)) {
             $this->load->library('word');
             $file_in = './uploads/templates/'.$division->template;
@@ -152,7 +153,7 @@ class Registration extends Admin_Controller {
                     $template->setValue('state', (!empty($row->user->state) ? $row->user->state: ''));
                     $template->setValue('zip', (!empty($row->user->zip) ? $row->user->zip: ''));
                     $template->setValue('address', $address);
-                    $template->setValue('division', $division->name);
+                    $template->setValue('division', "{$division->name}");
                     $template->setValue('dog', $row->canine->name);
                     $template->setValue('dog_id', (!empty($row->canine->dog_id) ? $row->canine->dog_id: ''));
                     if(!empty($row->canine->age)) {
@@ -173,6 +174,7 @@ class Registration extends Admin_Controller {
                     $template->setValue('event_location', $division->competition->location);
                     $template->setValue('event_date', $division->competition->date);
                     $template->setValue('event_date_2', $division->competition->date);
+                    $template->setValue('running_order', '');
                     $template = $this->_set_score_fields($template);
                     $i++;                         
                 }
@@ -208,16 +210,11 @@ class Registration extends Admin_Controller {
 
         if(!empty($_POST)) {
             //save method
-            $options = $this->set_post_options($_POST);          
+            $options = $this->set_post_options($_POST);
                 //need to alter the competition_result table in case we already set it up.
                 $this->load->model(array('competition_result_model'));
-                $results_message = $this->competition_result_model->adjust_scores($options, $registration->division_id);
-                if(!empty($results_message)) {
-                    $this->session->set_flashdata('result_message', $results_message);
-                    die($results_message);
-                } 
+                $this->competition_result_model->adjust_scores($options, $registration);
             if($this->registration_model->update($id, $options)) {
-
                 $this->session->set_flashdata('success_message', 'Record Saved');
                 redirect('admin/gameday/'.$options['competition_id']);
             }
@@ -236,19 +233,22 @@ class Registration extends Admin_Controller {
         
     }
     
-    public function delete($id, $competition_id) {
+    public function delete($id, $competition_id, $user_id, $canine_id, $division_id) {
         //grab competition id for redirect
         if(!empty($id)) {
+            $this->load->model('competition_result_model');
+            $competition_result_data = array('user_id' => $user_id, 'canine_id' => $canine_id, 'division_id' => $division_id);
+            $this->competition_result_model->delete_by($competition_result_data);
             if($this->registration_model->delete($id)) {
                 $this->session->set_flashdata('message', 'Record Deleted.');
-                redirect('admin/registration/detail/'.$competition_id);
+                redirect('admin/gameday/'.$competition_id);
             } else {
                 $this->session->set_flashdata('message', 'Could not delete record.');
-                redirect('admin/registration/detail/'.$competition_id);
+                redirect('admin/gameday/'.$competition_id);
             }
         } else {
             $this->session->set_flashdata('message', 'No ID to delete');
-            redirect('admin/registration/detail/'.$competition_id);
+            redirect('admin/gameday/'.$competition_id);
         }        
         
     }
@@ -256,13 +256,14 @@ class Registration extends Admin_Controller {
    public function generate_spreadsheet($competition_id) {
        $competition = $this->competition_model->get($competition_id);
        $registrations = $this->registration_model->sort_divisions($competition->id);
+       $this->load->helper('text');
        if(!empty($registrations)) {
            $excel = new PHPExcel();
            $i=0;
            foreach($registrations as $k=>$v) {
                $excel->createSheet(NULL, $i);
                $excel->setActiveSheetIndex($i);
-               $excel->getActiveSheet()->setTitle($k);
+               $excel->getActiveSheet()->setTitle(url_title(character_limiter(str_replace('Skyhoundz', '', $k), 29), ' '));
                $excel->getActiveSheet()->setCellValue('A1', 'user_id');
                $excel->getActiveSheet()->setCellValue('B1', 'canine_id');
                $excel->getActiveSheet()->setCellValue('C1', 'competition_id');
@@ -318,7 +319,22 @@ class Registration extends Admin_Controller {
            force_download($competition->name.'.xls', $file);           
        }
    }    
-    
+
+    private function _get_running_order($registration, $division) {
+        $this->load->model('competition_result_model');
+        $options = array(
+            'user_id' => $registration->user->id,
+            'canine_id' => $registration->canine_id,
+            'competition_id' => $division->competition->id,
+            'division_id' => $division->id
+        );
+        $running_order = $this->competition_result_model->get_by($options);
+        if(!empty($running_order)) {
+            return $running_order->fs_order;
+        }
+    }
+
+
     private function _set_score_fields($template) {
         //this function simply sets score fields in the form to blank
         $template->setValue('t1', '');

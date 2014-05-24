@@ -89,6 +89,10 @@ class Competition_result_model extends MY_Model {
             'label' => 'FS 4 2',
             'rules' => 'xss_clean'),
         array(
+            'field' => 'fs_5_2',
+            'label' => 'FS 5 2',
+            'rules' => 'xss_clean'),
+        array(
             'field' => 'cr_2',
             'label' => 'Catch Ratio 2',
             'rules' => 'xss_clean'),
@@ -253,7 +257,7 @@ class Competition_result_model extends MY_Model {
         $previous = '';
         foreach($new_results as $row) {
             if($previous == $row->total) {
-                $place = $place;
+                $place = isset($place)?$place:'1';
                 $previous = $previous;
             } else {
                 $place = $i;
@@ -500,14 +504,14 @@ class Competition_result_model extends MY_Model {
            'competition_id' => $registration['competition_id'],
            'user_id' => $registration['user_id'],
            'canine_id' => $registration['canine_id'],
-           'division_id' => $old_division);
+           'division_id' => $old_division->id);
        $results = $this->get_by($options);
        if(!empty($results) && $results->dual != 1) {
            $results_options = array(
                'division_id' => $registration['division_id']
            );
            if($this->update($results->id, $results_options)) {
-               return 'Scores have been altered.';
+               return true;
            }
        } elseif(!empty($results) && $results->dual == 1) {
            //what to do with dual
@@ -602,7 +606,7 @@ class Competition_result_model extends MY_Model {
         if(!empty($result->$type)) {
             return $result->$type + 1;
         } else {
-            return 0;
+            return 1;
         }
     }
 

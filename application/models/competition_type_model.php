@@ -65,16 +65,15 @@ class Competition_type_model extends MY_Model {
             $tc_labels = explode(',', $ct->tc_labels);
             //always add FF = Foot Fault
             //always add NC = No Catch
-            $return['tc_labels'] = array('0' => 'NC', '1' => 'FF');
+            $return['tc_labels']['airbonus'] = $ct->tc_airbonus;
+            $return['tc_labels']['no_catch_group'] = array('0' => 'NC', '1' => 'FF');
+            $return['tc_labels']['catch_group'] = array();
             //if out of bounds set add it to options
             if($ct->tc_outofbounds == 1) {
-                array_push($return['tc_labels'], 'OB');
+                array_push($return['tc_labels']['no_catch_group'], 'OB');
             }
             foreach($tc_labels as $label) {
-                array_push($return['tc_labels'], $label);
-                if(!empty($ct->tc_airbonus) && $label != 0) {
-                    array_push($return['tc_labels'], $label + $ct->tc_airbonus);
-                }
+                array_push($return['tc_labels']['catch_group'], $label);
             }
         }
         if(!empty($ct->freestyle_labels)) {

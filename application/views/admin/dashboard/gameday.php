@@ -86,6 +86,7 @@
                                         <th>Handler</th>
                                         <th>Dog</th>
                                         <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
                                     </thead>
                                     <tbody>
                                         <?php foreach($division->teams as $reg): ?>
@@ -93,6 +94,7 @@
                                             <td><a href="<?php echo base_url(); ?>admin/registration/edit/<?php echo $reg->id; ?>"><?php echo $reg->user->full_name; ?></a></td>
                                             <td><?php if(!empty($reg->canine->name)) echo $reg->canine->name; ?></td>
                                             <td><a href="<?php echo base_url(); ?>admin/registration/edit/<?php echo $reg->id; ?>" class="btn btn-xs btn-cdd">Edit <i class="icon-edit"></i></a></td>
+                                            <td><a href="<?php echo base_url(); ?>admin/registration/delete/<?php echo $reg->id; ?>/<?php echo $competition->id; ?>/<?php echo $reg->user->id; ?>/<?php echo $reg->canine->id; ?>/<?php echo $reg->division_id; ?>" class="btn btn-xs btn-danger">Delete <i class="icon-warning-sign"</a></td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>

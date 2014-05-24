@@ -126,6 +126,7 @@ class Registration_model extends MY_Model {
            try  {
                $this->canine_model->insert($canine_data);
                $reg_data['canine_id'] = $this->db->insert_id();
+               $reg_data['user_id'] = $options['user_id'];
            } catch (Exception $ex) {
                echo '<pre>';
                print_r($ex);
@@ -242,7 +243,7 @@ class Registration_model extends MY_Model {
                 $user = $this->user_model->get($row->user_id);
                 $users[$i] = $user;
                 $users[$i]->competition = $competition;
-                $options = array('user_id' => $row->user_id);
+                $options = array('user_id' => $row->user_id, 'competition_id' => $competition_id);
                 $users[$i]->registrations = $this->with('canine')->with('division')->get_many_by($options);
                 $i++;
             }
@@ -254,34 +255,51 @@ class Registration_model extends MY_Model {
     }
     
     public function get_mailmerge($competition_id) {
-        $this->load->model('competition_model');
-        $competition = $this->competition_model->get($competition_id);
-        $options = array('competition_id' => $competition_id);
-        $regs = $this->with('division')->with('user')->with('canine')->order_by('division_id')->get_many_by($options);
-        if(!empty($regs)) {
-            $data[0]['event_id'] = 'EventID';
-            $data[0]['hander_id'] = 'HandlerID';
-            $data[0]['dog_id'] = 'DogID';
-            $data[0]['season'] = 'Year';
-            $data[0]['human'] = 'HandlerName';
-            $data[0]['dog'] = 'DogName';
-            $data[0]['division'] = 'Division';
-            $data[0]['row_id'] = 'RowID';
-            $i=1;
-            foreach($regs as $row) {
-                $data[$i]['event_id'] = $competition->event_id;
-                $data[$i]['handler_id'] = $row->user->member_id;
-                $data[$i]['dog_id'] = $row->canine->dog_id;
-                $data[$i]['season'] = date('Y');
-                $data[$i]['human'] = $row->user->full_name;
-                $data[$i]['dog'] = $row->canine->name;
-                $data[$i]['division'] = $row->division->import_code;
-                $data[$i]['row_id'] = $row->canine->id;
+        $division = $this->registration_model->get_forms_by_user($competition_id);
+
+        if(!empty($division)) {
+            $data[0]['event_id'] = 'Event ID';
+            $data[0]['handler_id'] = 'Handler ID';
+            $data[0]['human'] = 'Handler Name';
+            $data[0]['address'] = 'Address';
+            $data[0]['phone'] = 'Phone';
+            $data[0]['email'] = 'Email';
+            $total_dog_rows = $this->_get_max_teams($division->users);
+            for($i=1; $i<= $total_dog_rows; $i++) {
+                $data[0]['dog_id_'.$i] = 'Dog ID'.$i;
+                $data[0]['dog_name_'.$i] = 'Dog Name '.$i;
+                $data[0]['division_'.$i] = 'Division '.$i;
+            }
+            foreach($division->users as $reg) {
+                $data[$i]['event_id'] = $reg->competition->id;
+                $data[$i]['handler_id'] = $reg->id;
+                $data[$i]['handlerName'] = $reg->full_name;
+                $data[$i]['address'] = $reg->address.' '.$reg->city.' '.$reg->state.' '.$reg->zip;
+                $data[$i]['phone'] = !empty($reg->phone)?$reg->phone:' ';
+                $data[$i]['email'] = !empty($reg->email)?$reg->email:' ';
+                if(!empty($reg->registrations)) {
+                    for($num=1; $num<= $total_dog_rows; $num++) {
+                        $key = $num - 1;
+                        $data[$i]['dog_id_'.$num] = !empty($reg->registrations[$key]->canine_id)?$reg->registrations[$key]->canine_id:' ';
+                        $data[$i]['dog_name_'.$num] = !empty($reg->registrations[$key]->canine->name)?$reg->registrations[$key]->canine->name:' ';
+                        $data[$i]['division_'.$num] = !empty($reg->registrations[$key]->division->name)?$reg->registrations[$key]->division->name:' ';
+                    }
+                }
                 $i++;
             }
         }
-        
         return $data;
+    }
+
+    private function _get_max_teams($users) {
+        $total = 0;
+        foreach($users as $reg) {
+            $current = count($reg->registrations);
+            if($current > $total)  {
+                $total = $current;
+            }
+        }
+        return $total;
     }
 
     public function get_list($competition) {
@@ -320,7 +338,7 @@ class Registration_model extends MY_Model {
     public function sort_divisions($competition_id) {
         $this->load->model(array('competition_model'));
         $competition = $this->competition_model->get($competition_id);
-        $registrations = $this->with('division')->get_many_by(array('competition_id' => $competition->id));
+        $registrations = $this->with('division')->with('canine')->with('user')->get_many_by(array('competition_id' => $competition->id));
         $open_division = $this->division_model->get_by(array('competition_type_id' => $competition->competition_type_id, 'freestyle' => '1'));
         $advanced_division = $this->division_model->get_by(array('competition_type_id' => $competition->competition_type_id, 'freestyle' => '0', 'dual' => '1'));
         $divisions = array();
@@ -328,6 +346,8 @@ class Registration_model extends MY_Model {
             foreach($registrations as $row) {
                 if($row->division->dual == '2') {
                     $divisions[$open_division->name][] = array(
+                        'handler' => $row->user->full_name,
+                        'canine' => $row->canine->name,
                         'division_id' => $open_division->id,
                         'user_id' => $row->user_id,
                         'canine_id' => $row->canine_id,
@@ -338,6 +358,8 @@ class Registration_model extends MY_Model {
                         'freestyle' => '1'
                     );
                     $divisions[$advanced_division->name][] = array(
+                        'handler' => $row->user->full_name,
+                        'canine' => $row->canine->name,
                         'division_id' => $advanced_division->id,
                         'user_id' => $row->user_id,
                         'canine_id' => $row->canine_id,
@@ -349,6 +371,8 @@ class Registration_model extends MY_Model {
                     );
                 } else {
                     $divisions[$row->division->name][] = array(
+                        'handler' => $row->user->full_name,
+                        'canine' => $row->canine->name,
                         'division_id' => $row->division->id,
                         'user_id' => $row->user_id,
                         'canine_id' => $row->canine_id,
@@ -361,6 +385,8 @@ class Registration_model extends MY_Model {
                     if($row->division->freestyle == 1) {
                         if(!empty($dvanced_division)) {
                             $divisions[$advanced_division->name][] = array(
+                                'handler' => $row->user->full_name,
+                                'canine' => $row->canine->name,
                                 'division_id' => $advanced_division->id,
                                 'user_id' => $row->user_id,
                                 'canine_id' => $row->canine_id,

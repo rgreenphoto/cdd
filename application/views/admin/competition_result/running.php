@@ -10,7 +10,7 @@
     </div>
     <div class="col-lg-4 hidden-xs">
         <table class="table">
-            <tr>
+            <tr class="hidden-sm hidden-xs">
                 <td><a href="<?php echo base_url(); ?>admin/competition_result/p_running/<?php echo $competition->id; ?>/<?php echo $division->id; ?>" class="btn btn-sm btn-cdd"><i class="icon-print"></i> Running Order</a></td>
                 <td><a href="<?php echo base_url(); ?>admin/competition_result/placement/<?php echo $competition->id; ?>/<?php echo $division->id; ?>" class="btn btn-sm btn-cdd"><i class="icon-print"></i> Final Results</a></td>
             </tr>
@@ -50,7 +50,11 @@
                     <?php if(!empty($row->tc_total_1) && $row->tc_total_1 != '0.0') echo 'TC1 '; ?>
                     <?php if(!empty($row->tc_total_2) && $row->tc_total_2 != '0.0') echo 'TC2 '; ?>
                 </td>
-                <td><a href="<?php echo base_url(); ?>admin/competition_result/edit/<?php echo $row->id; ?>/<?php echo $division->id; ?>" class="btn btn-sm btn-success"><i class="icon-plus"></i> Add Score</a></td>
+                <td>
+                    <a href="<?php echo base_url(); ?>admin/competition_result/edit/<?php echo $row->id; ?>/<?php echo $division->id; ?>/tc" class="btn btn-sm btn-success"><i class="icon-plus"></i> Add TC</a>
+                    <a href="<?php echo base_url(); ?>admin/competition_result/edit/<?php echo $row->id; ?>/<?php echo $division->id; ?>/<?php echo $division->freestyle == '1'?'fs':''; ?>" class="btn btn-sm btn-success"><i class="icon-plus"></i> Add FS</a>
+                    <a href="<?php echo base_url(); ?>admin/competition_result/edit/<?php echo $row->id; ?>/<?php echo $division->id; ?>/edit" class="hidden-xs hidden-sm hidden-md btn btn-sm btn-danger"><i class="icon-edit"></i> Edit</a>
+                </td>
             </tr>
             <?php endforeach; ?>
         </tbody>

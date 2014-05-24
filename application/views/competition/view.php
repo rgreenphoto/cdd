@@ -129,9 +129,6 @@
 </div>
 <script>
     $(document).ready(function() {
-
-
-
         $('#parkMap').click(function(e) {
             console.log('parkMap');
             $('#parkMapCanvas').gmap3({

@@ -3,7 +3,7 @@
         <h3><a href="<?php echo base_url(); ?>competition/view/<?php echo $competition[0]->slug; ?>"><?php if(!empty($competition[0]->name)) echo $competition[0]->name; ?></a> - Live Results</h3>    
     </div>
     <div class="col-lg-3">      
-        <div class="btn-group pull-right">
+        <div class="btn-group">
             <button id="spinner" style="display:none;" type="button" class="btn btn-cdd"><img src="<?php echo base_url(); ?>assets/images/dog-loader.gif" class="img-responsive" /></button>
             <div class="btn-group">
                 <button type="button" class="btn btn-cdd dropdown-toggle" data-toggle="dropdown">

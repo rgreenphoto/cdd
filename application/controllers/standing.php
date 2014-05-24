@@ -34,7 +34,7 @@ class Standing extends Public_Controller {
                         $this->data['standings'][$i]->handler = $standing->user->full_name;
                         $this->data['standings'][$i]->canine = $standing->canine->name;
                         $this->data['standings'][$i]->total = $standing->total_points;
-                        $this->data['standings'][$i]->comps = $standing->comps;
+                        $this->data['standings'][$i]->comps = !empty($standing->comps)?$standing->comps:'';
                         $this->data['standings'][$i]->lowest_competition = $standing->lowest_competition;
                         $this->data['standings'][$i]->stats = $standing->stats;
                         $i++;

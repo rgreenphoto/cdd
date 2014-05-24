@@ -34,9 +34,9 @@ class Standing extends Admin_Controller {
                     foreach($standings as $standing) {
                         $this->data['standings'][$i]['place'] = $standing->place;
                         $this->data['standings'][$i]['handler'] = $standing->user->full_name;
-                        $this->data['standings'][$i]['dog'] = $standing->canine->name;
+                        $this->data['standings'][$i]['dog'] = !empty($standing->canine->name)?$standing->canine->name:'';
                         $this->data['standings'][$i]['total'] = $standing->total_points;
-                        $this->data['standings'][$i]['comps'] = $standing->comps;
+                        $this->data['standings'][$i]['comps'] = !empty($standing->comps)?$standing->comps:'';
                         $this->data['standings'][$i]['drop'] = $standing->lowest_competition;
                         $i++;
                     }

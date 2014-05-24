@@ -28,10 +28,10 @@
         <div class="col-lg-6">
             <label for="freestyle">Freestyle Division? <span class="text-danger"><?php echo form_error('freestyle'); ?></span></label>
             <label class="radio-inline">
-                <input type="radio" name="freestyle" value="1" <?php if(!empty($division->freestyle) && $division->freestyle == 1) echo 'checked'; ?> />Yes
+                <input type="radio" name="freestyle" value="1" <?php if(isset($division->freestyle) && $division->freestyle == 1) echo 'checked'; ?> />Yes
             </label>
             <label class="radio-inline">
-                <input type="radio" name="freestyle" value="0" <?php if(!empty($division->freestyle) && $division->freestyle == 0) echo 'checked'; ?> />No
+                <input type="radio" name="freestyle" value="0" <?php if(isset($division->freestyle) && $division->freestyle == 0) echo 'checked'; ?> />No
             </label>
         </div>
         <div class="col-lg-6">

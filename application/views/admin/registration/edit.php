@@ -28,7 +28,7 @@
                     <td>$<?php echo $registration->fees; ?></td>
                     <td><?php echo ($registration->isPaid == '0' ? 'No': 'Yes'); ?></td>
                     <td>
-                        <a href="<?php echo base_url(); ?>admin/registration/delete/<?php echo $registration->id; ?>/<?php echo $registration->competition->id; ?>" class="btn btn-danger">Delete</a>
+                        <a href="<?php echo base_url(); ?>admin/registration/delete/<?php echo $registration->id; ?>/<?php echo $registration->competition->id; ?>/<?php echo $registration->user->id; ?>/<?php echo $registration->canine->id; ?>/<?php echo $registration->division_id; ?>" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             </tbody>

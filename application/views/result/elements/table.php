@@ -24,11 +24,10 @@
         </tr>
     </thead>
     <tbody>
-<!--    <pre><?php print_r($results); ?></pre>-->
         <?php if(!empty($results)) foreach($results as $result): ?>
         <tr>
             <td data-value="<?php echo ($division->freestyle == 1 ? $result->fs_order: $result->tc_order); ?>"><?php echo ($division->freestyle == 1 ? $result->fs_order: $result->tc_order); ?></td>
-            <td><?php echo ($result->dual == 0 && $result->division->freestyle == 1)?'See Open Results':$result->place; ?></td>
+            <td><?php echo $result->place;//echo ($result->dual == 0 && $result->division->freestyle == 1)?'See Open Results':$result->place; ?></td>
             <td><?php echo $result->handler; ?>/<?php echo $result->canine->name; ?></td>
             <?php if($division->freestyle == 1): ?>
             <td><?php echo ($result->fs_1_1 != '0.0' ? $result->fs_1_1: ''); ?></td>

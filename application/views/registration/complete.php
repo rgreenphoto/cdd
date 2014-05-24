@@ -48,18 +48,12 @@
                    <td>Total:</td> 
                    <td><?php echo $total; ?></td>
                 </tr>
-                <?php if($this->the_user->group_id == '3'): ?>
-                <tr>
-                    <td>Member Total:</td>
-                    <td><?php $newprice = round($total * ((100-10) / 100), 2); $newprice = number_format($newprice, 2); echo $newprice; ?></td>
-                </tr>
-                <?php endif; ?>
             </tbody>
         </table>        
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-1 pull-right">
+    <div class="col-lg-2 pull-right">
             <form id="paypal" class="paypal-button" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
                 <input value="buynow" name="button" type="hidden">
                 <input value="Colorado Disc Dogs Registrations" name="item_name" type="hidden">

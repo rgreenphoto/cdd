@@ -2,8 +2,8 @@
 <html>
     <head> 
         <title><?php if(!empty($site_info)) echo $site_info->site_title; ?> - ADMIN AREA</title>
-        <meta name="viewport" content="width=device-width, initial-scale=0.9">
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
         <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/js/jquery-ui-1.10.4/themes/base/jquery-ui.css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/freeow/freeow.css"/>
@@ -14,7 +14,7 @@
 <!--        <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/admin/master.css"/>-->
         <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.freeow.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/bootstrap/datepicker/js/bootstrap-datepicker.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/js/tiny_mce/tiny_mce.js"></script>

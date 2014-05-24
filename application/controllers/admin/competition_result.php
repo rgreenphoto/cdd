@@ -8,7 +8,7 @@ class Competition_result extends Admin_Controller {
         $this->load->library(array('excel'));
         $this->load->helper(array('download'));
         $this->css = array(base_url().'/assets/css/FooTable-2/css/footable.core.min.css');
-        $this->js = array(base_url().'assets/js/jmath.js',base_url().'assets/js/jquery.smooth-scroll.min.js',base_url().'assets/js/FooTable-2/dist/footable.min.js',base_url().'assets/js/FooTable-2/dist/footable.filter.min.js', base_url().'assets/js/FooTable-2/dist/footable.sort.min.js', base_url().'assets/js/FooTable-2/dist/footable.paginate.min.js');
+        $this->js = array(base_url().'assets/js/jmath.js',base_url().'assets/js/jquery.smooth-scroll.min.js',base_url().'assets/js/FooTable-2/dist/footable.min.js',base_url().'assets/js/FooTable-2/dist/footable.filter.min.js', base_url().'assets/js/FooTable-2/dist/footable.sort.min.js');
         
     }
     
@@ -46,7 +46,7 @@ class Competition_result extends Admin_Controller {
         }       
     }     
     
-    public function edit($id, $division_id) {
+    public function edit($id, $division_id, $view = 'tc') {
         $mobile_display = $this->agent->is_mobile();
         $this->data['breadcrumb'] = $this->division_model->get($division_id);
         
@@ -65,15 +65,16 @@ class Competition_result extends Admin_Controller {
         if(!empty($existing)) {
             $item = $this->_set_fields($existing);
             $this->data['id'] = $existing->id;
-            
-            $this->data['item'] = $item;//$this->competition_result_model->set_form($item);
+            $this->data['item'] = $item;
+            if($division_id == 5) {
+                $this->data['pairs'] = $this->_get_pairs($existing->user->id, $existing->canine->id, $existing->competition->id);
+            }
         } 
         
         if(!empty($_POST)) {
-            $calculate_scores = $this->input->post('calculate_scores');
-            //unset so we don't try to insert it with other data
             unset($_POST['calculate_scores']);
             $options = $this->competition_result_model->set_options($_POST);
+
             if($this->competition_result_model->update($id, $options)) {
                 if($options['dual'] == '1') {
                     $tc_scores = explode(',', $options['tc_cat_1']);
@@ -96,23 +97,36 @@ class Competition_result extends Admin_Controller {
                     //update second record
                     $this->competition_result_model->update($dual->id, $data);
                 }
-                if($calculate_scores == 'Yes') {
-                    $this->competition_result_model->calculate_scores($options['competition_id'], $options['division_id']);
-                }
+                $this->competition_result_model->calculate_scores($options['competition_id'], $options['division_id']);
                 $this->competition_result_model->calculate_overall_placement($options['competition_id'], $options['division_id']);
                 $this->session->set_flashdata('message', 'Result updated');
                 redirect('admin/competition_result/running/'.$options['competition_id'].'/'.$division_id);
             }
         }
-        
-        $this->data['main'] = 'admin/competition_result/elements/tc';
-        if($this->data['breadcrumb']->freestyle == 1) {
-            $this->data['main'] = 'admin/competition_result/elements/fs';
+
+        $this->data['main'] = 'admin/competition_result/layout';
+        switch($view) {
+            case 'fs':
+                $this->data['internal_view'] = 'admin/competition_result/elements/fs';
+                $this->data['order_view'] = 'fs_order';
+                break;
+            case 'tc':
+                $this->data['internal_view'] = 'admin/competition_result/elements/tc';
+                $this->data['order_view'] = 'tc_order';
+                break;
+            case 'tc_vertical':
+                $this->data['internal_view'] = 'admin/competition_result/elements/tc_vertical';
+                $this->data['order_view'] = 'tc_order';
+                break;
+            case 'edit':
+                $this->data['internal_view'] = 'admin/competition_result/edit';
+                $this->data['order_view'] = $this->data['breadcrumb']->freestyle == 1?'fs_order':'tc_order';
+                break;
         }
         $this->load->view('admin/scorekeep', $this->data);
-        
-        
     }
+
+
     public function running($competition_id, $division_id) {
         $this->data['competition'] = $this->competition_model->with('competition_type')->get_by(array('id' => $competition_id));        
         $this->data['division'] = $this->division_model->get($division_id);
@@ -124,7 +138,7 @@ class Competition_result extends Admin_Controller {
         }
  
         if(!empty($division_id)) {
-            $this->data['teams'] = $this->competition_result_model->get_teams($competition_id, $division_id);                   
+            $this->data['teams'] = $this->competition_result_model->get_teams($competition_id, $division_id);
         } else {
             $this->session->set_flashdata('message', 'No division selected');
             redirect('admin/competition_result/gameday/'.$competition_id);
@@ -232,7 +246,7 @@ class Competition_result extends Admin_Controller {
    public function placement($competition_id, $division_id) {
        //set memory limit in case we generate a large file.
        ini_set("memory_limit","96550M");
-       //$this->competition_result_model->calculate_scores($competition_id, $division_id);
+       $this->competition_result_model->calculate_scores($competition_id, $division_id);
        $this->competition_result_model->calculate_overall_placement($competition_id, $division_id);
        $this->competition_result_model->calculate_club_placement($competition_id, $division_id);
        $this->competition_result_model->calculate_cup_points($competition_id, $division_id);
@@ -259,6 +273,16 @@ class Competition_result extends Admin_Controller {
             }
         } 
         return $item;
+   }
+
+   private function _get_pairs($user_id, $canine_id, $competition_id) {
+       $this->load->model('registration_model');
+       $options = array('user_id' => $user_id, 'canine_id' => $canine_id, 'competition_id' => $competition_id, 'division_id' => 5);
+       $pairs = $this->registration_model->get_by($options);
+       if(!empty($pairs)) {
+           return $pairs->pairs;
+       }
+       return false;
    }
        
 }
