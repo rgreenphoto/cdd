@@ -259,7 +259,21 @@ class Competition_result extends Admin_Controller {
        $this->pdf->stream($this->data['division']->name."_standings.pdf");          
        
    }
-   
+
+   public function delete($id, $competition_id, $division_id) {
+       try {
+           $this->competition_result_model->delete($id);
+           $this->session->set_flashdata('message', 'Team has been scratched');
+           redirect('admin/competition_result/running/'.$competition_id.'/'.$division_id);
+       } catch(Exception $e) {
+           echo '<pre>';
+           print_r($e);
+           die(0);
+       }
+   }
+
+
+
    private function _set_fields($existing) {
         $item = $existing;
         $tc_scores_1 = explode(',', $existing->tc_cat_1);

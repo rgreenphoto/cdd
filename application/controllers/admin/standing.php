@@ -9,6 +9,8 @@ class Standing extends Admin_Controller {
         parent::__construct();
         $this->load->model(array('standing_model', 'competition_model', 'group_model', 'canine_model', 'competition_result_model', 'points_guide_model', 'division_model'));
         $this->load->library(array('table'));
+        $this->css = array(base_url().'/assets/css/FooTable-2/css/footable.core.min.css');
+        $this->js = array(base_url().'assets/js/jmath.js',base_url().'assets/js/jquery.smooth-scroll.min.js',base_url().'assets/js/FooTable-2/dist/footable.min.js',base_url().'assets/js/FooTable-2/dist/footable.filter.min.js', base_url().'assets/js/FooTable-2/dist/footable.sort.min.js');
     }
     
     public function index($season = '', $type = '') {
@@ -81,8 +83,12 @@ class Standing extends Admin_Controller {
         $this->table->set_caption('<input id="filter" type="text" class="form-control" placeholder="Search">');
         $tmpl = array ( 'table_open'  => '<table class="table table-striped footable" id="standingtable" data-page-size="300" data-filter="#filter">' );
         $this->table->set_template($tmpl);
-        
-        $this->data['seasons'] = array('2013', '2012');
+        $year = date('Y');
+        $seasons = array();
+        for($i=$year; $i>=2012; $i--) {
+            array_push($seasons, $i);
+        }
+        $this->data['seasons'] = $seasons;
         $this->data['season'] = $season;
         $this->data['type'] = $type;
         $this->data['main'] = 'admin/standing/index';

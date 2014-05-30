@@ -42,21 +42,21 @@
         var success_message = '<?php if(!empty($success_message)) echo $success_message; ?>';
         if(success_message) {
             $('#freeow').freeow("Success", success_message, {
-                classes: ["gray"],
+                classes: ["smokey"],
                 autoHide: true
             });
         }
         var error_message = '<?php if(!empty($error_message)) echo $error_message; ?>';
         if(error_message) {
             $('#freeow').freeow("Error", error_message, {
-                classes: ["gray", "error"],
+                classes: ["smokey", "error"],
                 autoHide: false
             });
         }
         var message = '<?php if(!empty($message)) echo $message; ?>';
         if(message) {
             $('#freeow').freeow("Message", message, {
-                classes: ["gray"],
+                classes: ["smokey"],
                 autoHide: true
             });
         }

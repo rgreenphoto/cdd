@@ -67,14 +67,16 @@ class Registration extends Member_Controller {
                 if(!empty($user->family_id)) {
                     $_POST['family_id'] = $user->family_id;
                 }
-                
+                unset($_POST['new_id']);
                 $data = $this->set_post_options($_POST);
-                if($this->registration_model->insert($data)) {          
-                    $message = '<tr>';
+                if($this->registration_model->insert($data)) {
+                    $id = $this->db->insert_id();
+                    $message = '<tr id="'.$id.'">';
                     $message .= '<td>'.$user->full_name.'</td>';
                     $message .= '<td>'.$dog->name.'</td>';
                     $message .= '<td>'.$division->name.'</td>';
                     $message .= '<td>'.$comp->fee.'</td>';
+                    $message .= '<td><a href="#" data="'.base_url().'registration/delete_ajax/'.$id.'" class="btn btn-sm btn-cdd delete"><i class="fa fa-trash-o"></i></a></td>';
                     $message .= '</tr>';
                     echo json_encode($message);
                 } else {
@@ -140,6 +142,16 @@ class Registration extends Member_Controller {
         } else {
             $this->session->set_flashdata('error_message', 'Could not remove, please try again');
             redirect(''.$_SERVER['HTTP_REFERER'].'');
+        }
+    }
+
+    public function delete_ajax($id) {
+        if($this->registration_model->delete($id)) {
+            $message = 'Deleted';
+            $array = array('message' =>$message, 'id' => $id);
+            echo json_encode($array);
+        } else {
+            return false;
         }
     }
     

@@ -7,7 +7,7 @@
 class Competition_result_model extends MY_Model {
     public $_table = 'competition_result';
     
-    protected $soft_delete = FALSE;
+    protected $soft_delete = TRUE;
    
     public $protected_attributes = array('id');
     
@@ -303,75 +303,82 @@ class Competition_result_model extends MY_Model {
         //grab the points guide for this division
         $this->load->model(array('division_model', 'points_guide_model'));
         $points_guide = $this->division_model->get($division_id);
-        
-        $this->db->select('DISTINCT(cdd_place)');
-        $this->db->where('competition_id', $competition_id);
-        $this->db->where('division_id', $division_id);
-        $this->db->where('cdd_place !=', 'NULL');
-        $this->db->order_by('cdd_place');
-        $query = $this->db->get('competition_result');
-        $results = $query->result();
-        
-        if(!empty($results)) {
-            $i=0;
-            $place_count = array();
-            foreach($results as $row) {
-                $options = array('cdd_place' => $row->cdd_place, 'competition_id' => $competition_id, 'division_id' => $division_id);
-                $count = $this->competition_result_model->count_by($options);
-                $place_count[$i]['place'] = $row->cdd_place;
-                $place_count[$i]['count'] = $count;
-                if($count > 1) {
-                    $count_place = $row->cdd_place;
-                    for($a=1; $a<=$count; $a++) {
-                        if($a == 1) {
-                            $count_place - 1;
-                        } else {
-                            $count_place++;
-                        }
-                        $place_count[$i]['tie'][$a] = $count_place;
-                    }   
-                }
-                $i++;
-            }
-            if(!empty($place_count)) {
+
+        if(!empty($points_guide->points_type)) {
+            $this->db->select('DISTINCT(cdd_place)');
+            $this->db->where('competition_id', $competition_id);
+            $this->db->where('division_id', $division_id);
+            $this->db->where('cdd_place !=', 'NULL');
+            $this->db->order_by('cdd_place');
+            $query = $this->db->get('competition_result');
+            $results = $query->result();
+
+            if(!empty($results)) {
                 $i=0;
-                foreach($place_count as $r) {
-                    $options = array('place' => $r['place'], 'type' => $points_guide->points_type);
-                    $points = $this->points_guide_model->get_by($options);
-                    if(!empty($points)) {
-                        $final['points'] = $points->points;
-                    } else {
-                        $final['points'] = 1;
-                    }
-                    $final['count'] = $r['count'];
-                    $final['place'] = $r['place'];
-                    if(!empty($r['tie'])) {
-                        $new_points = 0.00;
-                        foreach($r['tie'] as $k=>$v) {
-                            $multi_options = array('place' => $v, 'type' => $points_guide->points_type);
-                            $multi_points = $this->points_guide_model->get_by($multi_options);
-                            $new_points +=  $multi_points->points;
+                $place_count = array();
+                foreach($results as $row) {
+                    $options = array('cdd_place' => $row->cdd_place, 'competition_id' => $competition_id, 'division_id' => $division_id);
+                    $count = $this->competition_result_model->count_by($options);
+                    $place_count[$i]['place'] = $row->cdd_place;
+                    $place_count[$i]['count'] = $count;
+                    if($count > 1) {
+                        $count_place = $row->cdd_place;
+                        for($a=1; $a<=$count; $a++) {
+                            if($a == 1) {
+                                $count_place - 1;
+                            } else {
+                                $count_place++;
+                            }
+                            $place_count[$i]['tie'][$a] = $count_place;
                         }
-                        
-                        $final['points'] = ($new_points / $r['count']);
                     }
-                    $flag = 'false';
-                    $update_options = array(
-                        'cup_points' => $final['points']);
-                    $this->db->where('competition_id', $competition_id);
-                    $this->db->where('division_id', $division_id);
-                    $this->db->where('cdd_place', $final['place']);
-                    if($this->db->update('competition_result', $update_options)) {
-                        $flag = 'true';
+                    $i++;
+                }
+                if(!empty($place_count)) {
+                    $i=0;
+                    foreach($place_count as $r) {
+                        $options = array('place' => $r['place'], 'type' => $points_guide->points_type);
+                        $points = $this->points_guide_model->get_by($options);
+                        if(!empty($points)) {
+                            $final['points'] = $points->points;
+                        } else {
+                            $final['points'] = 1;
+                        }
+                        $final['count'] = $r['count'];
+                        $final['place'] = $r['place'];
+                        if(!empty($r['tie'])) {
+                            $new_points = 0.00;
+                            foreach($r['tie'] as $k=>$v) {
+                                $multi_options = array('place' => $v, 'type' => $points_guide->points_type);
+                                $multi_points = $this->points_guide_model->get_by($multi_options);
+                                $new_points +=  $multi_points->points;
+                            }
+
+                            $final['points'] = ($new_points / $r['count']);
+                        }
+                        $flag = 'false';
+                        $update_options = array(
+                            'cup_points' => $final['points']);
+                        $this->db->where('competition_id', $competition_id);
+                        $this->db->where('division_id', $division_id);
+                        $this->db->where('cdd_place', $final['place']);
+                        if($this->db->update('competition_result', $update_options)) {
+                            $flag = 'true';
+                        }
                     }
                 }
             }
-        }
-        if($flag == 'true') {
-            return true;
+            if($flag == 'true') {
+                return true;
+            } else {
+                return false;
+            }
+
         } else {
-            return false;
+            //if points type is empty we don't care, move along and pass a true
+            return true;
         }
+
     }
     
     
@@ -410,18 +417,30 @@ class Competition_result_model extends MY_Model {
         $options['tc_total_1'] = (!empty($options['tc_total_1']) ? $options['tc_total_1']: 'NULL');
         $options['tc_total_2'] = (!empty($options['tc_total_2']) ? $options['tc_total_2']: 'NULL');
         if(!empty($options)) {
-            $tc_cat_1 = '';
-            $tc_cat_2 = '';
-            for($i=1; $i<=10; $i++) {
-                if(isset($options['tc_1_'.$i])) {
-                    $tc_cat_1 .= $options['tc_1_'.$i].',';
-                    unset($options['tc_1_'.$i]);
+            if(empty($options['tc_cat_1'])) {
+                $tc_cat_1 = '';
+                for($i=1; $i<=10; $i++) {
+                    if(isset($options['tc_1_'.$i])) {
+                        $tc_cat_1 .= $options['tc_1_'.$i].',';
+                    }
                 }
+            } else {
+                $tc_cat_1 = $options['tc_cat_1'];
+            }
+            if(empty($options['tc_cat_2'])) {
+                $tc_cat_2 = '';
                 if(isset($options['tc_2_'.$i])) {
                     $tc_cat_2 .= $options['tc_2_'.$i].',';
-                    unset($options['tc_2_'.$i]);    
-                }            
+                }
+            } else {
+                $tc_cat_2 = $options['tc_cat_2'];
             }
+
+            for($i=1; $i<=10; $i++) {
+                unset($options['tc_1_'.$i]);
+                unset($options['tc_2_'.$i]);
+            }
+
             $options['tc_cat_1'] = rtrim($tc_cat_1, ',');
             $options['tc_cat_2'] = rtrim($tc_cat_2, ','); 
         }

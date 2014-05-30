@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
-    <li><a href="<?php echo base_url(); ?>admin/gameday/<?php echo $competition->id; ?>">Game Day Dashboard</a></li>
-    <li class="active"><?php echo $division->name; ?></li>
+    <li><a href="<?php echo base_url(); ?>admin/gameday/<?php echo $competition->id; ?>" class="btn btn-md btn-info">Game Day Dashboard</a></li>
+    <li class="active"><span class="label label-default"><?php echo $division->name; ?></span></li>
 </ul>
 <div class="row">
     <div class="col-lg-8">
@@ -26,34 +26,37 @@
 </div>
 <?php if(!empty($teams)): ?>
 <div class="row">
-    <table id="sort" class="table table-striped table-hover footable toggle-circle toggle-medium">
+    <table id="sort" class="table table-striped table-hover footable toggle-circle toggle-small">
         <thead>
             <tr>
-                <th data-toggle="true">Order</th>
+                <th>Order</th>
                 <th>Human</th>
-                <th>Canine</th>
-                <th data-hide="phone,tablet">Division</th>
-                <th data-hide="phone,tablet">Rounds Completes</th>
+                <th data-toggle="true" data-hide="phone">Rounds</th>
                 <th>&nbsp;</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach($teams as $row): ?>
             <tr id="<?php echo $row->id; ?>" class="clickable">
-                <td><?php if($division->freestyle == '1') { echo $row->fs_order; } else { echo $row->tc_order; } ?></td>
-                <td><?php echo $row->user->full_name; ?></td>
-                <td><?php if(!empty($row->canine->name)) echo $row->canine->name; ?></td>
-                <td><?php echo $row->division->name; ?> <?php if($row->dual == 1) echo '(Dual)'; ?></td>
-                <td class="text-error">
-                    <?php if(!empty($row->fs_total_1) && $row->fs_total_1 != '0.0') echo 'FS1 '; ?>
-                    <?php if(!empty($row->fs_total_2) && $row->fs_total_2 != '0.0') echo 'FS2 '; ?>
-                    <?php if(!empty($row->tc_total_1) && $row->tc_total_1 != '0.0') echo 'TC1 '; ?>
-                    <?php if(!empty($row->tc_total_2) && $row->tc_total_2 != '0.0') echo 'TC2 '; ?>
+                <td style="padding-top: 15px;"><span class="label label-primary running_order_label"><?php if($division->freestyle == '1') { echo $row->fs_order; } else { echo $row->tc_order; } ?></span></td>
+                <td style="padding-top: 15px;"><span class="label label-warning running_order_label"><?php echo $row->user->full_name; ?> & <?php if(!empty($row->canine->name)) echo $row->canine->name; ?> <?php if($row->dual == 1) echo '(D)'; ?></span></td>
+                <td>
+                    <ul class="list-inline">
+                    <?php if(!empty($row->fs_total_1) && $row->fs_total_1 != '0.0') echo '<li><h5><span class="label label-danger">FS1</span></h5></li>'; ?>
+                    <?php if(!empty($row->fs_total_2) && $row->fs_total_2 != '0.0') echo '<li><h5><span class="label label-danger">FS2</span></h5></li>'; ?>
+                    <?php if(!empty($row->tc_total_1) && !empty($row->tc_cat_1)/*$row->tc_total_1 != '0.0'*/) echo '<li><h5><span class="label label-danger">TC1</span></h5></li>'; ?>
+                    <?php if(!empty($row->tc_total_2) && !empty($row->tc_cat_2)/*$row->tc_total_2 != '0.0'*/) echo '<li><h5><span class="label label-danger">TC2</span></h5></li>'; ?>
+                    </ul>
                 </td>
                 <td>
-                    <a href="<?php echo base_url(); ?>admin/competition_result/edit/<?php echo $row->id; ?>/<?php echo $division->id; ?>/tc" class="btn btn-sm btn-success"><i class="icon-plus"></i> Add TC</a>
-                    <a href="<?php echo base_url(); ?>admin/competition_result/edit/<?php echo $row->id; ?>/<?php echo $division->id; ?>/<?php echo $division->freestyle == '1'?'fs':''; ?>" class="btn btn-sm btn-success"><i class="icon-plus"></i> Add FS</a>
+                    <?php if($division->freestyle != '1'): ?>
+                        <a href="<?php echo base_url(); ?>admin/competition_result/edit/<?php echo $row->id; ?>/<?php echo $division->id; ?>/tc" class="btn btn-sm btn-success"><strong><i class="icon-plus"></i> Add TC</strong></a>
+                    <?php endif; ?>
+                    <?php if($division->freestyle == '1'): ?>
+                        <a href="<?php echo base_url(); ?>admin/competition_result/edit/<?php echo $row->id; ?>/<?php echo $division->id; ?>/<?php echo $division->freestyle == '1'?'fs':''; ?>" class="btn btn-sm btn-success"><i class="icon-plus"></i> Add FS</a>
+                    <?php endif; ?>
                     <a href="<?php echo base_url(); ?>admin/competition_result/edit/<?php echo $row->id; ?>/<?php echo $division->id; ?>/edit" class="hidden-xs hidden-sm hidden-md btn btn-sm btn-danger"><i class="icon-edit"></i> Edit</a>
+                    <a href="#" data="<?php echo base_url(); ?>admin/competition_result/delete/<?php echo $row->id; ?>/<?php echo $competition->id; ?>/<?php echo $division->id; ?>" class="btn btn-sm btn-danger confirm"><i class="icon-ban-circle"></i> Scratch</a>
                 </td>
             </tr>
             <?php endforeach; ?>

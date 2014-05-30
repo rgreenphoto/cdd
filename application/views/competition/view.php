@@ -23,10 +23,10 @@
             <?php if($event->online_reg == 1): ?>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <h5>Registration Opens: <span class="text-info"><?php if(!empty($event->registration_start)) echo date('m/d/Y', strtotime($event->registration_start)); ?></span></h5>
+                        <h5>Registration Opens: <span class="text-info"><?php if(!empty($event->registration_start)) echo $event->registration_start; ?></span></h5>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <h5>Registration Closes: <a href="#" id="regCloseInfo" data-toggle="tooltip" data-placement="left" data-trigger="hover click" title="Online registration will close 48hrs prior to event at which time running orders will be posted. If you register at the event, you will be added to end of running order, in the same order they register. We will make reasonable attempts to separate single dogs from running too close."><span class="text-danger"><?php if(!empty($event->registration_end)) echo date('m/d/Y', strtotime($event->registration_end)); ?>*</span></a></h5>
+                        <h5>Registration Closes: <a href="#" id="regCloseInfo" data-toggle="tooltip" data-placement="left" data-trigger="hover click" title="Register before this date."><span class="text-danger"><?php if(!empty($event->registration_end)) echo $event->registration_end; ?>*</span></a></h5>
                     </div>
                 </div>
             <?php endif; ?>
@@ -48,8 +48,8 @@
 
 
             <div class="row">
-                <div class="col-lg-10">
-                    <?php $date = date('Y-m-d'); if($event->registration_start <= $date && $event->registration_end >= $date): ?>
+                <div class="col-lg-6">
+                    <?php $date = date('m/d/Y g:i A'); if($event->registration_start <= $date && $event->registration_end >= $date): ?>
                         <?php if(empty($the_user) && $event->online_reg == '1'): ?>
                             <a href="<?php echo base_url(); ?>auth/login" class="btn btn-warning pull-right">Log in to Register</a>
                         <?php endif; ?>
@@ -63,6 +63,9 @@
                     <?php if($event->online_reg == '0'): ?>
                         <?php $this->load->view('competition/elements/noreg'); ?>
                     <?php endif; ?>
+                </div>
+                <div class="col-lg-6">
+                    <a href="<?php echo base_url(); ?>competition/registered/<?php echo $event->slug; ?>" class="btn btn-info">View Registered Teams <i class="fa fa-users"></i></a>
                 </div>
             </div>
 

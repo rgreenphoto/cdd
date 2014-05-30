@@ -119,3 +119,8 @@ body {
     background: white url('../../images/dog-loader.gif') right center no-repeat;
 }
 
+.running_order_label {
+    font-size: 18px;
+
+}
+

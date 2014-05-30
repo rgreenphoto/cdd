@@ -404,7 +404,7 @@ class Standing_model extends MY_Model {
     private function _get_max_fs($user_id, $dog_id, $type, $season) {
         //query to get the highest scored out of database (includes second round if present)
         $this->db->select('MAX(fs_total_1) AS fs1, MAX(fs_total_2) AS fs2', FALSE);
-        $this->db->join('division', 'competition_result.division_id = division.id AND division.freestyle = 1');
+        $this->db->join('division', 'competition_result.division_id = division.id AND division.freestyle = 1 AND division.points_type IS NOT NULL');
         $this->db->where('competition_id IN (SELECT competition.id FROM competition JOIN competition_type ON (competition.competition_type_id = competition_type.id AND competition_type.type = "'.$type.'") WHERE season = "'.$season.'")', NULL, FALSE);
         $this->db->where('user_id', $user_id);
         $this->db->where('canine_id', $dog_id);
@@ -425,7 +425,7 @@ class Standing_model extends MY_Model {
     private function _get_max_tc($user_id, $dog_id, $type, $season) {
         //returns highest round for toss and catch. (included round 2 if found)
         $this->db->select('MAX(tc_total_1) AS tc1, MAX(tc_total_2) AS tc2', FALSE);
-        $this->db->join('division', 'competition_result.division_id = division.id AND division.freestyle = 0');
+        $this->db->join('division', 'competition_result.division_id = division.id AND division.freestyle = 0 AND division.points_type IS NOT NULL');
         $this->db->where('competition_id IN (SELECT competition.id FROM competition JOIN competition_type ON (competition.competition_type_id = competition_type.id AND competition_type.type = "'.$type.'") WHERE season = "'.$season.'")', NULL, FALSE);
         $this->db->where('user_id', $user_id);
         $this->db->where('canine_id', $dog_id);

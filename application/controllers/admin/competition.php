@@ -12,8 +12,8 @@ class Competition extends Admin_Controller {
         $this->load->model(array('competition_model'));
         $this->load->library(array('form_validation'));
         $this->previous_year = date('Y', strtotime("-1 year"));
-        $this->css = array(base_url().'/assets/css/FooTable-2/css/footable.core.min.css');
-        $this->js = array(base_url().'assets/js/FooTable-2/dist/footable.min.js',base_url().'assets/js/FooTable-2/dist/footable.filter.min.js', base_url().'assets/js/FooTable-2/dist/footable.sort.min.js', base_url().'assets/js/FooTable-2/dist/footable.paginate.min.js');
+        $this->css = array(base_url().'/assets/css/FooTable-2/css/footable.core.min.css', base_url().'/assets/css/bootstrap-datetimepicker.min.css');
+        $this->js = array(base_url().'assets/js/FooTable-2/dist/footable.min.js',base_url().'assets/js/FooTable-2/dist/footable.filter.min.js', base_url().'assets/js/FooTable-2/dist/footable.sort.min.js', base_url().'assets/js/FooTable-2/dist/footable.paginate.min.js', base_url().'assets/js/moment.min.js', base_url().'assets/js/bootstrap-datetimepicker.min.js');
         
     }
     

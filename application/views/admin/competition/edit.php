@@ -29,13 +29,13 @@
                 <label for="cup_points">Cup Points: <span class="text-danger"><?php echo form_error('cup_points'); ?></span></label>
                 <div class="radio-inline">
                     <label>
-                    <input type="radio" name="cup_points"  value="1" <?php if($competition->cup_points == 1) echo 'checked'; ?>/>
+                    <input type="radio" name="cup_points"  value="1" <?php if(!empty($competition) && $competition->cup_points == 1) echo 'checked'; ?>/>
                     Yes
                     </label>                    
                 </div>
                 <div class="radio-inline">
                     <label>
-                    <input type="radio" name="cup_points" value="0" <?php if($competition->cup_points == 0) echo 'checked'; ?> />
+                    <input type="radio" name="cup_points" value="0" <?php if(!empty($competition) && $competition->cup_points == 0) echo 'checked'; ?> />
                     No
                     </label>                    
                 </div>       
@@ -79,24 +79,24 @@
                 <label for="online_reg">Online Registration: <span class="text-danger"><?php echo form_error('online_reg'); ?></span></label>
                 <div class="radio-inline">
                     <label>
-                        <input type="radio" name="online_reg" value="1" <?php echo $competition->online_reg == 1?'checked':''; ?> />
+                        <input type="radio" name="online_reg" value="1" <?php echo !empty($competition) && $competition->online_reg == 1?'checked':''; ?> />
                         Yes
                     </label>
                 </div>
                 <div class="radio-inline">
                     <label>
-                        <input type="radio" name="online_reg" value="0" <?php echo $competition->online_reg == 0?'checked':''; ?> />
+                        <input type="radio" name="online_reg" value="0" <?php echo !empty($competition) && $competition->online_reg == 0?'checked':''; ?> />
                         No
                     </label>
                 </div>
             </div>
             <div class="col-lg-3 col-xs-10">
                 <label for="registration_start">Registration Start Date: <span class="text-danger"><?php echo form_error('registration_start'); ?></span></label>
-                <input type="date" name="registration_start" class="form-control datepicker" value="<?php echo !empty($competition->registration_start) ? $competition->registration_start: ''; ?>" />            
+                <input type="text" name="registration_start" class="form-control datetimepicker" value="<?php echo !empty($competition->registration_start) ? $competition->registration_start: ''; ?>" />
             </div>
             <div class="col-lg-3 col-xs-10">
                 <label for="registration_end">Registration End Date: <span class="text-danger"><?php echo form_error('registration_end'); ?></span></label>
-                <input type="date" name="registration_end" class="form-control datepicker" value="<?php echo !empty($competition->registration_end) ? $competition->registration_end: ''; ?>" />            
+                <input type="text" name="registration_end" class="form-control datetimepicker" value="<?php echo !empty($competition->registration_end) ? $competition->registration_end: ''; ?>" />
             </div>
             <div class="col-lg-3 col-xs-10">
                 <label for="external_reg_link">External Link: <span class="text-danger"><?php echo form_error('external_reg_link'); ?></span></label>
@@ -298,6 +298,8 @@
                 error: function(){alert('error');}
              });
         });
+
+        $('.datetimepicker').datetimepicker();
         
         
     }); 

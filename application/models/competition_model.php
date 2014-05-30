@@ -138,11 +138,22 @@ class Competition_model extends MY_Model {
         if(is_object($row)) {
             if(!empty($row->date)) {
                 $row->date = date('Y-m-d', strtotime($row->date));
-                
+            }
+            if(!empty($row->registration_start)) {
+                $row->registration_start = date('Y-m-d H:i:s', strtotime($row->registration_start));
+            }
+            if(!empty($row->registration_end)) {
+                $row->registration_end = date('Y-m-d H:i:s', strtotime($row->registration_end));
             }
         } else {
             if(!empty($row['date'])) {
                 $row['date'] = date('Y-m-d', strtotime($row['date']));
+            }
+            if(!empty($row['registration_start'])) {
+                $row['registration_start'] = date('Y-m-d H:i:s', strtotime($row['registration_start']));
+            }
+            if(!empty($row['registration_end'])) {
+                $row['registration_end'] = date('Y-m-d H:i:s', strtotime($row['registration_end']));
             }
         }
         return $row;
@@ -172,6 +183,12 @@ class Competition_model extends MY_Model {
             if(!empty($row->date)) {
                 $row->convert_date = date('m/d/Y', strtotime($row->date));
                 $row->long_date = date('l F jS Y', strtotime($row->date));         
+            }
+            if(!empty($row->registration_start)) {
+                $row->registration_start = date('m/d/Y g:i A', strtotime($row->registration_start));
+            }
+            if(!empty($row->registration_end)) {
+                $row->registration_end = date('m/d/Y g:i A', strtotime($row->registration_end));
             }
             $this->load->model('user_model');
             if(!empty($row->created)) {
