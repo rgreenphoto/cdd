@@ -8,7 +8,7 @@ class Competition_result extends Admin_Controller {
         $this->load->library(array('excel'));
         $this->load->helper(array('download'));
         $this->css = array(base_url().'/assets/css/FooTable-2/css/footable.core.min.css');
-        $this->js = array(base_url().'assets/js/jmath.js',base_url().'assets/js/jquery.smooth-scroll.min.js',base_url().'assets/js/FooTable-2/dist/footable.min.js',base_url().'assets/js/FooTable-2/dist/footable.filter.min.js', base_url().'assets/js/FooTable-2/dist/footable.sort.min.js');
+        $this->js = array(base_url().'assets/js/jmath.js',base_url().'assets/js/jquery.smooth-scroll.min.js',base_url().'assets/js/FooTable-2/dist/footable.min.js',base_url().'assets/js/FooTable-2/dist/footable.filter.min.js', base_url().'assets/js/FooTable-2/dist/footable.sort.min.js', base_url().'assets/js/admin/scoreCore.js');
         
     }
     
@@ -47,26 +47,28 @@ class Competition_result extends Admin_Controller {
     }     
     
     public function edit($id, $division_id, $view = 'tc') {
-        $mobile_display = $this->agent->is_mobile();
-        $this->data['breadcrumb'] = $this->division_model->get($division_id);
-        
+        $division = $this->division_model->get($division_id);
+        $this->data['division'] = $division;
+
         $existing = $this->competition_result_model->with('competition')->with('user')->with('canine')->with('division')->get($id);
+
         $this->load->model('competition_type_model');
-        $this->data['labels'] = $this->competition_type_model->set_labels($existing->competition->competition_type_id);
 
         $this->data['hidden'] = array(
+            'id' => $existing->id,
             'dual' => $existing->dual, 
             'user_id' => $existing->user->id, 
             'canine_id' => $existing->canine->id,
             'division_id' => $existing->division->id,
-            'competition_id' => $existing->competition->id);
-        $this->data['dual'] = $existing->dual;
-        $this->data['division_id'] = $division_id;
+            'competition_id' => $existing->competition->id,
+            'freestyle' => $existing->division->freestyle,
+            'dual' => $existing->dual
+        );
+        $this->data['labels'] = $this->competition_type_model->set_labels($existing->competition->competition_type_id);
         if(!empty($existing)) {
             $item = $this->_set_fields($existing);
-            $this->data['id'] = $existing->id;
             $this->data['item'] = $item;
-            if($division_id == 5) {
+            if($existing->division->id == 5) {
                 $this->data['pairs'] = $this->_get_pairs($existing->user->id, $existing->canine->id, $existing->competition->id);
             }
         } 
@@ -76,20 +78,10 @@ class Competition_result extends Admin_Controller {
             $options = $this->competition_result_model->set_options($_POST);
 
             if($this->competition_result_model->update($id, $options)) {
-                if($options['dual'] == '1') {
-                    $tc_scores = explode(',', $options['tc_cat_1']);
-                    if(!empty($tc_scores)) {
-                        $tc_total = '0';
-                        $tc_cat = '';
-                        foreach($tc_scores as $k=>$v) {
-                            $tc_total += $v;
-                            $tc_cat .= $v.',';
-                        }
-                        $tc_cat_1 = rtrim($tc_cat, ',');
-                    }
+                if($options['dual'] == '1' && isset($options['tc_total_1'])) {
                     $data = array(
-                        'tc_cat_1' => $tc_cat_1,
-                        'tc_total_1' => $tc_total                            
+                        'tc_cat_1' => $options['tc_cat_1'],
+                        'tc_total_1' => $options['tc_total_1']
                     );
                     //get the id of other dual division
                     $dual_array = array('competition_id' => $options['competition_id'], 'canine_id' => $options['canine_id'], 'division_id !=' => $options['division_id'], 'dual' => '1');
@@ -100,7 +92,7 @@ class Competition_result extends Admin_Controller {
                 $this->competition_result_model->calculate_scores($options['competition_id'], $options['division_id']);
                 $this->competition_result_model->calculate_overall_placement($options['competition_id'], $options['division_id']);
                 $this->session->set_flashdata('message', 'Result updated');
-                redirect('admin/competition_result/running/'.$options['competition_id'].'/'.$division_id);
+                redirect('admin/competition_result/running/'.$options['competition_id'].'/'.$division->id);
             }
         }
 
@@ -120,7 +112,7 @@ class Competition_result extends Admin_Controller {
                 break;
             case 'edit':
                 $this->data['internal_view'] = 'admin/competition_result/edit';
-                $this->data['order_view'] = $this->data['breadcrumb']->freestyle == 1?'fs_order':'tc_order';
+                $this->data['order_view'] = $existing->division->freestyle == 1?'fs_order':'tc_order';
                 break;
         }
         $this->load->view('admin/scorekeep', $this->data);
@@ -277,16 +269,17 @@ class Competition_result extends Admin_Controller {
    private function _set_fields($existing) {
         $item = $existing;
         $tc_scores_1 = explode(',', $existing->tc_cat_1);
+
         $tc_scores_2 = explode(',', $existing->tc_cat_2);
         if(!empty($tc_scores_1)) {
             for($i=1; $i<=10; $i++) {
-                $item->{"tc_1_$i"} = (!empty($tc_scores_1[$i-1]) ? $tc_scores_1[$i-1]: '');
+                $item->{"tc_1_$i"} = (isset($tc_scores_1[$i-1])  ? $tc_scores_1[$i-1]: NULL);
                 if(!empty($tc_scores_2)) {
-                    $item->{"tc_2_$i"} = (!empty($tc_scores_2[$i-1]) ? $tc_scores_2[$i-1]: '');
+                    $item->{"tc_2_$i"} = (isset($tc_scores_2[$i-1]) ? $tc_scores_2[$i-1]: NULL);
                 }
             }
-        } 
-        return $item;
+        }
+       return $item;
    }
 
    private function _get_pairs($user_id, $canine_id, $competition_id) {

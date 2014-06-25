@@ -5,7 +5,7 @@
                 <?php if(!empty($labels['tc_labels']['no_catch_group'])) foreach($labels['tc_labels']['no_catch_group'] as $label): ?>
                     <button class="btn btn-danger btn-lg tc_btn" data-value="<?php echo $label; ?>"><h3><?php echo $label; ?> <i class="icon-plus-sign"></i></h3></button>
                 <?php endforeach; ?>
-                    <button class="btn btn-success btn-lg tc_btn" data-value="0"><h3>0 <i class="icon-plus-sign"></i></h3></button>
+                    <button class="btn btn-success btn-lg tc_btn" data-value="0.0"><h3>0 <i class="icon-plus-sign"></i></h3></button>
             </div>
             <?php if(!empty($labels['tc_labels']['airbonus'])): ?>
                 <?php foreach($labels['tc_labels']['catch_group'] as $label): ?>
@@ -36,26 +36,12 @@
 <br />
 <div class="row">
     <div class="col-lg-12 col-sm-12 col-xs-12">
-        <?php echo form_open('admin/competition_result/edit/'.$id.'/'.$division_id, '', $hidden); ?>
+        <?php echo form_open('admin/competition_result/edit/'.$item->id.'/'.$division->id, '', $hidden); ?>
         <?php echo form_submit('submit', 'Save Score', 'class="btn btn-primary pull-right"'); ?>
-        <input type="hidden" name="round" id="round" value="<?php echo !empty($item->tc_total_2)&&$item->tc_total_2=='0.0'?'2':'1'; ?>" />
-        <input type="hidden" name="fs_1_1" value="<?php echo $item->fs_1_1; ?>" />
-        <input type="hidden" name="fs_2_1" value="<?php echo $item->fs_2_1; ?>" />
-        <input type="hidden" name="fs_3_1" value="<?php echo $item->fs_3_1; ?>" />
-        <input type="hidden" name="fs_4_1" value="<?php echo $item->fs_4_1; ?>" />
-        <input type="hidden" name="deduct_1" value="<?php echo $item->deduct_1; ?>" />
-        <input type="hidden" name="cr_1" value="<?php echo $item->cr_1; ?>" />
-        <input type="hidden" name="fs_total_1" value="<?php echo $item->fs_total_1; ?>" />
-        <input type="hidden" name="fs_1_2" value="<?php echo $item->fs_1_2; ?>" />
-        <input type="hidden" name="fs_2_2" value="<?php echo $item->fs_2_2; ?>" />
-        <input type="hidden" name="fs_3_2" value="<?php echo $item->fs_3_2; ?>" />
-        <input type="hidden" name="fs_4_2" value="<?php echo $item->fs_4_2; ?>" />
-        <input type="hidden" name="deduct_2" value="<?php echo $item->deduct_2; ?>" />
-        <input type="hidden" name="cr_2" value="<?php echo $item->cr_2; ?>" />
-        <input type="hidden" name="fs_total_2" value="<?php echo $item->fs_total_2; ?>" />
+        <input type="hidden" name="round" id="round" value="<?php echo isset($item->tc_total_1)?'2':'1'; ?>" />
         <ul class="nav nav-pills">
-            <li class="<?php if(empty($item->tc_total_1) && $item->tc_total_1 != '0.0') echo 'active '; ?>"><a href="#round_1" data="1" data-toggle="tab">Round 1</a></li>
-            <li class="<?php if(!empty($item->tc_total_2) && $item->tc_total_2 == '0.0') echo 'active '; ?>"><a href="#round_2" data="2" data-toggle="tab">Round 2</a></li>
+            <li class="<?php if(empty($item->tc_total_1)) echo 'active '; ?>"><a href="#round_1" data="1" data-toggle="tab">Round 1</a></li>
+            <li class="<?php if(!empty($item->tc_total_1)) echo 'active '; ?>"><a href="#round_2" data="2" data-toggle="tab">Round 2</a></li>
         </ul>
         <br />
         <div class="tab-content">
@@ -89,7 +75,7 @@
                             <td colspan="2">
                                 <div class="col-lg-12">
                                     <div class="input-group">
-                                        <?php echo form_input('tc_total_1', $item->tc_total_1, 'class="form-control" id="tc_total_1"'); ?>
+                                        <input type="number" name="tc_total_1" class="form-control" id="tc_total_1" value="<?php echo $item->tc_total_1; ?>" step=".1" />
                                         <span class="input-group-addon">Total</span>
                                     </div>
                                 </div>
@@ -98,7 +84,7 @@
                     </tfoot>
                 </table>                 
             </div>
-            <div class="tab-pane fade <?php if(!empty($item->tc_total_2) && $item->tc_total_2 == '0.0') echo 'in active '; ?>" id="round_2">
+            <div class="tab-pane fade <?php if(isset($item->tc_total_1)) echo 'in active '; ?>" id="round_2">
                 <table id="queue" class="table table-bordered table-striped">
                     <thead>
                         <tr class="info">

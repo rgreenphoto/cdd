@@ -28,6 +28,11 @@ A Jquery Plugin to do basic match and insert it into an input element
                 }
                 break;
         }
+
+        if(result == 0) {
+            result = 0.0;
+        }
+
         $(this).val(result);
         return result;
     };  

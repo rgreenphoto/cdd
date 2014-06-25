@@ -1,5 +1,5 @@
-<?php echo form_open('admin/competition_result/edit/'.$id.'/'.$division_id, '', $hidden); ?>
-<?php if($item->division->freestyle == '1'): ?>
+<?php echo form_open('admin/competition_result/edit/'.$item->id.'/'.$division->id, '', $hidden); ?>
+
 <div class="row">
     <div class="col-lg-12">
         <h5>Freestyle</h5>
@@ -33,7 +33,7 @@
                     <td><?php echo form_input('fs_2_2', $item->fs_2_2, 'class="fs_2 form-control" id="fs_2_2"'); ?></td>
                     <td><?php echo form_input('fs_3_2', $item->fs_3_2, 'class="fs_2 form-control" id="fs_3_2"'); ?></td>
                     <td><?php echo form_input('fs_4_2', $item->fs_4_2, 'class="fs_2 form-control" id="fs_4_2"'); ?></td>
-                    <td><?php echo form_input('cr_1', $item->cr_1, 'class="cr_1 form-control" id="cr_1"'); ?></td>
+                    <td><?php echo form_input('cr_2', $item->cr_2, 'class="cr_2 form-control" id="cr_2"'); ?></td>
                     <td><?php echo form_input('deduct_2', $item->deduct_2, 'class="fs_2 form-control" id="deduct_2"'); ?></td>
                     <td><?php echo form_input('fs_total_2', $item->fs_total_2, 'class="form-control" id="fs_total_2"'); ?></td>
                 </tr>
@@ -41,7 +41,6 @@
         </table>
     </div>
 </div>
-<?php endif; ?>
 <div class="row">
     <div class="col-lg-12">
         <h5>Toss and Catch</h5>

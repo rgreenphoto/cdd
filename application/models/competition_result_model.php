@@ -412,40 +412,33 @@ class Competition_result_model extends MY_Model {
     }
     
     public function set_options($options) {
-        $options['fs_total_1'] = (!empty($options['fs_total_1']) ? $options['fs_total_1']: 'NULL');
-        $options['fs_total_2'] = (!empty($options['fs_total_2'])? $options['fs_total_2']: 'NULL');
-        $options['tc_total_1'] = (!empty($options['tc_total_1']) ? $options['tc_total_1']: 'NULL');
-        $options['tc_total_2'] = (!empty($options['tc_total_2']) ? $options['tc_total_2']: 'NULL');
+
         if(!empty($options)) {
-            if(empty($options['tc_cat_1'])) {
-                $tc_cat_1 = '';
-                for($i=1; $i<=10; $i++) {
-                    if(isset($options['tc_1_'.$i])) {
-                        $tc_cat_1 .= $options['tc_1_'.$i].',';
-                    }
+            //first clean up empty fields
+            foreach($options as $k=>$value) {
+                if(empty($value) && $value !== '0') {
+                    unset($options[$k]);
                 }
-            } else {
-                $tc_cat_1 = $options['tc_cat_1'];
             }
-            if(empty($options['tc_cat_2'])) {
-                $tc_cat_2 = '';
+            $tc_cat_1 = '';
+            $tc_cat_2 = '';
+            for($i=1; $i<=10; $i++) {
+                if(isset($options['tc_1_'.$i])) {
+                    $tc_cat_1 .= $options['tc_1_'.$i].',';
+                    unset($options['tc_1_'.$i]);
+                }
                 if(isset($options['tc_2_'.$i])) {
                     $tc_cat_2 .= $options['tc_2_'.$i].',';
+                    unset($options['tc_2_'.$i]);
                 }
-            } else {
-                $tc_cat_2 = $options['tc_cat_2'];
             }
+            if(!empty($tc_cat_1)) $options['tc_cat_1'] = rtrim($tc_cat_1, ',');
+            if(!empty($tc_cat_2)) $options['tc_cat_2'] = rtrim($tc_cat_2, ',');
 
-            for($i=1; $i<=10; $i++) {
-                unset($options['tc_1_'.$i]);
-                unset($options['tc_2_'.$i]);
-            }
-
-            $options['tc_cat_1'] = rtrim($tc_cat_1, ',');
-            $options['tc_cat_2'] = rtrim($tc_cat_2, ','); 
         }
         unset($options['round']);
         unset($options['submit']);
+        unset($options['freestyle']);
         return $options;
     }
     

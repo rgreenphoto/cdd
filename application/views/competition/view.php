@@ -49,7 +49,7 @@
 
             <div class="row">
                 <div class="col-lg-6">
-                    <?php $date = date('m/d/Y g:i A'); if($event->registration_start <= $date && $event->registration_end >= $date): ?>
+                    <?php $date = date('Y-m-d H:i:s'); if(date('Y-m-d H:i:s',strtotime($event->registration_start)) <= $date && date('Y-m-d H:i:s', strtotime($event->registration_end)) >= $date): ?>
                         <?php if(empty($the_user) && $event->online_reg == '1'): ?>
                             <a href="<?php echo base_url(); ?>auth/login" class="btn btn-warning pull-right">Log in to Register</a>
                         <?php endif; ?>

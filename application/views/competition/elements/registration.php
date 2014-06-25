@@ -6,7 +6,7 @@
                     <button type="button" class="close reg-window"  aria-hidden="true">&times;</button>
                 </div>
                 <div class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
-                    <?php $date = date('m/d/Y g:i A'); if(!empty($the_user) && $event->registration_start <= $date && $event->registration_end >= $date): ?>
+                    <?php $date = date('Y-m-d H:i:s'); if(!empty($the_user) && date('Y-m-d H:i:s', strtotime($event->registration_start)) <= $date && date('Y-m-d H:i:s', strtotime($event->registration_end >= $date))): ?>
                         <?php $this->load->view('competition/elements/form'); ?>
                     <?php endif; ?>
                 </div>
