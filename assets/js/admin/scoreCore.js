@@ -23,7 +23,9 @@ jQuery(document).ready(function($) {
         score = $(this).attr('data-value');
         round = $('#round').val();
         if(score && round) {
-            $.fn.calculateTCScore(score, round);
+            $('#last_entered_score').html(score);
+            $('#scoreConfirm').attr('href', 'javascript:$.fn.calculateTCScore('+score+', '+round+')');
+            $('#scoreModal').modal('show');
         }
     });
 
@@ -54,6 +56,7 @@ jQuery(document).ready(function($) {
 
     $.fn.calculateTCScore = function(val, round) {
         throw_order = $.fn.position(round);
+        $('#last_entered_score').html(val);
         $('#label_' + throw_order).text(val);
         $('#tc_' + round + '_' + throw_order).val(val);
         new_label = $('#focus_target_'+ round +'_' + throw_order).attr('class');
@@ -62,6 +65,7 @@ jQuery(document).ready(function($) {
         }
         $('#focus_target_'+ round +'_' + throw_order).show().removeClass().addClass(new_label);
         $.fn.total(val, round);
+        $('#scoreModal').modal('hide');
     };
 
 

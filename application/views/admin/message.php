@@ -5,11 +5,11 @@
     $message = $this->session->flashdata('message');
 ?>
 
-<div id="dialog-confirm" class="modal fade">
+<div id="dialog-confirm" class="modal fade" role="dialog" aria-labelledby="confirm" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Alert</h4>
             </div>
             <div class="modal-body">
@@ -22,7 +22,8 @@
         </div>
     </div>
 </div>
-<div id="pleaseWaitDialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+
+<div id="pleaseWaitDialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
     <div class="modal-header">
         <h1>Processing...</h1>
     </div>
@@ -33,6 +34,21 @@
     </div>
     <div class="modal-footer">
         <p>Please wait for completion.</p>
+    </div>
+</div>
+
+<div class="modal fade" id="scoreModal" tabindex="-1" role="dialog" aria-labelledby="scoreModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">Confirm Score</div>
+            <div class="modal-body">
+                <h1 class="bg-primary text-center" id="last_entered_score"></h1>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <a href="#" id="scoreConfirm" class="btn btn-primary">Yes</a>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -8,7 +8,7 @@
         <h4><?php echo $division->name; ?> - Running Order</h4>
         <p>A random order has been generated. If for you need to adjust this running order, drag and drop the row to the new position.</p>
     </div>
-    <div class="col-lg-4 hidden-xs">
+    <div class="col-lg-4 hidden-md hidden-sm hidden-xs">
         <table class="table">
             <tr class="hidden-sm hidden-xs">
                 <td><a href="<?php echo base_url(); ?>admin/competition_result/p_running/<?php echo $competition->id; ?>/<?php echo $division->id; ?>" class="btn btn-sm btn-cdd"><i class="icon-print"></i> Running Order</a></td>

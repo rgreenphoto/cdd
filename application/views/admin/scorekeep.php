@@ -24,7 +24,7 @@
         <script type="text/javascript" src="<?php echo base_url();?>assets/js/admin/global.js"></script>
     </head>
     <body>
-        <?php $this->load->view('message'); ?>
+        <?php $this->load->view('admin/message'); ?>
         
             <div class="row">
                 <div class="col-lg-12">

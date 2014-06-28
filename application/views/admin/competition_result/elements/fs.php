@@ -11,7 +11,7 @@
         </ul>
         <br />
         <div class="tab-content">
-            <div class="tab-pane fade in <?php echo ($round == 1)?'active':''; ?>" id="round_1">
+            <div class="tab-pane fade <?php echo ($round == 1)?'in active':''; ?>" id="round_1">
                 <table class="table table-bordered table-condensed table-striped">
                     <thead>
                         <tr class="info">
@@ -45,7 +45,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="tab-pane fade <?php echo ($round == 2)?'active':''; ?>" id="round_2">
+            <div class="tab-pane fade <?php echo ($round == 2)?'in active':''; ?>" id="round_2">
                 <table class="table table-bordered table-condensed table-striped">
                     <thead>
                         <tr class="info">
