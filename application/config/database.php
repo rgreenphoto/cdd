@@ -49,7 +49,7 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-//$db['default']['hostname'] = 'coloradodiscdogs.netfirmsmysql.com';
+//$db['default']['hostname'] = 'frisbee-dogs.netfirmsmysql.com';
 $db['default']['username'] = 'root';
 $db['default']['password'] = 'Mar!ah01';
 $db['default']['database'] = 'cdd';

@@ -12,6 +12,8 @@ class Link extends Admin_Controller {
     }
     
     public function index() {
+        $this->css = array(base_url().'/assets/css/FooTable-2/css/footable.core.min.css');
+        $this->js = array(base_url().'assets/js/jquery.smooth-scroll.min.js',base_url().'assets/js/FooTable-2/dist/footable.min.js',base_url().'assets/js/FooTable-2/dist/footable.filter.min.js', base_url().'assets/js/FooTable-2/dist/footable.sort.min.js');
         $this->data['title'] = 'Club Information';
         $this->data['clubs'] = $this->link_model->with('region')->with('link_type')->get_all();
         $this->data['main'] = 'admin/link/index';
