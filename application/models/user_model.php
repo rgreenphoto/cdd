@@ -106,8 +106,17 @@ class User_model extends MY_Model {
     public $before_update = array('name_formats','modified');
     
     public $has_many = array('canine', 'competition_result', 'standing');
-    
-    
+
+
+
+    public function get_family($user) {
+        return $this->get_many_by(array('family_id' => $user->family_id, 'id !=' => $user->id));
+
+    }
+
+
+
+
     public function name_formats($row) {
         if(is_object($row)) {
             if(!empty($row->first_name) && !empty($row->last_name)) {

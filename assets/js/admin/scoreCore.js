@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
         round = $('#round').val();
         if(score && round) {
             $('#last_entered_score').html(score);
-            $('#scoreConfirm').attr('href', 'javascript:$.fn.calculateTCScore('+score+', '+round+')');
+            $('#scoreConfirm').attr('href', 'javascript:$.fn.calculateTCScore("'+score+'", '+round+')');
             $('#scoreModal').modal('show');
         }
     });

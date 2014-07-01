@@ -156,6 +156,10 @@ class User extends Admin_Controller {
         //pass the user to the view
         $this->data['user'] = $user;
 
+        if(isset($user->family_id)) {
+            $this->data['family'] = $this->user_model->get_family($user);
+        }
+
 
         $this->data['main'] = 'admin/user/edit';
         $this->load->view('admin/layout', $this->data);

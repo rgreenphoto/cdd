@@ -45,8 +45,8 @@
                 <h1 class="bg-primary text-center" id="last_entered_score"></h1>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                <a href="#" id="scoreConfirm" class="btn btn-primary">Yes</a>
+                <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">No</button>
+                <a href="#" id="scoreConfirm" class="btn btn-primary btn-lg">Yes</a>
             </div>
         </div>
     </div>

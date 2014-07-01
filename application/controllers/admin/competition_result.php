@@ -33,6 +33,83 @@ class Competition_result extends Admin_Controller {
     }
     
 
+    public function export_results($competition_id) {
+        $this->load->helper('text');
+        $competition = $this->competition_model->get($competition_id);
+        $this->load->model('competition_type_model');
+        $labels = $this->competition_type_model->set_labels($competition->competition_type_id);
+        //get divisions
+        $divisions = $this->division_model->get_many_by(array('competition_type_id' => $competition->competition_type_id, 'dual !=' => 2));
+
+        if(!empty($divisions)) {
+            //set up Excel doc
+            $excel = new PHPExcel();
+            $excel->getProperties()->setCreator('Disc Dog Score System');
+            $excel->getProperties()->setTitle($competition->name);
+
+            $i=0;
+            $alpha = 'A';
+            foreach($divisions as $division) {
+                $results = $this->competition_result_model->get_results_by_division($competition_id, $division->id);
+                $excel->createSheet(NULL, $i);
+                $excel->setActiveSheetIndex($i);
+                $excel->getActiveSheet()->setTitle(url_title(character_limiter(str_replace('Skyhoundz', '', $division->name), 29), ' '));
+                $excel->getActiveSheet()->setCellValue('A1', 'Place');
+                $excel->getActiveSheet()->setCellValue('B1', 'Handler');
+                $excel->getActiveSheet()->setCellValue('C1', 'Canine');
+                $excel->getActiveSheet()->setCellValue('D1', $labels['fs_labels'][0]);
+                $excel->getActiveSheet()->setCellValue('E1', $labels['fs_labels'][1]);
+                $excel->getActiveSheet()->setCellValue('F1', $labels['fs_labels'][2]);
+                $excel->getActiveSheet()->setCellValue('G1', $labels['fs_labels'][3]);
+                $excel->getActiveSheet()->setCellValue('H1', 'FS Total');
+                $excel->getActiveSheet()->setCellValue('I1', $labels['fs_labels'][0]);
+                $excel->getActiveSheet()->setCellValue('J1', $labels['fs_labels'][1]);
+                $excel->getActiveSheet()->setCellValue('K1', $labels['fs_labels'][2]);
+                $excel->getActiveSheet()->setCellValue('L1', $labels['fs_labels'][3]);
+                $excel->getActiveSheet()->setCellValue('M1', 'FS Total');
+                $excel->getActiveSheet()->setCellValue('N1', 'T1_Catches');
+                $excel->getActiveSheet()->setCellValue('O1', 'TC1');
+                $excel->getActiveSheet()->setCellValue('P1', 'T2_Catches');
+                $excel->getActiveSheet()->setCellValue('Q1', 'TC2');
+                $excel->getActiveSheet()->setCellValue('R1', 'Total');
+                if(!empty($results)) {
+                    $row = 2;
+                    foreach($results as $result) {
+                        $excel->getActiveSheet()->setCellValue('A'.$row, $result->place);
+                        $excel->getActiveSheet()->setCellValue('B'.$row, $result->full_name);
+                        $excel->getActiveSheet()->setCellValue('C'.$row, $result->name);
+                        $excel->getActiveSheet()->setCellValue('D'.$row, $result->fs_1_1);
+                        $excel->getActiveSheet()->setCellValue('E'.$row, $result->fs_2_1);
+                        $excel->getActiveSheet()->setCellValue('F'.$row, $result->fs_3_1);
+                        $excel->getActiveSheet()->setCellValue('G'.$row, $result->fs_4_1);
+                        $excel->getActiveSheet()->setCellValue('H'.$row, $result->fs_total_1);
+                        $excel->getActiveSheet()->setCellValue('I'.$row, $result->fs_1_2);
+                        $excel->getActiveSheet()->setCellValue('J'.$row, $result->fs_2_2);
+                        $excel->getActiveSheet()->setCellValue('K'.$row, $result->fs_3_2);
+                        $excel->getActiveSheet()->setCellValue('L'.$row, $result->fs_4_2);
+                        $excel->getActiveSheet()->setCellValue('M'.$row, $result->fs_total_2);
+                        $excel->getActiveSheet()->setCellValue('N'.$row, $result->tc_cat_1);
+                        $excel->getActiveSheet()->setCellValue('O'.$row, $result->tc_total_1);
+                        $excel->getActiveSheet()->setCellValue('P'.$row, $result->tc_cat_2);
+                        $excel->getActiveSheet()->setCellValue('Q'.$row, $result->tc_total_2);
+                        $excel->getActiveSheet()->setCellValue('R'.$row, $result->total);
+                        $row++;
+                    }
+                }
+                $alpha++;
+                $i++;
+            }
+        }
+        $write = PHPExcel_IOFactory::createWriter($excel, 'Excel5');
+        $write->save('./uploads/results.xls');
+        $file = file_get_contents('./uploads/results.xls');
+        unlink('./uploads/results.xls');
+        force_download($competition->name.'.xls', $file);
+    }
+
+
+
+
     public function competitior_setup($competition_id) {
         //grab all the registrations for this competition
         $this->load->model(array('registration_model'));

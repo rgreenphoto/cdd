@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="col-lg-10 col-lg-pull-2">
-        <h4><?php echo $competition->name; ?> <?php echo $division->name; ?></h4>
+        <h4><?php echo $competition->name; ?> <?php echo $division->name; ?> - <a href="<?php echo base_url(); ?>admin/competition_result/export_results/<?php echo $competition->id; ?>">Export All Scores</a></h4>
     </div>        
 </div>
 <table class="table table-condensed table-bordered table-striped table-hover footable toggle-circle toggle-medium" data-page-size="100" data-filter="#filter">

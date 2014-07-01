@@ -570,6 +570,28 @@ class Competition_result_model extends MY_Model {
         return false;
     }
     
+    public function get_results_by_division($competition_id, $division_id) {
+        $this->db->select('cr.place, u.full_name, c.name, cr.fs_1_1, cr.fs_2_1, cr.fs_3_1, cr.fs_4_1, cr.fs_total_1, cr.tc_cat_1, cr.tc_total_1, cr.fs_1_2, cr.fs_2_2, cr.fs_3_2, cr.fs_4_2, cr.fs_total_2, cr.tc_cat_2, cr.tc_total_2, cr.total');
+        $this->db->from('competition_result cr');
+        $this->db->join('users u', 'cr.user_id = u.id');
+        $this->db->join('canine c', 'cr.canine_id = c.id');
+        $this->db->where('cr.competition_id', $competition_id);
+        $this->db->where('cr.division_id', $division_id);
+        $this->db->where('cr.deleted', 0);
+        $this->db->order_by('cr.place');
+        $query = $this->db->get();
+        $result = $query->result();
+        if(!empty($result)) {
+            return $result;
+        }
+        return false;
+    }
+
+
+
+
+
+
     private function _check_and_set($row) {
         $existing_options = array(
             'user_id' => $row['user_id'],
@@ -606,6 +628,8 @@ class Competition_result_model extends MY_Model {
         }
         return false;
     }
+
+
     
     
     private function get_next_running($competition_id, $division_id, $type) {

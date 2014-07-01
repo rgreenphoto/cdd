@@ -3,7 +3,7 @@
 <ul class="nav nav-pills">
     <?php if(!empty($user)): ?>
     <li class="active"><a href="<?php echo base_url(); ?>admin/user/edit/<?php echo $user->id; ?>">Edit User</a></li>
-    
+    <li><a href="admin/user/family/">Edit Family</a></li>
     <?php if(!empty($user->canine)) foreach($user->canine as $row): ?>
     <li><a href="<?php echo base_url(); ?>admin/canine/edit/<?php echo $row->id; ?>">Edit <?php echo $row->name; ?></a></li>
     <?php endforeach; ?>
