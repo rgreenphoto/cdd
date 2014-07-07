@@ -22,6 +22,7 @@ class User extends Admin_Controller {
         $this->load->model('group_model');
         $this->data['user_list'] = $this->group_model->stats();
 
+
         $this->load->library('pagination');
         
         $config['base_url'] = base_url().'admin/user/index/'.$group_id;
@@ -83,7 +84,7 @@ class User extends Admin_Controller {
         $this->load->view('admin/layout', $this->data);
     }
     	//edit a user
-    public function edit($id) {
+    public function edit($group_id = '1', $id) {
 		
         $this->data['title'] = "Edit User";
         
@@ -144,7 +145,7 @@ class User extends Admin_Controller {
                 
                 
                 $this->session->set_flashdata('message', 'Record Saved');
-                redirect('admin/user/');
+                redirect('admin/user/index/'.$group_id);
             }
             
             
@@ -164,6 +165,22 @@ class User extends Admin_Controller {
         $this->data['main'] = 'admin/user/edit';
         $this->load->view('admin/layout', $this->data);
     }
+
+    public function delete($group_id = '1', $id) {
+        if(!empty($id)) {
+            if($this->user_model->delete($id)) {
+                $this->session->set_flashdata('message', 'Record Deleted');
+                redirect('admin/user/index/'.$group_id);
+            } else {
+                $this->session->set_flashdata('message', 'Could not delete record.');
+                redirect('admin/user/index/'.$group_id);
+            }
+        } else {
+            $this->session->set_flashdata('message', 'ID for this item is missing.');
+            redirect('admin/user_index/'.$group_id);
+        }
+    }
+
     
     public function import() {
         $this->data['main'] = 'admin/user/import';
@@ -175,16 +192,7 @@ class User extends Admin_Controller {
         echo json_encode($results);
     }
     
-    public function page_test() {
-        echo '<pre>';
-        print_r($_POST);
-        
-//$results = $this->user_model->quick_search($_GET['term']);
-        
-//        /echo $_GET['term'];
-        //echo json_encode($results);
-    }
-    
+
     public function fix_name() {
         $users = $this->user_model->get_all();
         if(!empty($users)) {

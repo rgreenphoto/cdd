@@ -73,6 +73,7 @@
                             <th data-hide="all">&nbsp;</th>
                             <th data-toggle="true">Division</th>
                             <th># Teams</th>
+                            <th>Fees</th>
                             <th>Score Sheets</th>
                         </tr>
                     </thead>
@@ -103,23 +104,17 @@
                             </td>
                             <td><?php echo $division->division; ?></td>
                             <td><?php echo $division->total; ?></td>
+                            <td>$<?php echo $division->total_fees; ?></td>
                             <td><a href="<?php echo base_url(); ?>admin/registration/generate_forms/<?php echo $competition->id; ?>/<?php echo $division->division_id; ?>"><img src="<?php echo base_url(); ?>assets/images/ms_word_2.png" height="25" width="25"></a></td>
                         </tr>
                         <?php endforeach; ?>       
                     </tbody>
                     <tfoot>
-                        <tr class="info">
+                        <tr>
                             <td>&nbsp;</td>
+                            <td><span class="label label-info pull-right"><h5>Registered: <?php echo $forms->total_reg; ?></h5></span></td>
+                            <td><span class="label label-success pull-right"><h5>Total Fees: $<?php echo $forms->grand_total; ?></h5></span></td>
                             <td>&nbsp;</td>
-                            <td><span class="pull-right"><strong>Registered:</strong></span></td>
-                            <td><span class="label label-info pull-right"><?php echo $forms->total_reg; ?></span></td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr class="success">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td><span class="pull-right"><strong>Total Fees:</strong></span></td>
-                            <td><span class="label label-success pull-right">$<?php echo $forms->grand_total; ?></span></td>
                             <td>&nbsp;</td>
                         </tr>
                     </tfoot>

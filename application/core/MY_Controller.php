@@ -202,7 +202,7 @@ class Admin_Controller extends Main_Controller {
         }
         
         $debug = $this->config->item('log_threshold');
-        
+        //$this->output->enable_profiler(TRUE);
         if($debug == 4) {
             //$this->output->enable_profiler(TRUE);
             //$this->email->print_debugger();

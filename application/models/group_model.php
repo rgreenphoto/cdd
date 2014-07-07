@@ -24,7 +24,7 @@ class Group_model extends MY_Model {
     
     public function stats() {
         $this->db->select('groups.id, groups.description, groups.name');
-        $this->db->select('(SELECT COUNT(user_id) FROM users_groups WHERE users_groups.group_id = groups.id) AS num_users');
+        $this->db->select('(SELECT COUNT(user_id) FROM users_groups JOIN users ON (users.id = users_groups.user_id AND users.deleted != 1) WHERE users_groups.group_id = groups.id AND users_groups.user_id != 1) AS num_users');
         $query = $this->db->get('groups');
         return $query->result();
     } 

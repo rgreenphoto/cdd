@@ -35,7 +35,8 @@
             <td><?php echo $row->first_name; ?></td>
             <td><?php echo $row->email; ?></td>
             <td>
-                <a href="<?php echo base_url(); ?>admin/user/edit/<?php echo $row->id; ?>" class="btn btn-cdd btn-sm">Edit <i class="icon-edit"></i></a>
+                <a href="<?php echo base_url(); ?>admin/user/edit/<?php echo $group_id; ?>/<?php echo $row->id; ?>" class="btn btn-cdd">Edit <i class="icon-edit"></i></a>
+                <a href="<?php echo base_url(); ?>admin/user/delete/<?php echo $group_id; ?>/<?php echo $row->id; ?>" class="btn btn-danger">Delete <i class="icon-remove-circle"></i></a>
             </td>
         </tr>
         <?php endforeach; ?>

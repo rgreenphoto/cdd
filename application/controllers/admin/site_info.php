@@ -12,7 +12,7 @@ class Site_info extends Admin_Controller {
     }
     
     
-    public function edit() {
+    public function index() {
         $this->data['title'] = 'Site Information';
         $id = $this->data['site_info']->id;
         
@@ -73,11 +73,11 @@ class Site_info extends Admin_Controller {
             );
             
             if($this->site_info_model->update($id, $options)) {
-                die('if');
+
                 $this->session->set_flashdata('message', 'Site information saved.');
                 redirect('admin/site_info/edit/'.$id);
             } else {
-                die('else');
+
             }
         }       
     }

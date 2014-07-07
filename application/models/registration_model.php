@@ -212,11 +212,16 @@ class Registration_model extends MY_Model {
                 $data->registrations[$i]->division_id = $division->id;
                 $options = array('competition_id' => $competition->id, 'division_id' => $division->id);
                 $registrations = $this->with('user')->with('canine')->get_many_by($options);
-                $data->registrations[$i]->total = count($registrations);
-                $data->registrations[$i]->teams = $registrations;
+                $total = 0;
                 foreach($registrations as $row) {
+                    $total += $row->fees;
                     $grand_total += $row->fees;
                 }
+                $data->registrations[$i]->total_fees = $total;
+                $data->registrations[$i]->total = count($registrations);
+                $data->registrations[$i]->teams = $registrations;
+
+
                 $total_reg += $data->registrations[$i]->total;
                 $i++;
             }

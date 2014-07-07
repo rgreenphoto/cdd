@@ -30,13 +30,14 @@
                             <li role="presentation" class="dropdown-header" role="menu">Site Content</li>
                             <li role="presentation"><a href="<?php echo base_url(); ?>admin/page">Content List</a></li>
                             <li role="presentation"><a href="<?php echo base_url(); ?>admin/show">Demo Schedule</a></li>
+                            <li role="presentation"><a href="<?php echo base_url(); ?>admin/link">Clubs & Organizations</a></li>
                             <li role="presentation" class="divider"></li>
                             <li role="presentation" class="dropdown-header">Notifications & Polls</li>
                             <li role="presentation"><a href="<?php echo base_url(); ?>admin/notification">Notifications</a></li>
                             <li role="presentation"><a href="<?php echo base_url(); ?>admin/poll">Polls</a></li>
                             <li role="presentation" class="divider"></li>
-                            <li role="presentation" class="dropdown-header">Links, Other Clubs etc</li>
-                            <li role="presentation"><a href="<?php echo base_url(); ?>admin/link">Links</a></li>
+                            <li role="presentation" class="dropdown-header">Site Options and Configuration</li>
+                            <li role="presentation"><a href="<?php echo base_url(); ?>admin/site_info/">Configuration</a></li>
                         </ul>
                     </li>
                     <li><a href="<?php echo base_url(); ?>admin/user"><i class="icon-group"></i> Users</a></li>

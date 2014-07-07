@@ -288,6 +288,7 @@ class User_model extends MY_Model {
         $this->db->join('users_groups', "users_groups.user_id = users.id AND users_groups.group_id = {$group_id}");
         $this->db->join('groups', "groups.id = users_groups.group_id");
         $this->db->where('users.id !=', '1');
+        $this->db->where('users.deleted', 0);
         $this->db->order_by('users.last_name');
         $this->db->limit($limit, $offset);
         $query = $this->db->get();
