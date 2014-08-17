@@ -48,13 +48,13 @@
 
 
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-md-5 col-sm-5">
                     <?php $date = date('Y-m-d H:i:s'); if(date('Y-m-d H:i:s',strtotime($event->registration_start)) <= $date && date('Y-m-d H:i:s', strtotime($event->registration_end)) >= $date): ?>
                         <?php if(empty($the_user) && $event->online_reg == '1'): ?>
-                            <a href="<?php echo base_url(); ?>auth/login" class="btn btn-warning pull-right">Log in to Register</a>
+                            <a href="<?php echo base_url(); ?>auth/login" class="btn btn-warning">Log in to Register</a>
                         <?php endif; ?>
                         <?php if(!empty($the_user) && $event->online_reg == '1'): ?>
-                            <a href="#" id="regWindow" class="reg-window btn btn-danger pull-right">Register Now <i class="fa fa-check fa"></i></a>
+                            <a href="#" id="regWindow" class="reg-window btn btn-danger">Register Now <i class="fa fa-check fa"></i></a>
                         <?php endif; ?>
                     <?php endif; ?>
                     <?php if($event->date == date('m/d/Y')): ?>
@@ -64,9 +64,11 @@
                         <?php $this->load->view('competition/elements/noreg'); ?>
                     <?php endif; ?>
                 </div>
-                <div class="col-lg-6">
+                <?php if($event->online_reg == '1'): ?>
+                <div class="col-lg-6 col-md-5 col-sm-5">
                     <a href="<?php echo base_url(); ?>competition/registered/<?php echo $event->slug; ?>" class="btn btn-info">View Registered Teams <i class="fa fa-users"></i></a>
                 </div>
+                <?php endif; ?>
             </div>
 
 
@@ -133,7 +135,6 @@
 <script>
     $(document).ready(function() {
         $('#parkMap').click(function(e) {
-            console.log('parkMap');
             $('#parkMapCanvas').gmap3({
                 action: 'init',
                 map: {
@@ -154,7 +155,7 @@
             $('#parkMapView').slideToggle();
         });
 
-        $('.reg-window').click(function(e) {
+        $('#regWindow').click(function(e) {
             e.preventDefault();
             $('#regForm').slideToggle();
         });

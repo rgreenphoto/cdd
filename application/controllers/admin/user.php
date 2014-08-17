@@ -84,7 +84,7 @@ class User extends Admin_Controller {
         $this->load->view('admin/layout', $this->data);
     }
     	//edit a user
-    public function edit($group_id = '1', $id) {
+    public function edit($group_id = 1, $id) {
 		
         $this->data['title'] = "Edit User";
         
@@ -160,7 +160,6 @@ class User extends Admin_Controller {
         if(isset($user->family_id)) {
             $this->data['family'] = $this->user_model->get_family($user);
         }
-
 
         $this->data['main'] = 'admin/user/edit';
         $this->load->view('admin/layout', $this->data);

@@ -246,8 +246,9 @@ class User_model extends MY_Model {
     
     public function quick_search($term) {
         $terms = explode(' ', $term);
-        $this->db->select('id, first_name, last_name');
+        $this->db->select('users.id, users.first_name, users.last_name, users_groups.group_id');
         $this->db->from('users USE INDEX(full_name) ');
+        $this->db->join('users_groups', "users_groups.user_id = users.id");
         $this->db->like('full_name', $term);
         $this->db->order_by('last_name');
         $query = $this->db->get();
@@ -278,6 +279,7 @@ class User_model extends MY_Model {
                if($this->canine_model->insert($canine_data)) {
                    $canine_id = $this->db->insert_id();
                }
+               return $this->get($id);
            }
     }
     

@@ -121,7 +121,8 @@ class Competition extends Admin_Controller {
         $this->data['main'] = 'admin/competition/import';
         $this->load->view('admin/layout', $this->data);
     }
-    
+
+
     
     public function manage($id) {
         //lets grab by registrations for a better set of joins

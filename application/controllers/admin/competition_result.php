@@ -205,13 +205,8 @@ class Competition_result extends Admin_Controller {
         } else {
             $type = 'tc_order';
         }
- 
-        if(!empty($division_id)) {
-            $this->data['teams'] = $this->competition_result_model->get_teams($competition_id, $division_id);
-        } else {
-            $this->session->set_flashdata('message', 'No division selected');
-            redirect('admin/competition_result/gameday/'.$competition_id);
-        }
+        $this->data['teams'] = $this->competition_result_model->get_teams($competition_id, $division_id);
+
         $this->data['division_id'] = $division_id;
         $this->data['main'] = 'admin/competition_result/running';
         $this->load->view('admin/layout', $this->data);
@@ -343,7 +338,161 @@ class Competition_result extends Admin_Controller {
 
 
 
-   private function _set_fields($existing) {
+    public function import($competition_id) {
+        $this->data['form_open'] = 'admin/competition_result/import/'.$competition_id;
+        $this->data['competition_id'] = $competition_id;
+        $this->data['main'] = 'admin/competition_result/import';
+        $this->load->view('admin/layout', $this->data);
+    }
+
+
+    public function import_file() {
+        $this->load->model('competition_type_model');
+        $competition_id = $_POST['competition_id'];
+        $file_name = $_POST['file_name'];
+
+        $competition = $this->competition_model->get($competition_id);
+
+        $competition_type = $this->competition_type_model->with('division')->get($competition->competition_type_id);
+        //$divisions = $this->divison_model->get_many_by(array('competition_type_id' => $competition->competition_type_id));
+
+        $this->load->library('excel');
+        $file = FCPATH.'/uploads/competition_result/'.$file_name;
+        $file_type = PHPExcel_IOFactory::identify($file);
+        $filterSubset = new MyReadFilter();
+        $this->reader = PHPExcel_IOFactory::createReader($file_type);
+        $this->reader->setReadFilter($filterSubset);
+        $this->excel = $this->reader->load($file);
+        $sheetData = $this->excel->getActiveSheet()->toArray(null,true,true,true);
+
+        $map = $this->_map_import();
+        $d_map = $this->_map_division($competition_type->division);
+        $this->load->model(array('user_model', 'canine_model'));
+        if(!empty($sheetData)) {
+            //loop through each record and prep insert
+            foreach($sheetData as $row) {
+                if(!empty($row[$map['name']])) {
+                    //run a couple of checks to see if we already have this user in the system.
+                    $name_array = explode(' ', $row[$map['name']]);
+                    $first_name = $name_array[0];
+                    $last_name = $name_array[1];
+                    if(isset($name_array[2])) {
+                        $last_name = $name_array[2];
+                    }
+
+                    $user = $this->user_model->get_by(array('first_name' => $first_name, 'last_name' => $last_name));
+                    if(!empty($user)) {
+                        echo '<pre>';
+                        echo $row[$map['name']].'<br />';
+                        //echo '<pre>';
+                        //print_r($user);
+                    } else {
+                        $options = array('first_name' => $name_array[0], 'last_name' => $name_array[1], 'canine' => $row[$map['canine']]);
+                        echo '<pre>';
+                        print_r($options);
+                        //die('no user');
+                    }
+
+                }
+
+            }
+
+        }
+
+
+        echo '<pre>';
+        print_r($map);
+        die();
+    }
+
+
+    public function do_upload() {
+
+        $config['upload_path'] = './uploads/competition_result/';
+        $config['allowed_types'] = 'xls';
+        $config['max_size'] = '60000';
+        $config['file_name'] = $_FILES['file']['name'];
+
+        $this->upload->initialize($config);
+
+
+        if(!$this->upload->do_upload('file')) {
+            log_message('error', $this->upload->display_errors());
+
+        } else {
+            $this->load->library('excel');
+            $file_data = $this->upload->data();
+            $file = FCPATH.'/uploads/competition_result/'.$file_data['file_name'];
+            $array = array('file' => $file);
+            header('Content-type: application/json');
+            echo json_encode($array);
+        }
+
+    }
+
+    private function _map_division($divisions) {
+        //$division_maps = array();
+        foreach($divisions as $division) {
+            $division_maps[$division->import_code] = $division->id;
+        }
+        return $division_maps;
+    }
+
+    private  function _map_import() {
+        $map = array(
+            'division' => 'A',
+            'name' => 'B',
+            'canine' => 'C',
+            'cr_1' => 'D',
+            'fs_1_1' => 'E',
+            'fs_2_1' => 'F',
+            'fs_3_1' => 'G',
+            'fs_4_1' => 'H',
+            'deduct_1' => 'I',
+            'fs_total_1' => 'J',
+            'cr_2' => 'K',
+            'fs_1_2' => 'L',
+            'fs_2_2' => 'M',
+            'fs_3_2' => 'N',
+            'fs_4_2' => 'O',
+            'deduct_2' => 'P',
+            'fs_total_2' => 'Q',
+            't1_1' => 'R',
+            't1_2' => 'S',
+            't1_3' => 'T',
+            't1_4' => 'U',
+            't1_5' => 'V',
+            't1_6' => 'W',
+            't1_7' => 'X',
+            't1_8' => 'Y',
+            't1_9' => 'Z',
+            't1_10' => 'AA',
+            'tc_total_1' => 'AB',
+            't2_1' => 'AC',
+            't2_2' => 'AD',
+            't2_3' => 'AE',
+            't2_4' => 'AF',
+            't2_5' => 'AG',
+            't2_6' => 'AH',
+            't2_7' => 'AI',
+            't2_8' => 'AJ',
+            't2_9' => 'AK',
+            't2_10' => 'AL',
+            'tc_total_2' => 'AM',
+            'fs_total' => 'BQ',
+            'tc_total' => 'BR',
+            'total' => 'BU'
+
+
+
+        );
+        return $map;
+    }
+
+
+
+
+    private function _set_fields($existing) {
         $item = $existing;
         $tc_scores_1 = explode(',', $existing->tc_cat_1);
 
@@ -369,5 +518,21 @@ class Competition_result extends Admin_Controller {
        return false;
    }
        
+}
+
+
+
+include APPPATH.'/third_party/PHPExcel/IOFactory.php';
+class MyReadFilter implements PHPExcel_Reader_IReadFilter
+{
+    public function readCell($column, $row, $worksheetName = '') {
+        // Read rows 1 to 7 and columns A to E only
+        if ($row >= 2) {
+            if (in_array($column,range('A','0'))) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 ?>

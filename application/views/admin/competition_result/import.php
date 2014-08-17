@@ -1,7 +1,14 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/plupload/js/plupload.full.js"></script>
 <h1>Upload Results in Excel format</h1>
 <button id="open-uploader" class="btn btn-primary">Browse to Excel File (xlsx)  <i class="icon-table"></i></button>
-<div id="output-panel"></div>
+<div id="output-panel" style="display:none;">
+    <h3 id="message"></h3>
+    <form name="import_result" action="/admin/competition_result/import_file/" method="POST">
+        <input type="hidden" name="competition_id" id="competition_id" value="<?php echo $competition_id; ?>" />
+        <input type="text" name="file_name" id="file_name" />
+        <button type="submit" name="submit" class="btn btn-primary">Import File</button>
+    </form>
+</div>
 
    
 
@@ -19,7 +26,7 @@
         max_file_size : '10mb',
         url : "<?php echo base_url(); ?>admin/competition_result/do_upload/",
         filters : [
-            {title : "Excel Files (.xlsx)", extensions : "xlsx"}
+            {title : "Excel Files (.xls)", extensions : "xls"}
         ]
       });
       
@@ -71,7 +78,13 @@ uploader.init();
 	});
 
 	uploader.bind('FileUploaded', function(up, file) {
-            $('#output-panel').html('<h3>Success</h3>');
+        $('#message').html('Success');
+        $('#output-panel').show();
+        $('#file_name').val(file.name);
+
+            //$('#output-panel').html('<h3>Success</h3><form name="import_results" action="/admin/competition_results" method="POST"');
+            //file_name = $.parseJSON(file);
+            console.log(file.name);
 //            $.ajax({
 //                url: '<?php echo base_url(); ?>user/get_image/<?php //echo $user->id; ?>',
 //                success: function(data){
