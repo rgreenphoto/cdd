@@ -129,7 +129,8 @@ class Competition_result_model extends MY_Model {
     public $belongs_to = array('user', 'canine', 'division', 'registration', 'competition');
     
     public $after_get = array('names');
-    
+
+
     public function competition_fee($row) {
         if(is_object($row)) {
             $this->load->model('competition_fee_model');

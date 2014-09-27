@@ -10,3 +10,6 @@
     <?php echo $this->load->view('admin/dashboard/widgets/reg_summary'); ?>
     <?php echo $this->load->view('admin/dashboard/widgets/poll_summary'); ?>
 </div>
+<div class="row">
+    <?php echo $this->load->view('admin/dashboard/widgets/notification_summary'); ?>
+</div>

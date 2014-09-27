@@ -30,6 +30,10 @@ class Dashboard extends Admin_Controller {
         $this->load->model(array('poll_model', 'poll_response_model'));
         $poll = $this->poll_model->get_stats(3);
         $this->data['polls'] = $this->poll_model->get_stats(3); //$this->poll_response_model->calculate($poll[0]->id);
+
+        $this->load->model('notification_model');
+        $this->data['notification_stats'] = $this->notification_model->getStats();
+
         //load up some basic stats
         $this->data['main'] = 'admin/dashboard/index';
         $this->load->view('admin/layout', $this->data); 

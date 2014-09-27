@@ -21,7 +21,8 @@ class Standing extends Public_Controller {
             $type = 'Cup';
         }
         $options = array('season' => $season, 'type' => $type);
-        $standings = $this->standing_model->with('user')->with('canine')->order_by('place', 'ASC')->get_many_by($options);        
+        $standings = $this->standing_model->with('user')->with('canine')->order_by('place', 'ASC')->get_many_by($options);
+
         
         switch($type) {
             case 'Cup':

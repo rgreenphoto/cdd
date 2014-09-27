@@ -530,7 +530,10 @@ class MY_Model extends CI_Model
                 }
                 else
                 {
-                    $row[$relationship] = $this->{$options['model']}->get_many_by($options['primary_key'], $row[$this->primary_key]);
+                    if(!empty($row)) {
+                        $row[$relationship] = $this->{$options['model']}->get_many_by($options['primary_key'], $row[$this->primary_key]);
+                    }
+
                 }
             }
         }

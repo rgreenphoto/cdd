@@ -350,11 +350,11 @@ class Competition_result extends Admin_Controller {
         $this->load->model('competition_type_model');
         $competition_id = $_POST['competition_id'];
         $file_name = $_POST['file_name'];
+        $test_import = $_POST['test_import'];
 
         $competition = $this->competition_model->get($competition_id);
 
         $competition_type = $this->competition_type_model->with('division')->get($competition->competition_type_id);
-        //$divisions = $this->divison_model->get_many_by(array('competition_type_id' => $competition->competition_type_id));
 
         $this->load->library('excel');
         $file = FCPATH.'/uploads/competition_result/'.$file_name;
@@ -365,44 +365,36 @@ class Competition_result extends Admin_Controller {
         $this->excel = $this->reader->load($file);
         $sheetData = $this->excel->getActiveSheet()->toArray(null,true,true,true);
 
+
+
         $map = $this->_map_import();
-        $d_map = $this->_map_division($competition_type->division);
+        $division_map = $this->_map_division($competition_type->division);
         $this->load->model(array('user_model', 'canine_model'));
+        $html = '';
         if(!empty($sheetData)) {
-            //loop through each record and prep insert
-            foreach($sheetData as $row) {
-                if(!empty($row[$map['name']])) {
-                    //run a couple of checks to see if we already have this user in the system.
-                    $name_array = explode(' ', $row[$map['name']]);
-                    $first_name = $name_array[0];
-                    $last_name = $name_array[1];
-                    if(isset($name_array[2])) {
-                        $last_name = $name_array[2];
+            //do normal import
+            if($test_import == 0) {
+                try {
+                    $html .= $this->_process_import($sheetData, $map, $division_map, $competition_id);
+                    //now process placement, club placement and cup point for each division
+                    foreach($division_map as $k=>$v) {
+                        $this->competition_result_model->calculate_overall_placement($competition_id, $v);
+                        $this->competition_result_model->calculate_club_placement($competition_id, $v);
+                        $this->competition_result_model->calculate_cup_points($competition_id, $v);
                     }
-
-                    $user = $this->user_model->get_by(array('first_name' => $first_name, 'last_name' => $last_name));
-                    if(!empty($user)) {
-                        echo '<pre>';
-                        echo $row[$map['name']].'<br />';
-                        //echo '<pre>';
-                        //print_r($user);
-                    } else {
-                        $options = array('first_name' => $name_array[0], 'last_name' => $name_array[1], 'canine' => $row[$map['canine']]);
-                        echo '<pre>';
-                        print_r($options);
-                        //die('no user');
-                    }
-
+                } catch(Exception $e) {
+                    echo '<pre>';
+                    print_r($e);
+                    die('We died a terrible death');
                 }
-
+            } else {
+                //test import
+                $html .= $this->_test_import($sheetData, $map, $division_map);
             }
 
         }
+        echo json_encode(array('html' => $html));
 
-
-        echo '<pre>';
-        print_r($map);
-        die();
     }
 
 
@@ -430,6 +422,201 @@ class Competition_result extends Admin_Controller {
 
     }
 
+    private function _process_import($data, $map, $division_map, $competition_id) {
+        $this->load->model('competition_model');
+        $competition = $this->competition_model->get($competition_id);
+        $competition_type_id = $competition->competition_type_id;
+        $this->load->model('division_model');
+        $dual_tc_division = $this->division_model->get_by(array('competition_type_id' => $competition_type_id, 'dual' => 1, 'freestyle' => 0));
+        $dual_tc_division_id = $dual_tc_division->id;
+        $html = '';
+
+        foreach($data as $row) {
+            if(!empty($row[$map['name']])) {
+                $tc_data = $this->_process_tc($row, $map);
+                $user = $this->_process_user($row[$map['name']]);
+                $existing_canines = !empty($user->canine)?$user->canine:array();
+                $canine = $this->_process_canine($user->id,$row[$map['canine']], $existing_canines);
+                $division_id = $division_map[$row[$map['division']]];
+
+                $result_row = array(
+                    'competition_id' => $competition_id,
+                    'division_id' => $division_id,
+                    'user_id' => $user->id,
+                    'canine_id' => $canine->id,
+                    'fs_1_1' => $row[$map['fs_1_1']],
+                    'fs_2_1' => $row[$map['fs_2_1']],
+                    'fs_3_1' => $row[$map['fs_3_1']],
+                    'fs_4_1' => $row[$map['fs_4_1']],
+                    'cr_1' => $row[$map['cr_1']],
+                    'deduct_1' => $row[$map['deduct_1']],
+                    'fs_total_1' => $row[$map['fs_total_1']],
+                    'tc_cat_1' => $tc_data['tc_cat_1'],
+                    'tc_total_1' => $tc_data['tc_total_1'],
+                    'fs_1_2' => $row[$map['fs_1_2']],
+                    'fs_2_2' => $row[$map['fs_2_2']],
+                    'fs_3_2' => $row[$map['fs_3_2']],
+                    'fs_4_2' => $row[$map['fs_4_2']],
+                    'cr_2' => $row[$map['cr_2']],
+                    'deduct_2' => $row[$map['deduct_2']],
+                    'fs_total_2' => $row[$map['fs_total_2']],
+                    'tc_cat_2' => $tc_data['tc_cat_2'],
+                    'tc_total_2' => $tc_data['tc_total_2'],
+                    'tc_total' => $row[$map['tc_total']],
+                    'fs_total' => $row[$map['fs_total']],
+                    'total' => $row[$map['total']]
+                );
+                if(!empty($result_row)) {
+                    try {
+                        $competition_result = $this->competition_result_model->insert($result_row);
+                        $html .= '<div class="alert alert-info">We added results for '.$user->full_name.' & '.$canine->name.' ('.$canine->id.') ';
+                        if($row[$map['division']]  == 'Open') {
+                            $result_row = array(
+                                'competition_id' => $competition_id,
+                                'division_id' => $dual_tc_division_id,
+                                'user_id' => $user->id,
+                                'canine_id' => $canine->id,
+                                'tc_cat_1' => $tc_data['tc_cat_1'],
+                                'tc_total_1' => $tc_data['tc_total_1'],
+                                'tc_cat_2' => $tc_data['tc_cat_2'],
+                                'tc_total_2' => $tc_data['tc_total_2'],
+                                'tc_total' => $row[$map['tc_total']],
+                                'total' => $row[$map['total']]
+                            );
+                            $competition_result = $this->competition_result_model->insert($result_row);
+                            $html .= ' Added to OTC as well. ';
+                        }
+                        $html .= '</div>';
+                    } catch(Exception $e) {
+                        $html .= '<div class="alert alert-danger">An excpetion has occured with '.$user->full_name.' & '.$canine->name.'</div>';
+                    }
+                }
+
+            }
+        }
+        return $html;
+    }
+
+
+    private function _process_user($user) {
+        $name_array = explode(' ', $user);
+        $first_name = $name_array[0];
+        $last_name = isset($name_array[2])?$name_array[2]:$name_array[1];
+        $user = $this->user_model->with('canine')->get_by(array('first_name' => $first_name, 'last_name' => $last_name));
+        if(empty($user)) {
+            $user_data = array('first_name' => $first_name, 'last_name' => $last_name);
+            $user_id = $this->user_model->insert($user_data);
+            $user = $this->user_model->with('canine')->get($user_id);
+        }
+        return $user;
+    }
+
+    private function _process_canine($user_id, $canine_name, $existing_canines = array()) {
+        $canine = array();
+        if(!empty($existing_canines)) {
+            $found = false;
+            foreach($existing_canines as $row) {
+                if($row->name == $canine_name) {
+                    $existing_canine = $row;
+                    $found = true;
+                }
+            }
+            if($found !== false) {
+                $canine = $existing_canine;
+            } else {
+                $dog_data = array('user_id' => $user_id, 'name' => $canine_name);
+                $canine_id = $this->canine_model->insert($dog_data);
+                $canine = $this->canine_model->get($canine_id);
+            }
+        } else {
+            $dog_data = array('user_id' => $user_id, 'name' => $canine_name);
+            $canine_id = $this->canine_model->insert($dog_data);
+            $canine = $this->canine_model->get($canine_id);
+        }
+
+        return $canine;
+
+    }
+
+    private function _process_tc($data, $map) {
+        $result['tc_cat_1'] = '';
+        $result['tc_total_1'] = $data[$map['tc_total_1']];
+        $result['tc_cat_2'] = '';
+        $result['tc_total_2'] = $data[$map['tc_total_2']];
+
+
+        for($i=1; $i<=10; $i++) {
+            if(!empty($data[$map['t1_'.$i]])) {
+                $result['tc_cat_1'] .= $data[$map['t1_'.$i]].',';
+            }
+            if(!empty($data[$map['t2_'.$i]])) {
+                $result['tc_cat_2'] .= $data[$map['t2_'.$i]].',';
+            }
+        }
+
+        $result['tc_cat_1'] = rtrim($result['tc_cat_1'], ',');
+        $result['tc_cat_2'] = rtrim($result['tc_cat_2'], ',');
+        return $result;
+    }
+
+    //this function simply tests the import row and creates an HTML stream for viewing results, it sucks and I know it.
+    private function _test_import($data, $map, $division_map) {
+        $html = '';
+        //loop through each record and test for insert
+        foreach($data as $row) {
+
+            if(!empty($row[$map['name']])) {
+                $html .= '<div class="well">';
+                $html .= '<h3>Testing: '.$row[$map['name']].' & '.$row[$map['canine']].' for division '.$division_map[$row[$map['division']]].' </h3>';
+                if($row[$map['division']] == 'Open') {
+                    $html .= '<h4>We also need to add an OTC record</h4>';
+                }
+                //run a couple of checks to see if we already have this user in the system.
+                $name_array = explode(' ', $row[$map['name']]);
+                $first_name = $name_array[0];
+                $last_name = $name_array[1];
+                if(isset($name_array[2])) {
+                    $last_name = $name_array[2];
+                }
+
+                $user = $this->user_model->with('canine')->get_by(array('first_name' => $first_name, 'last_name' => $last_name));
+                if(!empty($user)) {
+                    $html .= '<h4>We found user '.$user->first_name.'</h4>';
+                    if(!empty($user->canine)) {
+                        $found = false;
+                        $ul = '';
+                        foreach($user->canine as $canine) {
+                            if($row[$map['canine']] == $canine->name) {
+                                $existing_canine = $canine;
+                                $found = true;
+                            } else {
+                                $ul .= '<li>'.$canine->name.'</li>';
+                            }
+                        }
+                        if($found !== false) {
+                            $html .= '<h5>We found canine '.$existing_canine->name.'</h5>';
+                        } else {
+                            $html .= '<div class="alert alert-danger" role="alert">';
+                            $html .= '<p>We could not find this canine '.$row[$map['canine']].'. </p><p>Please review the list of canines for this user and see if there is a slight variant in names. If so, update the spreadsheet being uploaded to reflect the name in our system.';
+                            $html .= '<ul>'.$ul.'</ul>';
+                            $html .= '</div>';
+                        }
+                    }
+
+                } else {
+                    $html .= '<div class="alert alert-danger" role="alert">';
+                    $options = array('first_name' => $name_array[0], 'last_name' => $name_array[1], 'canine' => $row[$map['canine']]);
+                    $html .= '<p>We need to add '.$row[$map['name']].' and '.$row[$map['canine']].'</p>';
+                    $html .= '</div>';
+                }
+                $html .= '</div>';
+            }
+        }
+
+        return $html;
+
+    }
+
     private function _map_division($divisions) {
         //$division_maps = array();
         foreach($divisions as $division) {
@@ -437,6 +624,7 @@ class Competition_result extends Admin_Controller {
         }
         return $division_maps;
     }
+
 
     private  function _map_import() {
         $map = array(
@@ -482,9 +670,6 @@ class Competition_result extends Admin_Controller {
             'fs_total' => 'BQ',
             'tc_total' => 'BR',
             'total' => 'BU'
-
-
-
         );
         return $map;
     }

@@ -3,11 +3,18 @@
 <button id="open-uploader" class="btn btn-primary">Browse to Excel File (xlsx)  <i class="icon-table"></i></button>
 <div id="output-panel" style="display:none;">
     <h3 id="message"></h3>
-    <form name="import_result" action="/admin/competition_result/import_file/" method="POST">
+    <form id="import_results" name="import_result" action="/admin/competition_result/import_file/" method="POST">
         <input type="hidden" name="competition_id" id="competition_id" value="<?php echo $competition_id; ?>" />
+        <input type="hidden" name="test_import" id="test_import" value="0" />
         <input type="text" name="file_name" id="file_name" />
-        <button type="submit" name="submit" class="btn btn-primary">Import File</button>
+        <button type="submit" data="1" name="submit" class="import_results btn btn-primary">Test Import</button>
+        <button type="submit" data="0" name="submit" class="import_results btn btn-danger">Process Import</button>
     </form>
+</div>
+<div class="row">
+    <div class="col-lg-10">
+        <div id="test_results"></div>
+    </div>
 </div>
 
    
@@ -15,10 +22,25 @@
 
 
     <script type="text/javascript">
-      // Custom example logic
-//      function $(id) {
-//        return document.getElementById(id);
-//      }
+
+      $(document).ready(function() {
+         $('.import_results').click(function(e) {
+             e.preventDefault();
+             var test_import = $(this).attr('data');
+             $('#test_import').val(test_import);
+             var form = $('#import_results');
+             $.ajax({
+                 type: "POST",
+                 url: '<?php echo base_url(); ?>admin/competition_result/import_file/',
+                 data: form.serializeArray(),
+                 success: function(data) {
+                     var result = $.parseJSON(data);
+                     $('#test_results').html(result.html);
+                 },
+                 error: function(){alert('error');}
+             });
+         });
+      });
     
       var uploader = new plupload.Uploader({
         runtimes : 'html5,html4',
@@ -81,16 +103,6 @@ uploader.init();
         $('#message').html('Success');
         $('#output-panel').show();
         $('#file_name').val(file.name);
-
-            //$('#output-panel').html('<h3>Success</h3><form name="import_results" action="/admin/competition_results" method="POST"');
-            //file_name = $.parseJSON(file);
-            console.log(file.name);
-//            $.ajax({
-//                url: '<?php echo base_url(); ?>user/get_image/<?php //echo $user->id; ?>',
-//                success: function(data){
-//                    console.log(data);
-//                }
-//            });
 	});      
       
     </script>

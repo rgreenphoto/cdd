@@ -49,17 +49,15 @@ class Notification_model extends MY_Model {
     
     
     public function getStats() {
-        $this->load->model(array('message_category_model', 'message_status_model'));
-        $categories = $this->message_category_model->get_all();
-        $return = array();
-        if(!empty($categories)) {
-            foreach($categories as $category) {
-                $options = array('message_category_id' => $category->id);
-                $count = $this->count_by($options);
-                $array['count'] = $count;
-                $array['category'] = $category->name;
-                $array['message_category_id'] = $category->id;
-                $return[] = $array;
+        //get total number of subscriptions and users
+        $this->load->model('user_model');
+        $users = $this->user_model->get_many_by(array('email_notifications' => 1));
+        $return['count'] = count($users);
+        if(!empty($users)) {
+            foreach($users as $user) {
+                $array['full_name'] = $user->full_name;
+                $array['email'] = $user->email;
+                $return['users'][] = $array;
             }
         }
         return $return;

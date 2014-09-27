@@ -96,14 +96,21 @@ class Standing_model extends MY_Model {
             }
             $row->lowest_competition = '';
             if(!empty($row->lowest)) {
+                //check explode
+                $temp_array = explode(',', $row->lowest);
                 $this->db->select('name');
-                $this->db->where('id', $row->lowest);
+                $this->db->where_in('id', $temp_array);
                 $query = $this->db->get('competition');
                 $competition = $query->result();
                 if(!empty($competition)) {
-                    $row->lowest_competition = $competition[0]->name;
+                    $lowest_competition = '';
+                    foreach($competition as $c) {
+                        $lowest_competition .= $c->name.' | ';
+                    }
+                    $row->lowest_competition = rtrim($lowest_competition, ' | ');
                 }
             }
+
         }
         return $row;
     }
@@ -165,12 +172,22 @@ class Standing_model extends MY_Model {
                             }
                         }
                         if($total != 0) {
+
+
                             $lowest_competition = '';
-                            if($comp_count >= 7) {
+                            if($comp_count == 7) {
                                 $total -= min($cup_points_array);
                                 $lowest_key = array_search(min($cup_points_array), $cup_points_array);
                                 $lowest_competition = $competition_array[$lowest_key];
-                            }                
+                            } elseif($comp_count == 8) {
+                                $total -= min($cup_points_array);
+                                $lowest_key = array_search(min($cup_points_array), $cup_points_array);
+                                $lowest_competition = $competition_array[$lowest_key];
+                                unset($cup_points_array[$lowest_key]);
+                                $total -= min($cup_points_array);
+                                $lowest_key = array_search(min($cup_points_array), $cup_points_array);
+                                $lowest_competition .= ','.$competition_array[$lowest_key];
+                            }
                             //create an array to pass to the _set_place function
                             //always make sure to the total is listed first to property sort array
                             $final_array[] = array(
