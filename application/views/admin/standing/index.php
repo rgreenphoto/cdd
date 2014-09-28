@@ -7,9 +7,6 @@
         <button id="Cup" class="btn btn-warning popup"><i class="icon-refresh"></i> Calculate Cup Standings</button>
         <button id="RRR" class="btn btn-success popup"><i class="icon-refresh"></i> Calculate Red Rocket Standings</button>
         <button id="Hershey" class="btn btn-primary popup"><i class="icon-refresh"></i> Calculate Hershey Standings</button>
-<!--        <a href="<?php echo base_url(); ?>admin/standing/standings/Cup" class="btn btn-warning popup" id="Cup"><i class="icon-refresh"></i> Calculate Cup Standings</a>
-        <a href="<?php echo base_url(); ?>admin/standing/standings/RRR" class="btn btn-success popup" id="RRR"><i class="icon-refresh"></i> Calculate Red Rocket Standings</a>
-        <a href="<?php echo base_url(); ?>admin/standing/standings/Hershey" class="btn btn-primary popup" id="Hershey"><i class="icon-refresh"></i> Calculate Hershey Standings</a>-->
     </div>
     <p class="text-warning">Please note that you do not need to calculate Rookie of the Year. It's based on cup standings and is generated with cup calculation</p>
 </div>
@@ -31,10 +28,54 @@
             <?php endforeach; ?>
         </ul>
         <div class="tab-content">
-            <br />
-            <?php 
-                echo $this->table->generate($standings); 
-            ?>          
+            <table class="table table-hover table-striped table-bordered footable" id="standingtable" data-page-size="300" data-filter="#filter">
+                <caption><input id="filter" type="text" class="form-control" placeholder="Search"></caption>
+            <?php if($type == 'Cup' || $type == 'Rookie'): ?>
+                <thead>
+                    <tr>
+                        <th data-type="numeric">Place</th>
+                        <th>Handler</th>
+                        <th>Dog</th>
+                        <th data-type="numeric">Points</th>
+                        <th data-type="numeric">Comps</th>
+                        <th data-sort-ignore="true">Drop</th>
+                    </tr>
+                </thead>
+            <?php endif; ?>
+            <?php if($type != 'Cup' && $type != 'Rookie'): ?>
+                <thead>
+                    <tr>
+                        <th data-type="numeric">Place</th>
+                        <th>Handler</th>
+                        <th>Dog</th>
+                        <th>Skyhoundz</th>
+                        <th>UFO</th>
+                        <th>Total</th>
+                        <th>Award Points</th>
+                    </tr>
+                </thead>
+            <?php endif; ?>
+                <tbody>
+                <?php if(!empty($standings)) foreach($standings as $standing): ?>
+                    <tr>
+                        <td><?php echo $standing['place']; ?></td>
+                        <td><?php echo $standing['handler']; ?></td>
+                        <td><?php echo $standing['dog']; ?></td>
+                        <?php if($type == 'Cup' || $type == 'Roockie'): ?>
+                        <td><?php echo $standing['total']; ?></td>
+                        <td><?php echo $standing['comps']; ?></td>
+                        <td><?php echo $standing['drop'];?></td>
+                        <?php endif; ?>
+                        <?php if($type != 'Cup' && $type != 'Rookie'): ?>
+                        <td><?php echo $standing['sky']; ?></td>
+                        <td><?php echo $standing['ufo']; ?></td>
+                        <td><?php echo $standing['total']; ?></td>
+                        <td><?php echo $standing['award']; ?></td>
+                        <?php endif; ?>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>  
     </div>
 </div>

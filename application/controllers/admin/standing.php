@@ -77,12 +77,7 @@ class Standing extends Admin_Controller {
                 }
                 break;       
         }
-        
-        // Set the headings
-        $this->table->set_heading($header);
-        $this->table->set_caption('<input id="filter" type="text" class="form-control" placeholder="Search">');
-        $tmpl = array ( 'table_open'  => '<table class="table table-striped footable" id="standingtable" data-page-size="300" data-filter="#filter">' );
-        $this->table->set_template($tmpl);
+
         $year = date('Y');
         $seasons = array();
         for($i=$year; $i>=2012; $i--) {

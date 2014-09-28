@@ -44,17 +44,28 @@ class Notification extends Admin_Controller {
         //grab all users based on group if set to 0, send to both members, general users and provisional members
         if($group_id != 0) {
             $users = $this->group_model->get_members($group_id);
+        } else {
+            $this->load->model('user_model');
+            $users = $this->user_model->get_all();
+        }
+        if(!empty($users)) {
             foreach($users as $user) {
                 $n_options = array(
                     'notification_id' => $notification_id,
                     'user_id' => $user->id,
                     'date_sent' => date('Y-m-d H:i:s'));
-                $this->user_inbox_model->insert($n_options);
+
+                try {
+                    $this->user_inbox_model->insert($n_options);
+                } catch(Exception $e) {
+
+                }
+
                 if($user->email_notifications == 1 && base_url() != 'http://cdd/' && base_url() != 'http://qa.coloradodiscdogs.com/') {
                     $this->_send_email($notification_id, $user->id, $user->email);
                 }
             }            
-        }        
+        }
     }
     
     public function test_email() {

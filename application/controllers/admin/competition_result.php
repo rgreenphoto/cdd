@@ -481,7 +481,7 @@ class Competition_result extends Admin_Controller {
                                 'tc_cat_2' => $tc_data['tc_cat_2'],
                                 'tc_total_2' => $tc_data['tc_total_2'],
                                 'tc_total' => $row[$map['tc_total']],
-                                'total' => $row[$map['total']]
+                                'total' => $tc_data['tc_total']
                             );
                             $competition_result = $this->competition_result_model->insert($result_row);
                             $html .= ' Added to OTC as well. ';
@@ -543,6 +543,7 @@ class Competition_result extends Admin_Controller {
         $result['tc_total_1'] = $data[$map['tc_total_1']];
         $result['tc_cat_2'] = '';
         $result['tc_total_2'] = $data[$map['tc_total_2']];
+        $result['tc_total'] = $data[$map['tc_total']];
 
 
         for($i=1; $i<=10; $i++) {
