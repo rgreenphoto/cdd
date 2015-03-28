@@ -251,6 +251,7 @@ class User_model extends MY_Model {
         $this->db->join('users_groups', "users_groups.user_id = users.id");
         $this->db->like('full_name', $term);
         $this->db->order_by('last_name');
+        $this->db->group_by('users.id');
         $query = $this->db->get();
         $result = $query->result();
         if(!empty($result)) {
