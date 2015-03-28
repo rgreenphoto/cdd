@@ -118,7 +118,7 @@ class User extends Member_Controller {
                 $this->session->set_flashdata('message', 'Record Saved');
                 redirect('user/member');
             }       
-        }       
+        }
         $this->css = array(base_url().'/assets/css/FooTable-2/css/footable.core.min.css');
         $this->js = array(base_url().'assets/js/plupload/js/plupload.full.js', base_url().'assets/js/FooTable-2/dist/footable.min.js',base_url().'assets/js/FooTable-2/dist/footable.filter.min.js', base_url().'assets/js/FooTable-2/dist/footable.sort.min.js', base_url().'assets/js/FooTable-2/dist/footable.paginate.min.js');              
         $this->data['main'] = 'user/member';

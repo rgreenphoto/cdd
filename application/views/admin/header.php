@@ -10,6 +10,7 @@
         </div>
         <div class="navbar-collapse collapse navbar-ex3-collapse header-menu">
             <?php if(!empty($the_user)): ?>
+
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a class="dropdown-toggle navbar-link" href="#" data-toggle="dropdown"><i class="icon-calendar"></i> Competitions</a>
@@ -47,7 +48,7 @@
                         <a href="#" class="dropdown-toggle navbar-link" data-toggle="dropdown"><?php echo $the_user->username; ?> <i class="icon-cog icon-white"></i></a>
                         <ul id="admin-menu" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                             <li><a href="<?php echo base_url(); ?>">View Site</a></li>
-                            <li><a href="<?php echo base_url(); ?>admin/user/edit/<?php echo $the_user->id; ?>">Edit Profile</a></li>
+                            <li><a href="<?php echo base_url(); ?>admin/user/edit/<?php echo $the_user->groups[0]->group_id; ?>/<?php echo $the_user->id; ?>">Edit Profile</a></li>
                             <li><a href="<?php echo base_url(); ?>admin/auth/logout">Logout</a></li>
                         </ul>
                     </li>

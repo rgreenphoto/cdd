@@ -4,7 +4,7 @@
         <title><?php if(!empty($site_info)) echo $site_info->site_title; ?> - <?php echo $title; ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Colorado Disc Dogs - Frisbee Dog Club in Colorado. Please join us for fun in sun playing disc with your canine hero.">
-	<meta name="keywords" content="frisbee,dog,dogs,frisbee dog,frisbee dogs,disc,disc dog,disc dogs,colorado,colorado frisbee dogs,frisbee dogs show,frisbee dog show,frisbee dog entertainment,frisbee dogs entertainment,frisbee dogs halftime,frisbee halftime shows,frisbee dog demo,frisbee dog demos,frisbee dogs demo">        
+	    <meta name="keywords" content="frisbee,dog,dogs,frisbee dog,frisbee dogs,disc,disc dog,disc dogs,colorado,colorado frisbee dogs,frisbee dogs show,frisbee dog show,frisbee dog entertainment,frisbee dogs entertainment,frisbee dogs halftime,frisbee halftime shows,frisbee dog demo,frisbee dog demos,frisbee dogs demo">
         <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/paw-icon.png" type="image/png" />
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -24,7 +24,7 @@
         <script type="text/javascript" src="<?php echo $js; ?>"></script>
         <?php endforeach; ?>
     </head>
-    <body>        
+    <body>
         <?php $this->load->view('header'); ?>
         <?php $this->load->view('message'); ?>
         <?php if(!empty($mobile)): ?>
