@@ -49,7 +49,7 @@
             </div>
             <div class="col-lg-6 col-xs-5">
                 <label for="date">Event Date: <span class="text-danger"><?php echo form_error('date'); ?></span></label>
-                <input type="date" name="date" class="form-control" value="<?php echo !empty($competition->date) ? $competition->date: ''; ?>" />
+                <input type="date" name="date" class="form-control datetimepicker" value="<?php echo !empty($competition->date) ? $competition->date: ''; ?>" />
             </div>
         </div>
         <br />

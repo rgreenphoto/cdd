@@ -40,7 +40,7 @@ class Link extends Admin_Controller {
     public function edit($id) {
         $this->data['title'] = 'Edit Club';
         $this->data['hidden'] = array('id' => $id);
-        $this->data['attributes'] = array();  
+        $this->data['attributes'] = array('method' => 'POST');
         $this->data['link'] = $this->link_model->get($id);
         $this->data['link_types'] = $this->link_type_model->get_all();
         if(!empty($_POST)) {

@@ -220,6 +220,7 @@ class Competition_result_model extends MY_Model {
     }
     
     public function competitor_setup($registrations) {
+
         //run through all the registrations and see if we need to create a record on competition_result
         if(!empty($registrations)) {
             foreach($registrations as $k=>$v) {
@@ -393,8 +394,16 @@ class Competition_result_model extends MY_Model {
                $total = 0.0; 
                $total += ($row->fs_total_1 != '' ? ($row->fs_total_1 * $competition->competition_type->multiplier): 0.0); 
                $total += ($row->tc_total_1 != '' ? $row->tc_total_1: 0.0);
-               $total += ($row->fs_total_2 != '' ? $row->fs_total_2: 0.0);
-               $total += ($row->tc_total_2 != '' ? $row->tc_total_2: 0.0);
+               if($competition->competition_type->id == 4) {
+                   $total += ($row->fs_total_2 != '' ? ($row->fs_total_2 * $competition->competition_type->multiplier): 0.0);
+               } else {
+                   $total += ($row->fs_total_2 != '' ? $row->fs_total_2: 0.0);
+               }
+
+               if($competition->competition_type->id != 12) {
+                   $total += ($row->tc_total_2 != '' ? $row->tc_total_2: 0.0);
+               }
+
                $options = array('total' => $total);
                if($this->competition_result_model->update($row->id, $options, true)) {
                    $flag = 'true';
@@ -469,6 +478,7 @@ class Competition_result_model extends MY_Model {
     }
 
     public function get_teams($competition_id, $division_id) {
+        $new_teams = array();
        //returns an array for teams on division also takes care of advanced and open condition
         $competition = $this->competition_model->with('competition_type')->get_by(array('id' => $competition_id));
         //let's select the division and see if it's dual.
@@ -479,20 +489,22 @@ class Competition_result_model extends MY_Model {
             $type = 'competition_result.tc_order';
         }
 
+
         if(!empty($division)) {
             $all_teams = array();
             $team_options = array('competition_id' => $competition_id, 'division_id' => $division->id);
-            $teams = $this->competition_result_model->with('user')->with('canine')->with('division')->order_by($type)->get_many_by($team_options);
+            $teams = $this->with('user')->with('canine')->with('division')->order_by($type)->get_many_by($team_options);
             if(!empty($teams)) {
                 $all_teams = array_merge($all_teams, $teams);
             }
             //this condition will be met with Advanced divisions. We need to add Open only teams to the running order
             if($division->dual == 1 && $division->freestyle == 0) {
-                $open_options = array('competition_type_id' => $competition->competition_type_id, 'freestyle' => '1');
+                $open_options = array('competition_type_id' => $competition->competition_type_id, 'freestyle' => '1', 'points_type' => 'Open');
                 $open_division = $this->division_model->get_by($open_options);
+
                 //add addition teams to running order
-                $open_team_options = array('competition_id' => $competition_id, 'division_id' => $open_division->id, 'dual' => '0');
-                $teams = $this->competition_result_model->with('user')->with('canine')->with('division')->order_by($type)->get_many_by($open_team_options);                 
+                $open_team_options = array('competition_id' => $competition_id, 'division_id' => $open_division->id);
+                $teams = $this->with('user')->with('canine')->with('division')->order_by($type)->get_many_by($open_team_options);
                 if(!empty($teams)) {
                     foreach($teams as $row) {
                         if($row->dual != '1') {
@@ -507,7 +519,8 @@ class Competition_result_model extends MY_Model {
             usort($all_teams, function ($a, $b) { return $a->fs_order - $b->fs_order; });
         } else {
             usort($all_teams, function ($a, $b) { return $a->tc_order - $b->tc_order; });
-        } 
+        }
+
         return $all_teams;
    }
    
@@ -572,7 +585,10 @@ class Competition_result_model extends MY_Model {
     }
     
     public function get_results_by_division($competition_id, $division_id) {
-        $this->db->select('cr.place, u.full_name, c.name, cr.fs_1_1, cr.fs_2_1, cr.fs_3_1, cr.fs_4_1, cr.fs_total_1, cr.tc_cat_1, cr.tc_total_1, cr.fs_1_2, cr.fs_2_2, cr.fs_3_2, cr.fs_4_2, cr.fs_total_2, cr.tc_cat_2, cr.tc_total_2, cr.total');
+// Russ's original
+//        $this->db->select('cr.place, u.full_name, c.name, cr.fs_1_1, cr.fs_2_1, cr.fs_3_1, cr.fs_4_1, cr.fs_total_1, cr.tc_cat_1, cr.tc_total_1, cr.fs_1_2, cr.fs_2_2, cr.fs_3_2, cr.fs_4_2, cr.fs_total_2, cr.tc_cat_2, cr.tc_total_2, cr.total');
+//Chris's modified attempt to add Catch Ratio
+        $this->db->select('cr.place, u.full_name, c.name, cr.cr_1, cr.fs_1_1, cr.fs_2_1, cr.fs_3_1, cr.fs_4_1, cr.fs_total_1, cr.tc_cat_1, cr.tc_total_1, cr.cr_2, cr.fs_1_2, cr.fs_2_2, cr.fs_3_2, cr.fs_4_2, cr.fs_total_2, cr.tc_cat_2, cr.tc_total_2, cr.total');
         $this->db->from('competition_result cr');
         $this->db->join('users u', 'cr.user_id = u.id');
         $this->db->join('canine c', 'cr.canine_id = c.id');

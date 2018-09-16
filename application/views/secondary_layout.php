@@ -6,15 +6,16 @@
         <meta name="description" content="Colorado Disc Dogs - Frisbee Dog Club in Colorado. Please join us for fun in sun playing disc with your canine hero.">
         <meta name="keywords" content="frisbee,dog,dogs,frisbee dog,frisbee dogs,disc,disc dog,disc dogs,colorado,colorado frisbee dogs,frisbee dogs show,frisbee dog show,frisbee dog entertainment,frisbee dogs entertainment,frisbee dogs halftime,frisbee halftime shows,frisbee dog demo,frisbee dog demos,frisbee dogs demo">        
         <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/paw-icon.png" type="image/png" />
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/freeow/freeow.css"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/js/jquery-ui-1.10.4/themes/base/jquery-ui.css"/>
         <?php if(!empty($this->css)) foreach($this->css as $css): ?>
         <link rel="stylesheet" type="text/css" href="<?php echo $css; ?>"/>
         <?php endforeach; ?>        
         <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/master.css"/>
-        <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.8.3.js"></script>
-        <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.freeow.min.js"></script>
         <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>

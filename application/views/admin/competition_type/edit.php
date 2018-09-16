@@ -67,16 +67,17 @@
         </div>
         <br />
         <div class="row">
-            <div class="col-lg-12 col-xs-11">
-                <?php !empty($competition_type->division) ? $view = 'edit_divisions': $view = 'add_divisions'; ?>
-                <?php echo $this->load->view('admin/competition_type/elements/'.$view); ?>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-lg-12 col-xs-10">
                 <?php echo form_submit('submit', 'Save', 'class="btn btn-cdd pull-right"'); ?>              
             </div>
         </div>
         <br />
+        <div class="row">
+            <div class="col-lg-12 col-xs-10">
+                <?php echo $this->load->view('admin/competition_type/elements/edit_divisions'); ?>
+            </div>
+        </div>
+        <br />
     </fieldset>
-<?php echo form_close(); ?>   
+<?php echo form_close(); ?>
+

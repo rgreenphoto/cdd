@@ -24,7 +24,7 @@ class Standing extends Admin_Controller {
         
         $options = array('season' => $season, 'type' => $type);
         $this->data['standings'] = array();
-        $standings = $this->standing_model->with('user')->with('canine')->order_by('place', 'ASC')->get_many_by($options);        
+        $standings = $this->standing_model->with('user')->with('canine')->order_by('place', 'ASC')->get_many_by($options);
 
         //based on type create array for datatable and needed table headers
         switch($type) {

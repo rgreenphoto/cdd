@@ -230,6 +230,7 @@ class MY_Model extends CI_Model
 
         $result = $this->db->get($this->_table)
                            ->{$this->_return_type(1)}();
+
         $this->_temporary_return_type = $this->return_type;
 
         foreach ($result as &$row)
@@ -683,12 +684,12 @@ class MY_Model extends CI_Model
         if (is_object($row))
         {
             $row->created = date('Y-m-d H:i:s');
-            $row->created_by = $this->data['the_user']->id;
+            $row->created_by = isset($this->data['the_user']->id)?$this->data['the_user']->id:'';
         }
         else
         {
             $row['created'] = date('Y-m-d H:i:s');
-            $row['created_by'] = $this->data['the_user']->id;
+            $row['created_by'] = isset($this->data['the_user']->id)?$this->data['the_user']->id:'';
         }
 
         return $row;
@@ -699,12 +700,12 @@ class MY_Model extends CI_Model
         if (is_object($row))
         {
             $row->modified = date('Y-m-d H:i:s');
-            $row->modified_by = $this->data['the_user']->id;
+            $row->modified_by = isset($this->data['the_user']->id)?$this->data['the_user']->id:'';
         }
         else
         {
             $row['modified'] = date('Y-m-d H:i:s');
-            $row['modified_by'] = $this->data['the_user']->id;
+            $row['modified_by'] = isset($this->data['the_user']->id)?$this->data['the_user']->id:'';
             
         }
 

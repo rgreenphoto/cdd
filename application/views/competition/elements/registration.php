@@ -2,9 +2,6 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="container-fluid">
-                <div class="row">
-                    <button type="button" class="close reg-window"  aria-hidden="true">&times;</button>
-                </div>
                 <div class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
                     <?php $date = date('Y-m-d H:i:s'); if(!empty($the_user) && date('Y-m-d H:i:s', strtotime($event->registration_start)) <= $date && date('Y-m-d H:i:s', strtotime($event->registration_end >= $date))): ?>
                         <?php $this->load->view('competition/elements/form'); ?>
@@ -33,7 +30,7 @@
                         </tbody>
                         <tfoot>
                         <tr>
-                            <th colspan="3"><a href="<?php echo base_url(); ?>registration/done/1/0" class="btn btn-primary btn-xs pull-right">Pay at event</a></th>
+                            <th colspan="4"><a href="<?php echo base_url(); ?>registration/done/1/0" class="btn btn-primary btn-xs pull-right">Pay at event</a></th>
                             <th><a href="<?php echo base_url(); ?>registration/complete" class="btn btn-xs btn-success pull-right" id="complete-reg">PayPal</a></th>
                         </tr>
                         </tfoot>
@@ -116,19 +113,6 @@
                 flag = '0';
             }
 
-//            if(new_id) {
-//                user_id = new_id;
-//            }
-
-//            if(canine_id == '0') {
-//                if(new_canine_id == '') {
-//                    $('#error-info p').html('Please select a dog');
-//                    flag = '0';
-//                } else {
-//                    canine_id = new_canine_id;
-//                }
-//            }
-
             if(flag == '1') {
                 $('#loader').show();
                 $.ajax({
@@ -194,6 +178,27 @@
                 }
             });
         });
+
+        $('#volunteerForm').submit(function(e) {
+            e.preventDefault();
+            $('#loader').show();
+            var form = $('#volunteerForm');
+            var data = form.serializeArray();
+            $.ajax({
+               type: "POST",
+               async: false,
+               url: '<?php echo base_url(); ?>registration/volunteer',
+               data: data,
+               success: function(data) {
+                   $('#loader').hide();
+                   $('#message').show();
+               }
+
+            });
+
+        });
+
+        $('[data-toggle="tooltip"]').tooltip();
     });
 </script>
 

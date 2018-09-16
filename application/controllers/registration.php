@@ -3,13 +3,35 @@
 /* Russ Green rgreen@rgreenphotography.com
  */
 
-class Registration extends Member_Controller {
+class Registration extends Public_Controller {
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('registration_model'));
+        $this->load->model(array('registration_model', 'user_model', 'competition_result_model'));
         $this->data['display_social'] = false;
     }
-    
+
+
+    public function volunteer() {
+        $this->load->model(array('event_helpers_model'));
+        if(!empty($_POST)) {
+            foreach($_POST['position'] as $k=>$v) {
+                $data['user_id'] = $this->input->post('user_id');
+                $data['competition_id'] = $this->input->post('competition_id');
+                $data['position_id'] = $v;
+                $existing = $this->event_helpers_model->get_by($data);
+                if(!$existing) {
+                    $this->event_helpers_model->insert($data);
+                    $flag = true;
+                }
+            }
+        }
+        if($flag == true) {
+            //$new_data = $this->event_helpers_model->with('position')->get_many_by(array('competition_id' => $data['competition_id'], 'user_id' => $data['user_id']));
+            echo json_encode(array('message' => 'Success'));
+        } else {
+            echo json_encode(array('message' => 'Failed '));
+        }
+    }
     
     public function complete() {
         if(isset($this->the_user->family_id)) {
@@ -43,7 +65,7 @@ class Registration extends Member_Controller {
         $canine_id = $this->input->post('canine_id');
         $division_id = $this->input->post('division_id');
         $competition_id = $this->input->post('competition_id');
-        
+
         if(!empty($user_id) && !empty($canine_id) && !empty($division_id) && !empty($competition_id)) {
             $this->load->model('user_model');
             $user = $this->user_model->get($user_id);
@@ -153,6 +175,49 @@ class Registration extends Member_Controller {
         } else {
             return false;
         }
+    }
+
+
+    public function quick_add() {
+        $this->load->model(array('registration_model'));
+        if(!empty($_POST)) {
+            if($this->registration_model->quick_add($_POST)) {
+                echo json_encode(array('message' => 'Success'));
+            } else {
+                echo json_encode(array('error_message' => 'Fail'));
+            }
+        }
+    }
+
+
+    public function quick_add_form($competition_id, $group_id = '', $user_id = '') {
+        $this->data['hidden'] = array('competition_id' => $competition_id);
+        if(!empty($competition_id)) {
+            $this->load->model(array('competition_model', 'division_model'));
+            $competition = $this->competition_model->get($competition_id);
+            if(!empty($competition)) {
+                //grab divisions
+                $this->data['divisions'] = $this->division_model->get_full_list($competition->competition_type_id);
+                $this->data['competition_name'] = $competition->name;
+                $this->data['competition_id'] = $competition->id;
+            }
+        }
+        if(!empty($user_id)) {
+            $this->data['user_id'] = $user_id;
+            $this->data['group_id'] = $group_id;
+            $this->data['hidden']['user_id'] = $user_id;
+            $this->data['user'] = $this->user_model->with('canine')->get($user_id);
+            //check for existing registrations
+            $options = array('competition_id' => $competition_id, 'user_id' => $user_id);
+            $this->data['registrations'] = $this->registration_model->with('canine')->with('division')->get_many_by($options);
+        }
+        $this->data['main'] = 'registration/quick_add';
+        $this->load->view('registration/quick_add', $this->data);
+    }
+
+    public function quick_user_search() {
+        $results = $this->user_model->quick_search($_GET['term']);
+        echo json_encode($results);
     }
     
 }

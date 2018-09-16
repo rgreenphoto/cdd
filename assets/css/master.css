@@ -21,6 +21,41 @@ a {
     color: #020277;
 }
 
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+.form-signin .checkbox {
+    font-weight: normal;
+}
+.form-signin .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
 /*make top navbar adjustments*/
 .navbar-cdd {
     border-bottom: #000 solid thin;
@@ -150,7 +185,7 @@ a {
 }
 /* Declare heights because of positioning of img element */
 .carousel .item {
-  height: 320px;
+  height: 520px;
   background-color: #fff;
 }
 .carousel-inner > .item > img {
@@ -158,7 +193,7 @@ a {
   top: 0;
   left: 0;
   min-width: 100%;
-  height: 320px;
+  height: 520px;
 }
 /* carousel */
 .carousel-caption h1 {
@@ -313,6 +348,12 @@ a {
     color:#000;
     background-color:#ED9C28;
 }
+
+.ui-autocomplete-loading {
+    background: white url('../images/dog-loader.gif') right center no-repeat;
+}
+
+
 @media (max-width: 1024px) {
     .navbar-header {
         float: none;

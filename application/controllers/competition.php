@@ -7,12 +7,12 @@
 class Competition extends Public_Controller {
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('competition_model', 'competition_fee_model', 'division_model'));
+        $this->load->model(array('competition_model', 'competition_fee_model', 'division_model', 'position_model', 'user_model'));
         $this->load->library(array('table'));
         //TO-DO - move this to only the methods that need it, no need to load not used JS files.
         $this->js = array(
             'http://maps.google.com/maps/api/js?sensor=false&amp;language=en',
-            ''.base_url().'assets/js/gmap3.min.js'
+            ''.base_url().'assets/js/gmap3.min.js', base_url().'assets/js/autocomplete.js'
         );
     }
     
@@ -44,6 +44,9 @@ class Competition extends Public_Controller {
         $this->data['event'] = $this->competition_model->with('competition_type')->get_by('slug', $slug);
         $this->data['title'] = $this->data['event']->name;
         $this->data['divisions'] = $this->competition_fee_model->order_by('division_id')->get_many_by('competition_id', $this->data['event']->id);
+        $tmp = $this->position_model->get_all();
+        $positions = array_chunk($tmp, 6);
+        $this->data['positions'] = $positions;
         $this->load->model('registration_model');
 
         if(!empty($this->the_user)) {
@@ -104,8 +107,8 @@ class Competition extends Public_Controller {
         $this->data['main'] = 'competition/registered';
         $this->load->view('secondary_layout', $this->data);
     }
-    
-    
+
+
 }
 
 ?>

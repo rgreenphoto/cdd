@@ -101,19 +101,21 @@ class Registration_model extends MY_Model {
        $fee = $this->competition_fee_model->get_by($fee_options);
        
        //set up reg data info
-       $reg_data['division_id'] = $options['division_id'];
-       $reg_data['competition_id'] = $options['competition_id'];
+       $reg_data = $options;
        $reg_data['complete'] = 1;
        $reg_data['isPaid'] = 1;
        $reg_data['fees'] = !empty($fee->fee)?$fee->fee:'';
+
+
        
        //if we need to add a new user 
-       if(empty($options['user_id'])) {
+       if(empty($reg_data['user_id'])) {
            try {
                $reg_info = $this->user_model->quick_add($options);
-               $reg_data['user_id'] = $reg_info['user_id'];
-               $reg_data['canine_id'] = $reg_info['canine_id'];
-               unset($options);
+               $reg_data['user_id'] = $reg_info->id;
+               $reg_data['canine_id'] = $reg_info->canine_id;
+
+
            } catch (Exception $ex) {
                echo '<pre>';
                print_r($ex);
@@ -121,25 +123,32 @@ class Registration_model extends MY_Model {
            }   
        }
        
-       if(!empty($options['canine']) && empty($options['canine_id'])) {
-           $canine_data = array('user_id' => $options['user_id'], 'name' => $options['canine']);
+       if(!empty($reg_data['canine']) && empty($reg_data['canine_id'])) {
+           $canine_data = array('user_id' => $reg_data['user_id'], 'name' => $reg_data['canine']);
            try  {
                $this->canine_model->insert($canine_data);
                $reg_data['canine_id'] = $this->db->insert_id();
-               $reg_data['user_id'] = $options['user_id'];
            } catch (Exception $ex) {
                echo '<pre>';
                print_r($ex);
                die();
            }           
-       } else {
-           $reg_data['user_id'] = $options['user_id'];
-           $reg_data['canine_id'] = $options['canine_id'];
        }
+
+       //unset things reg model doesn't need
+       unset($reg_data['first_name']);
+       unset($reg_data['last_name']);
+       unset($reg_data['email']);
+       unset($reg_data['canine']);
+       $create_result = isset($reg_data['create_result'])?$reg_data['create_result']:'';
+       unset($reg_data['create_result']);
+
+
        if($this->registration_model->insert($reg_data)) {
            $id = $this->db->insert_id();
-           if(!empty($options['create_result'])) {
+           if(!empty($create_result)) {
                //check the division for dual
+
                $division = $this->division_model->get($reg_data['division_id']);
                if($division->dual != 2) {
                    $reg_data['not_dual'] = true;
@@ -344,7 +353,7 @@ class Registration_model extends MY_Model {
         $this->load->model(array('competition_model'));
         $competition = $this->competition_model->get($competition_id);
         $registrations = $this->with('division')->with('canine')->with('user')->get_many_by(array('competition_id' => $competition->id));
-        $open_division = $this->division_model->get_by(array('competition_type_id' => $competition->competition_type_id, 'freestyle' => '1'));
+        $open_division = $this->division_model->get_by(array('competition_type_id' => $competition->competition_type_id, 'freestyle' => '1', 'points_type' => 'Open'));
         $advanced_division = $this->division_model->get_by(array('competition_type_id' => $competition->competition_type_id, 'freestyle' => '0', 'dual' => '1'));
         $divisions = array();
         if(!empty($registrations)) {
@@ -388,7 +397,7 @@ class Registration_model extends MY_Model {
                         'freestyle' => $row->division->freestyle
                     );
                     if($row->division->freestyle == 1) {
-                        if(!empty($dvanced_division)) {
+                        if(!empty($advanced_division)) {
                             $divisions[$advanced_division->name][] = array(
                                 'handler' => $row->user->full_name,
                                 'canine' => $row->canine->name,

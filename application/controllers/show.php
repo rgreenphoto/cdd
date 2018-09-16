@@ -14,12 +14,8 @@ class Show extends Public_Controller {
     
     public function index() {
         $this->data['title'] = 'Demo Team';
-        if(empty($year)) {
-            $year = date('Y');
-        }       
         $this->data['cms_content'] = $this->page_model->get_page('Demo-Team');        
-        $this->data['demos'] = $this->show_model->order_by('date')->get_all();
-        
+        $this->data['demos'] = $this->show_model->order_by('date', 'DESC')->get_all();
         $this->data['main'] = 'show/index';
         $this->load->view('demo_layout', $this->data);
     }

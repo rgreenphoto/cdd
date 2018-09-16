@@ -50,10 +50,12 @@ class Competition_result extends Admin_Controller {
             $i=0;
             $alpha = 'A';
             foreach($divisions as $division) {
+                $title = substr($division->name, 0, 29);
+                $title = url_title($title);
                 $results = $this->competition_result_model->get_results_by_division($competition_id, $division->id);
                 $excel->createSheet(NULL, $i);
                 $excel->setActiveSheetIndex($i);
-                $excel->getActiveSheet()->setTitle(url_title(character_limiter(str_replace('Skyhoundz', '', $division->name), 29), ' '));
+                $excel->getActiveSheet()->setTitle($title);
                 $excel->getActiveSheet()->setCellValue('A1', 'Place');
                 $excel->getActiveSheet()->setCellValue('B1', 'Handler');
                 $excel->getActiveSheet()->setCellValue('C1', 'Canine');
@@ -145,10 +147,15 @@ class Competition_result extends Admin_Controller {
         if(!empty($existing)) {
             $item = $this->_set_fields($existing);
             $this->data['item'] = $item;
+            if($existing->competition->competition_type_id == 8) {
+                $this->data['bonus_iterator'] = true;
+            }
             if($existing->division->id == 5) {
                 $this->data['pairs'] = $this->_get_pairs($existing->user->id, $existing->canine->id, $existing->competition->id);
             }
-        } 
+        }
+
+
         
         if(!empty($_POST)) {
             unset($_POST['calculate_scores']);

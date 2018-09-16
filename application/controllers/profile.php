@@ -22,7 +22,7 @@ class Profile extends Public_Controller {
         $this->css = array(base_url().'/assets/css/FooTable-2/css/footable.core.min.css');
         $this->js = array(base_url().'assets/js/plupload/js/plupload.full.js', base_url().'assets/js/FooTable-2/dist/footable.min.js',base_url().'assets/js/FooTable-2/dist/footable.filter.min.js', base_url().'assets/js/FooTable-2/dist/footable.sort.min.js', base_url().'assets/js/FooTable-2/dist/footable.paginate.min.js');
         $this->data['title'] = 'Member Profiles';
-        $this->data['users'] = $this->user_model->with('canine')->order_by('last_name')->get_many_in('privacy', $this->privacy_options);
+        $this->data['users'] = $this->user_model->get_members($this->privacy_options);
         $this->data['main'] = 'user/index';
         $this->load->view('secondary_layout', $this->data);        
     }

@@ -23,6 +23,9 @@
                             <li role="presentation" class="dropdown-header">Competition Types</li>
                             <li role="presentation"><a href="<?php echo base_url(); ?>admin/competition_type/">View All</a></li>
                             <li role="presentation"><a href="<?php echo base_url(); ?>admin/points_guide">Points Guide</a></li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation" class="dropdown-header">Volunteer Positions</li>
+                            <li role="presentation"><a href="<?php echo base_url(); ?>admin/position/">Volunteer Positions</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

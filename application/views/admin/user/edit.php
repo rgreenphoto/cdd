@@ -1,17 +1,29 @@
 <h3><?php echo $title; ?></h3>
-<?php if(!empty($message)) echo '<div class="message">'.$message.'</div>'; ?>
+<?php if(!empty($message)) echo '<div class="alert alert-danger">'.$message.'</div>'; ?>
 <ul class="nav nav-pills">
     <?php if(!empty($user)): ?>
     <li class="active"><a href="<?php echo base_url(); ?>admin/user/edit/<?php echo $user->id; ?>">Edit User</a></li>
-    <li><a href="admin/user/family/">Edit Family</a></li>
+    <li><a href="<?php echo base_url(); ?>admin/user/family/<?php echo $user->id; ?>">Edit Family</a></li>
     <?php if(!empty($user->canine)) foreach($user->canine as $row): ?>
     <li><a href="<?php echo base_url(); ?>admin/canine/edit/<?php echo $row->id; ?>">Edit <?php echo $row->name; ?></a></li>
     <?php endforeach; ?>
     <li><a href="<?php echo base_url(); ?>admin/canine/add/<?php echo $user->id; ?>">Add Dog</a></li>
     <?php endif; ?>
 </ul>
+<hr />
     <div class="container">
         <?php echo form_open(current_url(), '', $hidden);?>
+
+        <div class="row">
+            <div class="col-lg-2">
+                <label for="active">Account Active</label>
+                <input type="checkbox" name="active" value="1" <?php echo (!empty($user) && $user->active == 1)?'checked':''; ?>/>
+            </div>
+            <div class="col-lg-10">
+                <p>This options needs to be selected if the user wants to log into the site.</p>
+            </div>
+        </div>
+<hr />
         <div class="row">
             <div class="col-lg-6">
                 <label for="first_name">First Name <span class="text-danger"><?php echo form_error('first_name'); ?></span></label>

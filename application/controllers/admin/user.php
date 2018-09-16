@@ -64,15 +64,11 @@ class User extends Admin_Controller {
                 $_POST['formal_name'] = $_POST['last_name'].', '.$_POST['first_name'];
 
                 $additional_data = $this->set_post_options($_POST);
-//                echo '<pre>';
-//                print_r($additional_data);
-//                echo '</pre>';
-                
                 $id = $this->ion_auth->register($username, $password, $email, $additional_data, $additional_data['group_id']);
                 
                 if(!empty($id)) {
                     $this->session->set_flashdata('message', $this->ion_auth->messages());
-                    redirect('admin/user/edit/'.$id, 'refresh'); 
+                    redirect('admin/user/edit/'.$additional_data['group_id'][0].'/'.$id, 'refresh');
                 } else {
                     $this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
                 }
@@ -84,7 +80,7 @@ class User extends Admin_Controller {
         $this->load->view('admin/layout', $this->data);
     }
     	//edit a user
-    public function edit($group_id = 1, $id) {
+    public function edit($id) {
 		
         $this->data['title'] = "Edit User";
         
@@ -145,7 +141,7 @@ class User extends Admin_Controller {
                 
                 
                 $this->session->set_flashdata('message', 'Record Saved');
-                redirect('admin/user/index/'.$group_id);
+                redirect('admin/user/index/');
             }
             
             
@@ -165,18 +161,28 @@ class User extends Admin_Controller {
         $this->load->view('admin/layout', $this->data);
     }
 
-    public function delete($group_id = '1', $id) {
+    public function family($user_id) {
+        $user = $this->user_model->with('canine')->get($user_id);
+        if(isset($user->family_id)) {
+            $this->data['family'] = $this->user_model->get_family($user);
+        }
+
+        $this->data['main'] = 'admin/user/family';
+        $this->load->view('admin/layout', $this->data);
+    }
+
+    public function delete($id) {
         if(!empty($id)) {
             if($this->user_model->delete($id)) {
                 $this->session->set_flashdata('message', 'Record Deleted');
-                redirect('admin/user/index/'.$group_id);
+                redirect('admin/user/index/');
             } else {
                 $this->session->set_flashdata('message', 'Could not delete record.');
-                redirect('admin/user/index/'.$group_id);
+                redirect('admin/user/index/');
             }
         } else {
             $this->session->set_flashdata('message', 'ID for this item is missing.');
-            redirect('admin/user_index/'.$group_id);
+            redirect('admin/user_index/');
         }
     }
 

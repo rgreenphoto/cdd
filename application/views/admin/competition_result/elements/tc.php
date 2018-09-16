@@ -20,7 +20,7 @@
             <?php if(empty($labels['tc_labels']['airbonus'])): ?>
             <div class="btn-group btn-group-lg">
                 <?php foreach($labels['tc_labels']['catch_group'] as $label): ?>
-                 <button class="btn btn-success btn-lg tc_btn" data-value="<?php echo $label; ?>"><h3><?php echo $label; ?> <i class="icon-plus-sign"></i></h3></button>
+                 <button class="btn btn-success btn-lg tc_btn <?php if(!empty($bonus_iterator) && $label == 2.5): ?>iterate<?php endif; ?>" <?php if(!empty($bonus_iterator) && $label == 2.5): ?>data-iterate="true"<?php endif; ?> data-value="<?php echo $label; ?>"><h3><span><?php echo $label; ?></span> <i class="icon-plus-sign"></i></h3></button>
                 <?php endforeach; ?>
             </div>
             <?php endif; ?>
@@ -125,7 +125,6 @@
             </div>
             <table class="table table-condensed">
                 <tbody>
-                    <tr>
                         <td class="text-right">
                             <?php echo form_reset('Clear All', 'Clear All', 'id="clear_form" class="btn btn-danger"'); ?>&nbsp;
                             <?php echo form_submit('submit', 'Save Score', 'class="btn btn-primary pull-right"'); ?>

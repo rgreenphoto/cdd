@@ -11,7 +11,7 @@ class Registration extends Admin_Controller {
         $this->load->helper(array('download', 'csv'));
     }    
     
-    public function quick_add_form($competition_id, $user_id = '') {
+    public function quick_add_form($competition_id, $group_id = '', $user_id = '') {
         $this->data['competitors'] = $this->competition_result_model->check_table_status($competition_id);
         $this->data['hidden'] = array('competition_id' => $competition_id);
         if(!empty($competition_id)) {
@@ -25,7 +25,8 @@ class Registration extends Admin_Controller {
             }
         }
         if(!empty($user_id)) {
-            $this->data['user_id'] = $user_id; 
+            $this->data['user_id'] = $user_id;
+            $this->data['group_id'] = $group_id;
             $this->data['hidden']['user_id'] = $user_id;
             $this->data['user'] = $this->user_model->with('canine')->get($user_id);
             //check for existing registrations
@@ -37,6 +38,7 @@ class Registration extends Admin_Controller {
     }
     
     public function quick_add() {
+        $this->load->model(array('registration_model'));
         if(!empty($_POST)) {
             if($this->registration_model->quick_add($_POST)) {
                 echo json_encode(array('message' => 'Success'));
@@ -251,6 +253,34 @@ class Registration extends Admin_Controller {
             redirect('admin/gameday/'.$competition_id);
         }        
         
+    }
+
+    public function volunteer_spreadsheet($competition_id) {
+        $this->load->model('event_helpers_model');
+        $volunteers = $this->event_helpers_model->with('position')->with('user')->get_many_by(array('competition_id' => $competition_id));
+        $this->load->helper('text');
+        if(!empty($volunteers)) {
+            $excel = new PHPExcel();
+            $excel->createSheet(NULL, 0);
+            $excel->setActiveSheetIndex(0);
+            $excel->getActiveSheet()->setTitle('Volunteer Roster');
+            $excel->getActiveSheet()->setCellValue('A1', 'Volunteer');
+            $excel->getActiveSheet()->setCellValue('B1', 'Position');
+            $excel->getActiveSheet()->setCellValue('C1', 'Email Address');
+            $i = 2;
+            foreach($volunteers as $volunteer) {
+                $excel->getActiveSheet()->setCellValue('A'.$i, $volunteer->user->full_name);
+                $excel->getActiveSheet()->setCellValue('B'.$i, $volunteer->position->name);
+                $excel->getActiveSheet()->setCellValue('C'.$i, $volunteer->user->email);
+                $i++;
+            }
+            $write = PHPExcel_IOFactory::createWriter($excel, 'Excel5');
+            $write->save('./uploads/volunteer_spreadsheet.xls');
+            $file = file_get_contents('./uploads/volunteer_spreadsheet.xls');
+            unlink('./uploads/volunteer_spreadsheet.xls');
+            force_download('Volunteer Roster'.'.xls', $file);
+        }
+
     }
 
    public function generate_spreadsheet($competition_id) {

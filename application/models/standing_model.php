@@ -235,6 +235,7 @@ class Standing_model extends MY_Model {
             foreach($members as $user) {
                 $options = array('user_id' => $user->id);
                 $dogs = $this->canine_model->get_many_by($options);
+
                 if(!empty($dogs)) {
                     foreach($dogs as $dog) {
                         $total = 0;
@@ -263,9 +264,13 @@ class Standing_model extends MY_Model {
                                 'season' => $season
                             );
                         }
+                        echo '<pre>';
+                        print_r($total);
                     }
+
                 }
             }
+            die();
             //pass the array to the _set_place function to resort by total points
             $data = $this->_set_place($final_array, 'rrr_award');
             if(!empty($data)) {

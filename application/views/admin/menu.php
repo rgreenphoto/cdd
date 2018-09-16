@@ -15,6 +15,8 @@
                     <li class="divider"></li>
                     <li><a href="<?php echo base_url(); ?>admin/points_guide"><i class="icon-list-alt"></i> Points Guide</a></li>
 <!--                    <li><a href="<?php echo base_url(); ?>admin/competition_result/"><i class="icon-list-ol"></i> Competition Results</a></li>-->
+                    <li class="divider"></li>
+                    <li><a href="<?php echo base_url(); ?>admin/position">Volunteer Positions</a></li>
                 </ul>
             </div>
         </div>

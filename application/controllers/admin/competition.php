@@ -37,7 +37,10 @@ class Competition extends Admin_Controller {
        $this->data['previous_comps'] = $this->competition_model->get_event($this->previous_year);
 
        if(!empty($_POST)) {
-           $_POST['season'] = date('Y', strtotime($_POST['date']));
+           $date = date('Y-m-d', strtotime($_POST['date']));
+           $_POST['season'] = date('Y', strtotime($date));
+           $_POST['date'] = $date;
+
            $options = $this->set_post_options($_POST);
            if($this->competition_model->insert($options)) {
                $this->load->model('competition_fee_model');

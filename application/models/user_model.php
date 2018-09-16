@@ -280,7 +280,9 @@ class User_model extends MY_Model {
                if($this->canine_model->insert($canine_data)) {
                    $canine_id = $this->db->insert_id();
                }
-               return $this->get($id);
+               $return = $this->get($id);
+               $return->canine_id = $canine_id;
+               return $return;
            }
     }
     
@@ -294,6 +296,23 @@ class User_model extends MY_Model {
         $this->db->where('users.deleted', 0);
         $this->db->order_by('users.last_name');
         $this->db->limit($limit, $offset);
+        $query = $this->db->get();
+        $result = $query->result();
+        if(!empty($result)) {
+            return $result;
+        }
+        return false;
+    }
+
+    public function get_members($privacy = 'Public') {
+        $this->db->select('users.*, groups.description', TRUE);
+        $this->db->from('users');
+        $this->db->join('users_groups', "users_groups.user_id = users.id AND users_groups.group_id = 3");
+        $this->db->join('groups', "groups.id = users_groups.group_id");
+        $this->db->where('users.id !=', '1');
+        $this->db->where('users.deleted', 0);
+        $this->db->where_in('users.privacy', $privacy);
+        $this->db->order_by('users.last_name');
         $query = $this->db->get();
         $result = $query->result();
         if(!empty($result)) {

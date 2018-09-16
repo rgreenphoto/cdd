@@ -66,6 +66,13 @@
                         <a href="<?php echo base_url(); ?>admin/registration/generate_spreadsheet/<?php echo $competition->id; ?>">
                         <img src="<?php echo base_url(); ?>assets/images/Excel-icon.png" width="25" height="25" /> Backup Score Sheets</a>
                     </li>
+
+                </ul>
+                <ul class="list-inline hidden-xs">
+                    <li>
+                        <a href="<?php echo base_url(); ?>admin/registration/volunteer_spreadsheet/<?php echo $competition->id; ?>">
+                        <img src="<?php echo base_url(); ?>assets/images/Excel-icon.png" width="25" height="25" /> Volunteers</a>
+                    </li>
                 </ul>
                 <table class="table table-striped table-hover table-condensed footable toggle-circle toggle-medium">
                     <thead>

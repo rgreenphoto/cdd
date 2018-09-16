@@ -115,9 +115,9 @@ $(document).ready(function() {
                         autoHide: true
                     });
                    $('#ajax-loader').hide();
-                   $('#details_forms').load('<?php echo base_url(); ?>admin/gameday/' + competition_id + ' #details_forms', function(){
-                      $('.footable').footable(); 
-                   });
+<!--                   $('#details_forms').load('--><?php //echo base_url(); ?><!--admin/gameday/' + competition_id + ' #details_forms', function(){-->
+<!--                      $('.footable').footable(); -->
+<!--                   });-->
                });
              } else {
                    var error_message = message.error_message;

@@ -46,7 +46,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">No</button>
-                <a href="#" id="scoreConfirm" class="btn btn-primary btn-lg">Yes</a>
+                <a href="#" data="" id="scoreConfirm" class="btn btn-primary btn-lg">Yes</a>
             </div>
         </div>
     </div>

@@ -112,7 +112,7 @@ class Main_Controller extends CI_Controller {
         $options = array();
         if(!empty($array)) {
             foreach($array as $k=>$v) {
-                if($k != 'submit' && $k != 'Submit' && $k != 'id' && $k != 'division_fee' && $k != 'poll_options' && $k != 'previous_description' && $k != 'previous_fees') {
+                if($k != 'submit' && $k != 'Submit' && $k != 'id' && $k != 'division_fee' && $k != 'poll_options' && $k != 'previous_description' && $k != 'previous_fees' && $k != 'position' && $k != 'division_name') {
                     $options[$k] = $this->input->post($k);
                 }
             }

@@ -12,7 +12,7 @@ $(document).ready(function() {
        source: source,
        minLength: 2,
        select: function (event, ui) {
-           url = result_link + "/" + ui.item.group_id + "/" + ui.item.id;
+           url = result_link  + '/' + ui.item.id;
            if(ajax) {
                $('#ajax-loader').show();
                $(ajax).load(url, function() {

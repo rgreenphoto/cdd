@@ -22,12 +22,17 @@ jQuery(document).ready(function($) {
         e.preventDefault();
         score = $(this).attr('data-value');
         round = $('#round').val();
+        iterate = $(this).attr('data-iterate');
         if(score && round) {
             $('#last_entered_score').html(score);
             $('#scoreConfirm').attr('href', 'javascript:$.fn.calculateTCScore("'+score+'", '+round+')');
+            if(iterate) {
+                $('#scoreConfirm').attr('data', 1);
+            }
             $('#scoreModal').modal('show');
         }
     });
+
 
     //change event to calc FS scores
     $('.fs_score').change(function() {
@@ -55,6 +60,7 @@ jQuery(document).ready(function($) {
 
 
     $.fn.calculateTCScore = function(val, round) {
+        iterate = $('#scoreConfirm').attr('data');
         throw_order = $.fn.position(round);
         $('#last_entered_score').html(val);
         $('#label_' + throw_order).text(val);
@@ -65,6 +71,12 @@ jQuery(document).ready(function($) {
         }
         $('#focus_target_'+ round +'_' + throw_order).show().removeClass().addClass(new_label);
         $.fn.total(val, round);
+        if(iterate) {
+            current = $('.iterate').attr('data-value');
+            new_score = Number(current) + Number(.5);
+            $('.iterate h3 span').html(new_score);
+            $('.iterate').attr('data-value', new_score);
+        }
         $('#scoreModal').modal('hide');
     };
 
